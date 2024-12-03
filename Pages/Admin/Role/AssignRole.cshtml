@@ -1,0 +1,67 @@
+﻿@page
+@model myportfolio.Pages.Admin.Role.AssignRoleModel
+@{
+}
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Assign Role</h3>
+                        </div>
+
+                        <form method="post">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="card-body">
+
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label asp-for="AssignRole.UserId">Name<span class="text-danger">*</span></label>
+                                                    <select asp-for="AssignRole.UserId" required class="form-control"  asp-items="ViewBag.UserListDdl" >
+                                                        <option value="">Select Name</option>                                                     
+                                                    </select>
+                                                    </div>                                                   
+                                            </div>                                       
+                                 
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label asp-for="AssignRole.RoleId">Name<span class="text-danger">*</span></label>
+                                            <select asp-for="AssignRole.RoleId" required class="form-control"  asp-items="ViewBag.RoleListDdl">
+                                                <option value="">Select Role</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <a class="btn btn-outline-info" asp-page="/Admin/Role/Index">Back</a>
+                                <button type="submit" class="btn btn-info float-right">Save</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- /.content -->
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-configuration").addClass("menu-open");
+            $("#menu-role").addClass("active-custom");
+        });</script>
+}

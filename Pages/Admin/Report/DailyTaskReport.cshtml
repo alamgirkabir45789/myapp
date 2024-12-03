@@ -1,0 +1,184 @@
+﻿@page
+@model myportfolio.Pages.Admin.Report.DailyTaskReportModel
+@{
+    ViewData["Title"] = "Daily Task Report";
+}
+<link href="~/quadrion/css/backdropspinnerloader.css" rel="stylesheet" />
+@*Spinner Start*@
+<div id="overlay">
+    <div class="cv-spinner">
+        <span class="spinner"></span>
+    </div>
+</div>
+@*Spinner End*@
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                Daily Task Summary
+                            </h3>
+                            
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <input type="hidden" id="tableData"/>
+                            <div class="d-flex mb-5" style="gap:5px;">
+                                <div style="width:90%">
+                                        <input type="text" name="startDate" id="startDate" autocomplete="off" readonly class="form-control datepicker" />
+
+                                </div>
+                                <div>
+                                    <button type="button" class="btn bg-primary  align-middle"  onclick="handleViewData()">
+                                        View
+                                    </button>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn bg-info  align-middle" onclick="handlePrintData()">
+                                        @*<i class='fa fa-print'></i>*@
+                                        Print
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                            <table class="table table-bordered table-hover p-2">
+                                <thead>
+                                    <tr>
+                                        <th> Employee Code</th>
+                                        <th> Name</th>
+                                        <th> In Time</th>
+                                        <th> Out Time</th>
+                                        <th>Working Project </th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tbody">
+                                    <tr class="noRecord">
+                                        <td colspan="7" class="text-center tableText">No data found</td>
+                                    </tr>
+                                </tbody>
+                            </table>    
+                            </div>
+                        </div>                      
+                        <div class="card-footer">
+                            <a class="btn btn-outline-info" asp-page="/Admin/User/Index">Back</a>
+
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-qt-report").addClass("menu-open");
+            $("#menu-daily-task-report").addClass("active-custom");
+            $(".datepicker").datepicker("setDate", new Date());
+            $('#startDate').change(function () {
+                $(".tbody").html("<tr><td colspan='7' class='text-center'>No data found</td></tr>");
+                $("#tableData").val("");
+            });
+
+        });
+
+        function handleViewData() {
+            var date = $("#startDate").val();
+            if (date == "") {
+                Swal.fire("Please select ", "Date", "warning");
+            } 
+            else {
+                $("#overlay").fadeIn(300);
+                $.ajax({
+                    url: "/api/DailyTask/TaskReportByDate?date=" + date,
+                    type: "GET",
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "json",
+                    async: true,
+                    success: function (result, status) {
+                       
+                        var data = "";
+                        $.each(result, function (key, item) {
+
+                            if (item.description !== null && item.workingProject !== "" && item.id > 0 && item.reason === null  && item.isHalfDayLeave===false && item.isInLeave===false) {
+                                data += '<tr>';
+                                data += '<td>' + item.sortCode + '</td>';
+                                data += '<td>' + item.name + '</td>';
+                                data += '<td>' + new Date('7/10/2013 ' + item.inTime).toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3") + '</td>';
+                                data += '<td>' + new Date('7/10/2013 ' + item.outTime).toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3") + '</td>';
+                                data += '<td>' + item.workingProject + '</td>';
+                                data += '<td>' + item.description + '</td>';
+                                data += '</tr>';
+                            } else if (item.inTime === "00:00:00" && item.reason !== "" && item.isInLeave){
+                                data += '<tr>';
+                                data += '<td>' + item.sortCode + '</td>';
+                                data += '<td >' + item.name + '</td>';
+                                data += '<td colspan="6" class="text-center text-warning">' +"Leave due to "+ item.reason + '</td>';
+                                data += '</tr>';
+                            }
+                            else if (item.reason !== "" && item.workingProject !== "" && item.isHalfDayLeave || item.isInLeave) {
+                                data += '<tr>';
+                                data += '<td>' + item.sortCode + '</td>';
+                                data += '<td>' + item.name + '</td>';
+                                data += '<td>' + new Date('7/10/2013 ' + item.inTime).toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3") + '</td>';
+                                data += '<td>' + new Date('7/10/2013 ' + item.outTime).toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3") + '</td>';
+                                data += '<td>' + item.workingProject + '</td>';
+                                data += '<td>' + "(Note:" + item.reason + ") " + item.description + '</td>';
+                                data += '</tr>';
+                            } else if (item.workingProject === "" && item.isHoliday===true){
+                                data += '<tr>';
+                                data += '<td>' + item.sortCode + '</td>';
+                                data += '<td >' + item.name + '</td>';
+                                data += '<td colspan="6" class="text-center text-warning">' +  item.description + '</td>';
+                                data += '</tr>';
+                            }
+                            else{
+                                data += '<tr>';
+                                data += '<td>' + item.sortCode + '</td>';
+                                data += '<td>' + item.name + '</td>';
+                                data += '<td colspan="6" class="text-center text-danger">' + "Task not submitted." + '</td>';
+                                data += '</tr>';
+                            }
+                        });
+                        if (status == 'success') {
+
+                            if (data === "") {
+                                $(".tbody").html("<tr><td colspan='7' class='text-center'>No data found</td></tr>");
+
+                            } else {
+                                $(".tbody").html(data);
+                                $(".noRecord").hide();
+                                $("#tableData").val(result)
+                            }
+
+                        }
+
+                    }
+
+                }).done(function () {
+                    setTimeout(function () {
+                        $("#overlay").fadeOut(300);
+                    }, 500);
+                });
+            }
+        }
+
+        function handlePrintData(){
+            var val = $("#tableData").val();
+            if (val == "") {
+                Swal.fire("No data found ", "Please load data", "warning");
+            }else{
+
+            window.print();
+            }
+        }
+    </script>
+}

@@ -1,0 +1,322 @@
+﻿@page
+@model myportfolio.Pages.Admin.LeaveRegister.IndexModel
+
+@{
+    ViewData["Title"] = "Leave Register";
+   
+}
+<input type="hidden" value={baseUrl} id="baseUrl"/>
+
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="card card-outline card-tabs">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                 Leave Application
+                            </h3>
+                            <a class="float-right btn btn-outline-success" asp-page="Create">
+                                Add
+                            </a>
+                        </div>
+                
+                        <div class="card-header p-0 pt-1 border-bottom-0">
+                            <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="custom-tabs-all-profile-tab" data-toggle="pill" href="#custom-tabs-all-profile" role="tab" aria-controls="custom-tabs-all-profile" aria-selected="true">Pending </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="custom-tabs-approved-home-tab" data-toggle="pill" href="#custom-tabs-approved-home" role="tab" aria-controls="custom-tabs-approved-home" aria-selected="false">Approved </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="custom-tabs-reject-home-tab" data-toggle="pill" href="#custom-tabs-reject-home" role="tab" aria-controls="custom-tabs-reject-home" aria-selected="false">Reject</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content" id="custom-tabs-three-tabContent">
+                                <div class="tab-pane fade active show  table-responsive" id="custom-tabs-all-profile" role="tabpanel" aria-labelledby="custom-tabs-all-profile-tab">
+                                    <table id="data-table-two" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th> Employee Code</th>
+                                                <th> Name</th>
+                                                <th>Email</th>
+                                                <th>Contact No</th>
+                                                <th>Leave Type</th>
+                                                <th>Reason</th>
+                                                <th> Date</th>
+                                                @*<th>To Date</th>*@
+                                          @*      <th>From Time</th>
+                                                <th>To Time</th>*@
+                                                <th>Total Day</th>
+                                                <th style="width: 10%; text-align: center">
+                                                    Actions
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.LeaveRegisterRequests.Where(x=>x.IsReject==false && x.IsAccepted==false).ToList())
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @item.EmployeeCode
+                                                    </td>
+                                                    <td>
+                                                        @item.Name
+                                                    </td>
+                                                    <td>
+                                                        @item.Email
+                                                    </td>
+                                                    <td>
+                                                        @item.ContactNo
+                                                    </td>
+                                                    @if (item.IsDays)
+                                                    {
+                                                         <td>
+                                                        @item.LeaveType
+                                                        </td>
+                                                    } else
+                                                        {
+                                                             <td>
+                                                        Half Day
+                                                    </td>  
+                                                        }
+                                                        <td>
+                                                        @item.Reason
+                                                    </td>     
+                                                   
+                                              @*      <td>@item.FromDate.ToString("dd MMMM yyyy")</td>
+                                                    <td>@item.ToDate.ToString("dd MMMM yyyy")</td>*@
+                                                    @if (item.IsDays)
+                                                    {
+
+                                                        <td>@item.FromDate.ToString("dd MMMM yyyy")</td>
+                                                    }else if (item.IsHalfDay)
+                                                    {
+                                                        <td>@item.HourlyLeaveDate.ToString("dd MMMM yyyy")</td>
+                                                    }   
+                                                    @*    <td>@(item.IsHalfDay ? item.FromTime : "")</td>
+                                                        <td>@(item.IsHalfDay ? item.ToTime : "")</td>*@
+                                                    <td>@item.TotalDay</td>
+                                                    <td class="text-center">
+                                                        <a class="btn btn-primary text-white px-1 py-0" asp-page="./Edit" asp-route-id="@item.Id" title="Details">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                        <button class="btn btn-danger text-white px-1 py-0" onclick="handleDeleteLeave()" value="@item.Id" id="btnDelete" title="Delete">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="tab-pane fade table-responsive" id="custom-tabs-approved-home" role="tabpanel" aria-labelledby="custom-tabs-approved-home-tab">
+                                    <table id="data-table" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th> Employee Code</th>
+                                                <th> Name</th>
+                                                <th>Email</th>
+                                                <th>Contact No</th>
+                                                <th>Reason</th>
+                                                <th> Date</th>
+                                                @*<th>To Date</th>
+                                                <th>From Time</th>
+                                                <th>To Time</th>*@
+                                                <th>Approved Day</th>
+
+                                                <th style="width: 10%; text-align: center">
+                                                    Actions
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.LeaveRegisterRequests.Where(x => x.IsAccepted == true))
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @item.EmployeeCode
+                                                    </td>
+                                                    <td>
+                                                        @item.Name
+                                                    </td>
+                                                    <td>
+                                                        @item.Email
+                                                    </td>
+                                                    <td>
+                                                        @item.ContactNo
+                                                    </td>
+                                                    <td>
+                                                        @item.Reason
+                                                    </td>
+                                                   @* <td>@item.FromDate.ToString("dd MMMM yyyy")</td>
+                                                    <td>@item.ToDate.ToString("dd MMMM yyyy")</td>
+                                                    <td>@item.FromTime</td>
+                                                    <td>@item.ToTime</td>*@
+                                                    @if (item.IsHalfDay)
+                                                    {
+                                                        <td>@item.HourlyLeaveDate.ToString("dd MMMM yyyy")</td>
+                                                    }else
+                                                        {
+                                                            
+                                                        <td>@item.FromDate.ToString("dd MMMM yyyy")</td>
+                                                        }
+                                                    
+                                                    <td>@item.ApprovedTotalDay</td>
+                                                    <td class="text-center">
+                                                        <a class="btn btn-primary text-white px-1 py-0" asp-page="./Edit" asp-route-id="@item.Id" title="Details">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="tab-pane fade table-responsive" id="custom-tabs-reject-home" role="tabpanel" aria-labelledby="custom-tabs-reject-home-tab">
+                                    <table id="data-table" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th> Employee Code</th>
+                                                <th> Name</th>
+                                                <th>Email</th>
+                                                <th>Contact No</th>
+                                                <th>Reason</th>
+                                                <th> Date</th>
+                                               @* <th>To Date</th>
+                                                <th>From Time</th>
+                                                <th>To Time</th>*@
+                                                <th>Total Day</th>
+                                                <th style="width: 10%; text-align: center">
+                                                    Actions
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.LeaveRegisterRequests.Where(x => x.IsReject == true))
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @item.EmployeeCode
+                                                    </td>
+                                                    <td>
+                                                        @item.Name
+                                                    </td>
+                                                    <td>
+                                                        @item.Email
+                                                    </td>
+                                                    <td>
+                                                        @item.ContactNo
+                                                    </td>
+                                                    <td>
+                                                        @item.Reason
+                                                    </td>
+                                                   @* <td>@item.FromDate.ToString("dd MMMM yyyy")</td>
+                                                    <td>@item.ToDate.ToString("dd MMMM yyyy")</td>
+                                                    <td>@item.FromTime</td>
+                                                    <td>@item.ToTime</td>*@
+                                                    @if (item.IsHalfDay)
+                                                    {
+                                                        <td>@item.HourlyLeaveDate.ToString("dd MMMM yyyy")</td>
+                                                    }
+                                                    else
+                                                    {
+
+                                                        <td>@item.FromDate.ToString("dd MMMM yyyy")</td>
+                                                    }
+                                                    <td>@item.TotalDay</td>
+                                                    <td class="text-center">
+                                                        <a class="btn btn-primary text-white px-1 py-0" asp-page="./Edit" asp-route-id="@item.Id" title="Details">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                       
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //$("#menu-leave").addClass("menu-open");
+            $("#menu-leave-application").addClass("active-custom");
+            $(".datepicker").datepicker("setDate", new Date());
+        });
+        function setRouteParameter() {
+            var date = $(".datepicker").val();
+           var selectedUser= $('#selectedUser option:selected').text();
+            console.log(selectedUser)
+            var data = $("#selectedUser").val();
+            if(data === ""){
+            var newhref = $("#addActivityPrice").attr('href') + '/' + date;
+                $("#addActivityPrice").attr("href", newhref);
+            }else{
+                var newhref = $("#addActivityPrice").attr('href') + '/' + data;
+                $("#addActivityPrice").attr("href", newhref);
+            }
+           
+        }
+
+        function handleDeleteLeave(){
+            var id = $("#btnDelete").val();
+         
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "/api/LeaveRegister/DeleteLeaveRegister?id=" + id,
+                        type: "DELETE",
+                        contentType: "application/json;charset=utf-8",
+                        dataType: "json",
+                        success: function (data, status) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your application has been deleted.",
+                                icon: "success"
+                            });
+                            window.location.reload();
+                           
+                        },
+                        error:function(error){
+                            Swal.fire({
+                                title: error.message,
+                                text: "Something went wrong!",
+                                icon: "error"
+                            });
+                        }
+                    })
+                   
+                }
+            });
+        }
+    </script>
+}

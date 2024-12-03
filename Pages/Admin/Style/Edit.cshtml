@@ -1,0 +1,204 @@
+﻿@page
+@using myportfolio.Helpers
+@model myportfolio.Pages.Admin.Style.EditModel
+
+@{
+    ViewData["Title"] = "Style | Edit";
+}
+<link href="~/css/imageUpload.css" rel="stylesheet" />
+
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Style</h3>
+                        </div>
+                        <form method="post" enctype="multipart/form-data">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="RequestStyle.StyleNo" value="T" />
+                            <input type="hidden" asp-for="RequestStyle.Price" value="0" />
+                            <input type="hidden" asp-for="RequestStyle.StyleCategoryId" value="@Model.RequestStyle.Style.StyleCategoryId" />
+
+                            <input type="hidden" asp-for="RequestStyle.Style.Id" />
+                            <input type="hidden" asp-for="RequestStyle.Style.Key" />
+                            <input type="hidden" asp-for="RequestStyle.Style.CreatedAt" />
+                            <input type="hidden" asp-for="RequestStyle.Style.CreatedBy" />
+                            <input type="hidden" asp-for="RequestStyle.Style.FilePath" id="filePath" />
+
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label asp-for="RequestStyle.Style.StyleCategoryId">Category<span class="text-danger">*</span></label>
+                                                    <select asp-for="RequestStyle.Style.StyleCategoryId" required class="form-control">
+                                                        <option value="">Select Category</option>
+                                                        @foreach (var item in Model.RequestStyle.Categories)
+                                                        {
+                                                            <option value="@item.Id">@item.Title</option>
+                                                        }
+                                                    </select>
+                                                    <span asp-validation-for="RequestStyle.Style.StyleCategoryId" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label asp-for="RequestStyle.Style.StyleNo">Style No<span class="text-danger">*</span></label>
+                                                    <input asp-for="RequestStyle.Style.StyleNo" type="text" required class="form-control" placeholder="Enter Style No" />
+                                                    <span asp-validation-for="RequestStyle.Style.StyleNo" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label asp-for="RequestStyle.Style.Fabrication">Fabrication</label>
+                                                    <textarea asp-for="RequestStyle.Style.Fabrication" type="text" class="form-control" placeholder="Enter Fabrication"></textarea>
+                                                    <span asp-validation-for="RequestStyle.Style.Fabrication" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-sm-2 col-md-2 col-lg-2">
+                                                        <div class="form-group">
+                                                            <label asp-for="RequestStyle.Style.Price">FOB<span class="text-danger">*</span></label>
+                                                            <input type="text" class="form-control" placeholder="$" readonly style="text-align: center;" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-5 col-md-5 col-lg-5">
+                                                        <div class="form-group">
+                                                            <label asp-for="RequestStyle.Style.Price" style="color: transparent;">.</label>
+                                                            <input asp-for="RequestStyle.Style.Price" type="number" style="text-align: right;" required class="form-control" placeholder="Enter FOB" />
+                                                            <span asp-validation-for="RequestStyle.Style.Price" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-5 col-md-5 col-lg-5">
+                                                        <div class="form-group">
+                                                            <label asp-for="RequestStyle.Style.PriceFor" style="color: transparent;">.</label>
+                                                            <select asp-for="RequestStyle.Style.PriceFor" required class="form-control">
+                                                                <option value="Piece">Piece</option>
+                                                                <option value="Set">Set</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label asp-for="RequestStyle.Style.ExportTo">Export Market</label>
+                                                    <input asp-for="RequestStyle.Style.ExportTo" type="text" class="form-control" placeholder="Enter Export Market" />
+                                                    <span asp-validation-for="RequestStyle.Style.ExportTo" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label asp-for="RequestStyle.Style.Size">Size</label>
+                                                    <input asp-for="RequestStyle.Style.Size" type="text" class="form-control" placeholder="Enter Size" />
+                                                    <span asp-validation-for="RequestStyle.Style.Size" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label asp-for="RequestStyle.Style.Color">Color</label>
+                                                    <input asp-for="RequestStyle.Style.Color" type="text" class="form-control" placeholder="Enter Color" />
+                                                    <span asp-validation-for="RequestStyle.Style.Color" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label asp-for="RequestStyle.Style.Item">Item</label>
+                                                    <input asp-for="RequestStyle.Style.Item" type="text" class="form-control" placeholder="Enter Item" />
+                                                    <span asp-validation-for="RequestStyle.Style.Item" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+
+                                                    <div class="container">
+                                                        <p style="color: red; font-size: 20px;">** Please use 1920x1080 image for better view.</p>
+                                                        <div class="wrapper-two">
+                                                            <div class="image">
+                                                            </div>
+                                                            <div class="content">
+                                                                <div class="icon">
+                                                                    <i class="fas fa-cloud-upload-alt"></i>
+                                                                </div>
+                                                                <div class="text">
+                                                                    No file chosen, yet!
+                                                                </div>
+                                                            </div>
+                                                            <div id="cancel-btn">
+                                                                <i class="fas fa-times"></i>
+                                                            </div>
+                                                            <div class="file-name">
+                                                                File name here
+                                                            </div>
+                                                        </div>
+                                                        <button type="button" onclick="defaultBtnActive()" id="custom-choose-file-btn">Choose a file</button>
+                                                        <input id="default-btn" type="file" asp-for="RequestStyle.File" style="opacity: 0;">
+                                                    </div>
+                                                    <br />
+                                                    <span asp-validation-for="RequestStyle.File" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-footer">
+                                <a class="btn btn-outline-info" asp-page="./Index">Back</a>
+                                <button type="submit" class="btn btn-info float-right">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- /.content -->
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="~/js/imageUpload.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-style").addClass("active-custom");
+            $("#menu-styles").addClass("menu-open");
+        });</script>
+}

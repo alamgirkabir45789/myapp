@@ -1,0 +1,64 @@
+﻿@page
+@model myportfolio.Pages.Website.Contact.CorporateOfficeModel
+@{
+}
+
+
+<section class="home-slider js-fullheight owl-carousel">
+    <div class="slider-item js-fullheight"
+         style="
+          background-image: url(https://www.ecotextile.com/images/stories/2021/January/Garment_factory.jpg);
+        ">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row slider-text justify-content-center align-items-center">
+                <div class="col-md-7 col-sm-12 text-center ftco-animate">
+                    <h1 class="mb-3 mt-5 bread">Corporate Office</h1>
+                    <p class="breadcrumbs">
+                        <span class="mr-2"><a href="/Index">Home</a></span><span>/ Contact Us / Corporate Office</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section ftco-animate">
+    <div class="container">
+        <div class="office-address-container">
+            <div class="office-image">
+                <img class="office-image-style"
+                     src="https://media.istockphoto.com/photos/modern-office-room-interior-picture-id529272173?b=1&k=20&m=529272173&s=170667a&w=0&h=mOofhBZt3cDMYjNyhQnesb6V1mehVX1TlhSaSmBjuNw="
+                     alt="RDM Corporate Office" />
+            </div>
+            <div class="office-address">
+                <div class="office-address-header">Corporate Office</div>
+                <div class="office-address-text">
+                    8 A G Road, Chattogram, Bangladesh
+                    <!-- <br />
+                    34, Kemal Ataturk Avenue <br />
+                    Banani C/A, Dhaka - 1213 <br />
+                    Bangladesh -->
+                </div>
+                <div class="office-address-phone">
+                    <span class="font-weight-bold mr-2">Phone : </span>
+                    <span class="address-phone-email"> +88 031 2854236 </span>
+                </div>
+
+                <div class="office-address-email">
+                    <span class="font-weight-bold mr-2">Email: </span>
+                    <span class="address-phone-email">rdm.apparels@gmail.com</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#contact-menu-big-screen").addClass("active");
+            $("#contact-menu-small-screen").addClass("active");
+        });</script>
+}

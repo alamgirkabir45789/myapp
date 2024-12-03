@@ -1,0 +1,153 @@
+﻿@page
+@model myportfolio.Pages.Admin.User.DetailsModel
+@using Microsoft.AspNetCore.Identity
+@{
+    ViewData["Title"] = "User Details";
+    var userId = ViewData["userId"];
+}
+<link href="~/quadrion/css/backdropspinnerloader.css" rel="stylesheet" />
+@*Spinner Start*@
+<div id="overlay">
+    <div class="cv-spinner">
+        <span class="spinner"></span>
+    </div>
+</div>
+@*Spinner End*@
+
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <section class="content">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">User  Details</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-12 d-flex align-items-stretch flex-column">
+                                <div class="card bg-light d-flex flex-fill">
+                                    <div class="card-header text-muted border-bottom-0">
+                                    </div>
+                                    <div class="card-body pt-0">
+                                        <input type="hidden" id="userId" value="@userId"/>
+                                      
+                                       <div class="d-flex justify-content-between " style="flex-wrap:wrap">
+                                            <div>
+                                                <b>Name:  </b><span>@Html.DisplayFor(model => model.ApplicationUsers.Name)</span>
+
+                                            </div><div>
+                                                <b>Email:  </b><span>@Html.DisplayFor(model => model.ApplicationUsers.Email)</span>
+
+                                            </div><div>
+                                                <b>Contact No: </b><span>@Html.DisplayFor(model => model.ApplicationUsers.ContactNo)</span>
+
+                                            </div>
+                                       </div>
+                                        <div class="table-responsive mt-5">
+                                            <h6 class="text-center text-bold">Current Year Leave Summery</h6>
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th> Leave Type</th>
+                                                        <th> Validate From</th>
+                                                        <th> Validate To</th>
+                                                        <th>Total </th>
+                                                        <th> Taken </th>
+                                                        <th> Remaining </th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="tbody">
+                                                    <tr class="noRecord">
+                                                        <td colspan="6" class="text-center tableText">No data found</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                       
+                                    </div>
+                                    <div class="card-footer">
+                                        <form method="post">
+                                            <input type="hidden" asp-for="ApplicationUsers.Id" />
+                                            <a asp-page="./Index" class="btn  btn-outline-info">Back</a>
+                                         
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+</div>
+
+
+@section Scripts {
+    <script src="~/js/moment.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-configuration").addClass("menu-open");
+            $("#menu-user").addClass("active-custom");
+          LoadData()
+        });
+       
+    function LoadData(){
+            var userId = $("#userId").val();
+            console.log(userId !== "");
+           if(userId !==""){
+                $("#overlay").fadeIn(300);
+                $.ajax({
+                    url: "/api/LeaveRegister/GetCurrentYearLeaveSummary?userId=" + userId,
+                    type: "GET",
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "json",
+                    async: true,
+                    success: function (result, status) {
+                        console.log(result);
+                        var data = "";
+                        $.each(result, function (key, item) {
+                            
+                                data += '<tr>';
+                                data += '<td>' + item.leaveType + '</td>';
+                                data += '<td >' + moment(item.validFromDate).format('DD-MMM-YYYY') + '</td>';
+                                data += '<td>' + moment(item.validToDate).format('DD-MMM-YYYY') + '</td>';
+                                data += '<td>' + item.totalLeave + '</td>';
+                                data += '<td>' + item.takenLeave + '</td>';
+                                data += '<td>' + item.remainingLeave + '</td>';
+                                data += '</tr>';
+                            
+                        });
+
+                        if (status == 'success') {
+
+                            if (data === "") {
+                                $(".tbody").html("<tr><td colspan='6' class='text-center'>No data found</td></tr>");
+
+                            } else {
+                                $(".tbody").html(data);
+                                $(".noRecord").hide();
+                                $("#tableData").val(result)
+
+                            }
+
+                        }
+
+                    }
+
+                }).done(function () {
+                    setTimeout(function () {
+                        $("#overlay").fadeOut(300);
+                    }, 500);
+                });
+           }
+    }
+    </script>
+}

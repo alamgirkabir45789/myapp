@@ -1,0 +1,159 @@
+﻿@page
+@using myportfolio.Helpers
+
+@model myportfolio.Pages.Admin.Product.CreateModel
+
+@{
+    ViewData["Title"] = "Project | Create";
+    var businessType = BusinessType.BusinessTypeList();
+
+}
+
+<link href="~/css/imageUpload.css" rel="stylesheet" />
+
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Project</h3>
+                        </div>
+                        <form method="post" enctype="multipart/form-data">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="RequestProduct.Key" value="@Guid.NewGuid()" />
+
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-12">                                              
+                                              
+                                                <div class="form-group">
+
+                                                    <label asp-for="RequestProduct.CategoryId">
+                                                      Category
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <select class="form-control select2 select2-container" id="CategoryId" asp-for="RequestProduct.CategoryId" asp-items="ViewBag.CategoryId">
+                                                        <option value="">Select Category</option>
+                                                    </select>
+
+                                                    <span asp-validation-for="RequestProduct.CategoryId" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label asp-for="RequestProduct.Name">
+                                                        Name
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input asp-for="RequestProduct.Name" type="text" required class="form-control" placeholder="Enter Product Name" />
+                                                    <span asp-validation-for="RequestProduct.Name" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label asp-for="RequestProduct.ProjectUrl">
+                                                        Project Url
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input asp-for="RequestProduct.ProjectUrl" type="text"  class="form-control" placeholder="Enter Product Project Url" />
+                                                    <span asp-validation-for="RequestProduct.ProjectUrl" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label asp-for="RequestProduct.Details">
+                                                        Details
+                                                    </label>
+                                                    <textarea asp-for="RequestProduct.Details" type="text" class="form-control" placeholder="Enter Details"></textarea>
+                                                    <span asp-validation-for="RequestProduct.Details" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-6 mb-5">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+
+                                                    <div class="container">
+                                                        <p style="color: red; font-size: 20px;">** Please use 1920x1080 image for better view.</p>
+                                                        <div class="wrapper-two">
+                                                            <div class="image">
+                                                            </div>
+                                                            <div class="content">
+                                                                <div class="icon">
+                                                                    <i class="fas fa-cloud-upload-alt"></i>
+                                                                </div>
+                                                                <div class="text">
+                                                                    No file chosen, yet!
+                                                                </div>
+                                                            </div>
+                                                            <div id="cancel-btn">
+                                                                <i class="fas fa-times"></i>
+                                                            </div>
+                                                            <div class="file-name">
+                                                                File name here
+                                                            </div>
+                                                        </div>
+                                                        <button type="button" onclick="defaultBtnActive()" id="custom-choose-file-btn">Choose a file</button>
+                                                        <input id="default-btn" type="file" required asp-for="RequestProduct.File" style="opacity: 0;">
+                                                    </div>
+                                                    <br />
+                                                    <span asp-validation-for="RequestProduct.File" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-footer">
+                                <a class="btn btn-outline-info" asp-page="./Index">Back</a>
+                                <button type="submit" class="btn btn-info float-right">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- /.content -->
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="~/js/imageUpload.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-product").addClass("active-custom");
+            $("#menu-product-services").addClass("menu-open");
+
+            var items = "<option value='0'>Select Category</option>";
+            $("#categoryId").html(items);
+
+
+
+        });
+
+
+    </script>
+}

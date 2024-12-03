@@ -1,0 +1,139 @@
+﻿<!-- ./wrapper -->
+<!-- jQuery -->
+<script src="~/plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+@*<script src="~/plugins/jquery-ui/jquery-ui.min.js"></script>*@
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+    $.widget.bridge("uibutton", $.ui.button);
+</script>
+<!-- Bootstrap 4 -->
+<script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Tempusdominus Bootstrap 4 -->
+<!-- overlayScrollbars -->
+@*<script src="~/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>*@
+
+
+<!-- AdminLTE App -->
+<script src="~/dist/js/adminlte.js"></script>
+
+<!-- AdminLTE for demo purposes -->
+<!-- DataTables  & Plugins -->
+<script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="~/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="~/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+@*Sweet Alert*@
+<script src="~/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+<script src="~/plugins/sweetalert2/sweetalert2.min.js"></script>
+<script src="~/plugins/sweetalert2/sweetalert2.js"></script>
+
+@*Clock*@
+<script src="~/plugins/clockpicker/js/bootstrap.min.js"></script>
+<script src="~/plugins/clockpicker/dist/bootstrap-clockpicker.js"></script>
+
+@*
+        <script src="~/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+        <script src="~/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+        <script src="~/plugins/jszip/jszip.min.js"></script>
+            <script src="~/plugins/pdfmake/pdfmake.min.js"></script>
+            <script src="~/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+        <script src="~/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+        <script src="~/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>*@
+<script src="~/plugins/summernote/summernote-bs4.min.js"></script>
+
+<script src="~/js/flatpickr.js"></script>
+@*New Add Script*@
+<script src="~/plugins/select2new/select2.min.js"></script>
+@*End*@
+<script>
+    $(function () {
+        $("#data-table").DataTable({
+            //paging: true,
+            //lengthChange: false,
+            //searching: true,
+            //ordering: false,
+            //info: true,
+            //autoWidth: false,
+            //responsive: true,
+            //bSort: true
+
+            bLengthChange: true,
+            lengthMenu: [[10, 20, -1], [10, 20, "All"]],
+            bFilter: true,
+            bSort: true,
+            bPaginate: true,
+            responsive: true,
+            autoWidth: false,
+        });
+
+        $("#data-table-two").DataTable({
+            //paging: true,
+            //lengthChange: false,
+            //searching: true,
+            //ordering: true,
+            //info: true,
+            //autoWidth: false,
+            //responsive: true,
+            //bSort: true
+
+            bLengthChange: true,
+            lengthMenu: [[10, 20, -1], [10, 20, "All"]],
+            bFilter: true,
+            bSort: true,
+            bPaginate: true
+        });
+        
+        $(
+            "#job-responsibilities, #job-privilege, #job-qualifications, #job-skills"
+        ).summernote({
+            toolbar: [
+                ["style", ["bold", "italic", "underline", "clear"]],
+                ["font"],
+                ["fontname", ["fontname"]],
+                ["color", ["color"]],
+                ["fontsize", ["fontsize"]],
+                ["para", ["ul", "ol", "paragraph"]],
+                ["height", ["height"]]
+            ],
+            height: 100
+        });
+
+        $(
+            "#company-details"
+        ).summernote({
+            toolbar: [
+                ["style", ["bold", "italic", "underline", "clear"]],
+                ["font"],
+                ["fontname", ["fontname"]],
+                ["color", ["color"]],
+                ["fontsize", ["fontsize"]],
+                ["para", ["ul", "ol", "paragraph"]],
+                ["height", ["height"]]
+            ],
+            height: 250
+        });
+
+        //$(".date").flatpickr({
+        //    allowInput: true,
+        //    dateFormat: 'd-M-Y',
+        //});
+        //console.log($(".datepicker"))
+
+        $(".datepicker").datepicker();
+        $(".datepicker").datepicker("option", "dateFormat", "d-M-yy");
+        $(".datepicker").datepicker("option", "yearRange", "1900:@DateTime.Now.AddYears(100).Year");
+        $(".datepicker").datepicker("option", "changeMonth", true);
+        $(".datepicker").datepicker("option", "changeYear", true);
+     
+       
+    });
+
+</script>
+
+

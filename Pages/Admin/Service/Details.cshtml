@@ -1,0 +1,72 @@
+﻿@page
+@model myportfolio.Pages.Admin.Service.DetailsModel
+@{
+    ViewData["Title"] = "Service Details";
+}
+
+
+
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <section class="content">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Service Details</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-sm-6 col-md-6 d-flex align-items-stretch flex-column">
+                                <div class="card bg-light d-flex flex-fill">
+                                    <div class="card-header text-muted border-bottom-0">
+
+                                    </div>
+                                    <div class="card-body pt-0">
+                                        <div class="row">
+                                            <div class="col-7">
+                                                <h2 class="lead"><b> Title : @Html.DisplayFor(model => model.Category.Title) </b></h2>
+                                                <h2 class="lead"><b>Description :  @Html.DisplayFor(model => model.Category.Description) </b></h2>
+                                                @*<h2 class="lead"><b>Business Type :  @Html.DisplayFor(model => model.Category.BusinessType) </b></h2>*@
+
+                                            </div>
+                                            <div class="col-5 text-center">
+                                                <img src="~/@Model.Category.FilePath" alt="media gallery image" class="img-rounded img-fluid">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="text-left">
+
+                                            <a asp-page="./Index" class="btn btn-sm btn-outline-info">
+                                                Back to list
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+    </section>
+</div>
+
+
+@section Scripts {
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-service").addClass("active-custom");
+            $("#menu-product-services").addClass("menu-open");
+        });</script>
+}

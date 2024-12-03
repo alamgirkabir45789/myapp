@@ -1,0 +1,397 @@
+﻿@page
+@model myportfolio.Pages.Admin.LeaveRegister.EditModel
+@using Microsoft.AspNetCore.Identity
+@{
+    ViewData["Title"] = "Edit Leave Application";
+    var fTime = Model.LeaveRegisterRequest.FromTime;
+    var toTime = Model.LeaveRegisterRequest.ToTime;
+}
+
+<div class="content-wrapper">
+    <section class="content pt-4">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h4 class="card-title">Leave Application Details</h4>
+                        </div>
+                        <form method="post">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        
+                            <input type="hidden" asp-for="LeaveRegisterRequest.Id" />
+                            <input type="hidden" asp-for="LeaveRegisterRequest.Key" />
+                            <input type="hidden" asp-for="LeaveRegisterRequest.CreatedAt" />
+                            <input type="hidden" asp-for="LeaveRegisterRequest.CreatedBy" />
+                            <input type="hidden" asp-for="LeaveRegisterRequest.TotalDay" />
+                            <input type="hidden" asp-for="LeaveRegisterRequest.Name" />
+                            <input type="hidden" asp-for="LeaveRegisterRequest.Reason" />
+                            <input type="hidden" asp-for="LeaveRegisterRequest.LeaveType" id="leaveType" />
+                            <input type="hidden" asp-for="LeaveRegisterRequest.UserId" id="userId" />
+                            <input type="hidden" asp-for="LeaveRegisterRequest.Email" />
+                            <input type="hidden" asp-for="LeaveRegisterRequest.Designation" />
+                            <input type="hidden" asp-for="LeaveRegisterRequest.ContactNo" />
+                            <input type="hidden" asp-for="LeaveRegisterRequest.IsDays" />
+                            <input type="hidden" asp-for="LeaveRegisterRequest.IsHalfDay" />
+                            <input type="hidden" asp-for="LeaveRegisterRequest.IsHours" />
+                            <input type="hidden" asp-for="LeaveRegisterRequest.FromDate" />
+                            <input type="hidden" asp-for="LeaveRegisterRequest.ToDate" />
+                            <input type="hidden" asp-for="LeaveRegisterRequest.HourlyLeaveDate" />
+                            <input type="hidden" asp-for="LeaveRegisterRequest.FromTime" />
+                            <input type="hidden" asp-for="LeaveRegisterRequest.ToTime" />
+
+                            <input id="fTime" type="hidden" value="@fTime" />
+                            <input id="toTime" type="hidden" value="@toTime" />
+                            <div class="card-body">
+
+                                <div class="row">                                   
+                                    <div class="col-md-4">
+                                        <div class="form-group" >
+                                            <label asp-for="LeaveRegisterRequest.Name">
+                                                Name :
+                                            </label>
+                                                <span class="ml-1">@Model.LeaveRegisterRequest.Name</span>                                           
+                                        </div>                                      
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="LeaveRegisterRequest.Email">
+                                                Email :
+                                            </label>
+                                            <span class="ml-1">@Model.LeaveRegisterRequest.Email</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="LeaveRegisterRequest.ContactNo">
+                                                ContactNo :
+                                            </label>
+                                                <span class="ml-1">@Model.LeaveRegisterRequest.ContactNo</span>                                           
+                                        </div>                                        
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="LeaveRegisterRequest.Designation">
+                                                Designation :
+                                            </label>                                           
+                                                <span class="ml-1">@Model.LeaveRegisterRequest.Designation</span>                                       
+                                        </div>                                       
+                                    </div>
+                                    @if (Model.LeaveRegisterRequest.IsDays)
+                                    {
+                                        <div class="col-md-4 changeDays">
+                                            <div class="form-group">
+                                                <label asp-for="LeaveRegisterRequest.FromDate">
+                                                     Start Date :
+                                                </label>
+                                                    <span class="ml-1">@Model.LeaveRegisterRequest.FromDate.ToString("dd MMMM yyyy")</span>                                        
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 changeDays">
+                                            <div class="form-group">
+                                                <label asp-for="LeaveRegisterRequest.ToDate">
+                                                     End Date :
+                                                </label>
+                                                    <span class="ml-1">@Model.LeaveRegisterRequest.ToDate.ToString("dd MMMM yyyy")</span>                                              
+                                            </div>
+                                        </div>
+                                    }
+                                    else if(Model.LeaveRegisterRequest.IsHalfDay)
+
+                                    {
+                                          <div class="col-md-4 ">
+                                            <div class="form-group">
+                                                <label asp-for="LeaveRegisterRequest.HourlyLeaveDate">
+                                                      Date :
+                                                </label>
+                                                    <span class="ml-1">@Model.LeaveRegisterRequest.HourlyLeaveDate.ToString("dd MMMM yyyy")</span>                                              
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 checkTime">
+                                            <div class="form-group">
+                                                <label asp-for="LeaveRegisterRequest.FromTime">
+                                                    From Time :
+                                                </label>
+                                                <span class="ml-1" id="test"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 checkTime">
+                                            <div class="form-group">
+                                                <label asp-for="LeaveRegisterRequest.ToTime">
+                                                    To Time :
+                                                </label>
+                                                <span class="ml-1" id="test2"></span>
+                                            </div>
+                                        </div>
+                                    }
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="LeaveRegisterRequest.Reason">
+                                                Reason :
+                                            </label>
+                                                <span class="ml-1">@Model.LeaveRegisterRequest.Reason</span>                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="LeaveRegisterRequest.LeaveType">
+                                                 Type :
+                                            </label>
+                                            <span class="ml-1">@Model.LeaveRegisterRequest.LeaveType</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="LeaveRegisterRequest.TotalDay">
+                                                Total Day :
+                                            </label>
+                                            <span class="ml-1">@Model.LeaveRegisterRequest.TotalDay </span>
+                                        </div>
+                                    </div>
+
+                                    @if (Model.LeaveRegisterRequest.IsChangeDate)
+                                    {
+                                        <div class="col-md-4 ">
+                                            <div class="form-group">
+                                                <label asp-for="LeaveRegisterRequest.ApprovedFromDate">
+                                                    Approved Start Date :
+                                                </label>
+                                                    <span class="ml-1">@Model.LeaveRegisterRequest.ApprovedFromDate.ToString("dd MMMM yyyy")</span>                                               
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-4 ">
+                                            <div class="form-group">
+                                                <label asp-for="LeaveRegisterRequest.ApprovedToDate">
+                                                    Approved End Date :
+                                                </label>
+                                                    <span class="ml-1">@Model.LeaveRegisterRequest.ApprovedToDate.ToString("dd MMMM yyyy")</span>                                               
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="LeaveRegisterRequest.ApprovedTotalDay">
+                                                    Approved Day :
+                                                </label>
+                                                    <span class="ml-1">@Model.LeaveRegisterRequest.ApprovedTotalDay</span>                                               
+                                            </div>
+                                        </div>
+                                    }
+                                    <div class="col-md-4">                                     
+                                        <div class="form-group">
+                                            <label>
+                                                Status:
+                                            </label>
+                                                <span class="ml-1">@(Model.LeaveRegisterRequest.IsReject ? "Reject" : Model.LeaveRegisterRequest.IsAccepted ? "Approved" : "Pending")</span>
+                                           
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>
+                                                Remaining Leave:
+                                            </label>
+                                            <span class="ml-1" id="remainingDays">0</span>
+                                        </div>
+                                    </div>
+                                
+                                  
+                                    @if (Model.LeaveRegisterRequest.IsChangeDate)
+                                    {
+                                        <div class="col-md-12 checkedDays">
+                                            <div class="form-group">
+                                                <label asp-for="LeaveRegisterRequest.ApprovedFromDate">
+                                                    Approved Start Date
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input asp-for="LeaveRegisterRequest.ApprovedFromDate" id="fromDate" value="@Model.LeaveRegisterRequest.ApprovedFromDate" type="text" autocomplete="off" readonly class="form-control datepicker" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 checkedDays">
+                                            <div class="form-group">
+                                                <label asp-for="LeaveRegisterRequest.ApprovedToDate">
+                                                    Approved End Date
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input asp-for="LeaveRegisterRequest.ApprovedToDate" id="toDate" type="text" value="@Model.LeaveRegisterRequest.ApprovedToDate" autocomplete="off" readonly class="form-control datepicker" />
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-md-12 checkedDays">
+                                            <div class="form-group">
+                                                <label asp-for="LeaveRegisterRequest.ApprovedFromDate">
+                                                    Leave Start
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input asp-for="LeaveRegisterRequest.ApprovedFromDate" id="fromDate" value="@Model.LeaveRegisterRequest.FromDate" type="text" autocomplete="off" readonly class="form-control datepicker" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 checkedDays">
+                                            <div class="form-group">
+                                                <label asp-for="LeaveRegisterRequest.ApprovedToDate">
+                                                    Leave End
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input asp-for="LeaveRegisterRequest.ApprovedToDate" id="toDate" type="text" value="@Model.LeaveRegisterRequest.ToDate" autocomplete="off" readonly class="form-control datepicker" />
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (User.IsInRole("Admin") && !Model.LeaveRegisterRequest.IsAccepted && !Model.LeaveRegisterRequest.IsReject)
+                                    {
+                                        <div class="col-md-12">                                           
+                                            <div class="form-group">
+                                                <label asp-for="LeaveRegisterRequest.Comments" class="control-label">Remarks:</label>
+                                                <textarea asp-for="LeaveRegisterRequest.Comments" class="form-control"></textarea>
+                                                <span asp-validation-for="LeaveRegisterRequest.Comments" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                    <div class="col-md-12">
+
+                                        <div class="form-group">
+                                                <label asp-for="LeaveRegisterRequest.Comments">
+                                                    Remarks :
+                                                </label>
+                                                <span class="ml-1">@(Model.LeaveRegisterRequest.Comments ==""?Model.LeaveRegisterRequest.Comments:"N/A")</span>
+                                                </div>
+                                    </div>
+                                    }
+
+                                    <div class="col-md-12 ">
+                                    <div class="d-flex justify-content-around">
+                                            @if (User.IsInRole("Admin") && !Model.LeaveRegisterRequest.IsAccepted && !Model.LeaveRegisterRequest.IsReject)
+                                            {
+
+                                                @if (Model.LeaveRegisterRequest.IsDays)
+                                                {
+                                                    
+                                                        <div class="form-group form-check">
+                                                            <label class="form-check-label">
+                                                                <input class="form-check-input" id="isChangeDate" onclick="ChangeDay()" asp-for="LeaveRegisterRequest.IsChangeDate" />Change Date
+                                                            </label>
+                                                        </div>
+                                                    
+                                                }
+                                                
+                                                    <div class="form-group form-check">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" id="isRejected" onclick="isReject()" asp-for="LeaveRegisterRequest.IsReject" /> Reject
+                                                        </label>
+                                                    </div>
+                                               
+                                                    <div class="form-group form-check">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" id="isAccepted" onclick="isApproved()" asp-for="LeaveRegisterRequest.IsAccepted" /> Approved
+                                                        </label>
+                                                    </div>
+                                                
+                                            }
+                                    </div>
+                                    </div>                                  
+                                </div>                
+                            </div>
+                            @if (User.IsInRole("Admin") && !Model.LeaveRegisterRequest.IsAccepted && !Model.LeaveRegisterRequest.IsReject)
+                            {
+                                <div class="card-footer">
+                                    <a class="btn btn-outline-info" asp-page="/Admin/LeaveRegister/Index">Back</a>
+                                    <button type="submit" class="btn btn-info float-right">Save</button>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="card-footer">
+                                    <a class="btn btn-outline-info" asp-page="/Admin/LeaveRegister/Index">Back</a>
+                                </div>
+                            }                           
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+           
+            $("#menu-leave-application").addClass("active-custom");
+         
+            $(".checkedDays").css("display", "none")
+
+            LoadRemainingLeave();
+            var time = $("#fTime").val();
+            $("#test").text(function (i, oldText) {
+                return "" + new Date('7/10/2013 ' + time).toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3")
+            })
+
+            var time2 = $("#toTime").val();
+            $("#test2").text(function (i, oldText) {
+                return "" + new Date('7/10/2013 ' + time2).toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3")
+            })
+            console.log(time2, time);
+
+        });
+
+        function ChangeDay() {
+            var checked = $('#isChangeDate').is(':checked');
+            var isRejectChecked = $('#isRejected').is(':checked');
+            if (isRejectChecked) {
+                $('#isChangeDate').prop("checked", false);
+                
+            }else{
+                if (checked) {
+                    console.log("hi");
+                    $(".checkedDays").css("display", "block")
+
+                } else {
+                    $(".checkedDays").css("display", "none")
+                }
+            }
+        }
+
+        function isReject() {
+            var checked = $('#isRejected').is(':checked');
+            if (checked) {
+               
+                $('#isAccepted').prop("checked", false);
+                $('#isChangeDate').prop("checked", false);
+                $(".checkedDays").css("display", "none")
+            }
+        }
+
+        function isApproved() {
+            var checked = $('#isAccepted').is(':checked');
+            if (checked) {               
+                $('#isRejected').prop("checked", false);
+            } 
+        }
+
+        function LoadRemainingLeave() {
+            var leaveType = $('#leaveType').val();
+            var userId = $("#userId").val();
+            $.ajax({
+                url: "/api/LeaveRegister/GetLeaveRecordByLeaveType?userId=" + userId + "&leaveType=" + leaveType,
+                type: "GET",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (data, status) {
+                    console.log({ data, status });
+                    if(status=="success"){
+
+                    $("#remainingDays").html(data);
+                    }else{
+                        $("#remainingDays").html(0);
+                    }
+                }
+            })
+
+        }
+    </script>
+}

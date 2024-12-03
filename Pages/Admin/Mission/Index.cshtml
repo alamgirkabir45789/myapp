@@ -1,0 +1,86 @@
+﻿@page
+@model myportfolio.Pages.Admin.Mission.IndexModel
+
+@{
+    ViewData["Title"] = "Mission & Value";
+}
+
+
+<div class="content-wrapper">
+
+
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                Mission
+                            </h3>
+                            <a class="float-right btn btn-outline-success" asp-page="Create">
+                                Add
+                            </a>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="data-table"
+                                   class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th> Title</th>
+                                        <th> Description</th>
+                                        <th>Image</th>
+
+                                        <th style="width: 15%; text-align: center">
+                                            Actions
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Missions)
+                                    {
+                                        <tr>
+                                            <td>@item.Title</td>
+                                            <td>@Html.Raw(item.Description)</td>
+                                            <td>
+                                                <img src="~/@item.FilePath" alt="Alternate Text" class="img-circle elevation-2" width="50" height="50" />
+                                            </td>
+
+
+                                            <td class="text-center">
+                                                <a class="btn btn-primary text-white px-1 py-0" asp-page="./Details" asp-route-id="@item.Id" title="Details">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                <a class="btn btn-warning text-white px-1 py-0" asp-page="./Edit" asp-route-id="@item.Id" title="Edit">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a class="btn btn-danger text-white px-1 py-0" asp-page="./Delete" asp-route-id="@item.Id" title="Delete">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-about-mission").addClass("active-custom");
+            $("#menu-about-us").addClass("menu-open");
+        });</script>
+}
+

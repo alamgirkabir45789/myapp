@@ -1,0 +1,99 @@
+﻿@page
+@model myportfolio.Pages.Website.About.MessageFromMDModel
+@{
+}
+
+
+<section class="home-slider js-halfheight owl-carousel">
+    @if (Model.Slider != null)
+    {
+        <div class="slider-item js-halfheight"
+             style=" background-image: url(/@Model.Slider.FilePath); ">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row slider-text justify-content-center align-items-center">
+                    <div class="col-md-7 col-sm-12 text-center ftco-animate js-halfheight-text">
+                        <h1 class="mb-3 mt-5 bread">About Us</h1>
+                        <p class="breadcrumbs">
+                            <span class="mr-2"><a href="/Index">Home</a></span><span>/ About US / Message From MD</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="slider-item js-halfheight"
+             style=" background-image: url(https://www.ecotextile.com/images/stories/2021/January/Garment_factory.jpg); ">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row slider-text justify-content-center align-items-center">
+                    <div class="col-md-7 col-sm-12 text-center ftco-animate js-halfheight-text">
+                        <h1 class="mb-3 mt-5 bread">About Us</h1>
+                        <p class="breadcrumbs">
+                            <span class="mr-2"><a href="/Index">Home</a></span><span>/ About US / Message From MD</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</section>
+
+
+<section class="ftco-section pt-5 mt-3">
+    <div class="">
+
+        <div class="md-message-container">
+            <div class="md-image ftco-animate">
+                <img src="~/images/management/MD_MostafaSarwarRiyad.jpg" alt="Alternate Text" />
+            </div>
+            <div class="md-message ftco-animate">
+                <div class="md-message-header ">
+                    @*Our MD's Message*@
+                    Managing Director's Message
+                </div>
+                <div class="md-message-body ftco-animate text-justify">
+                    <p>
+                        In the current process of widespread globalization, we in RDM understand that meeting our customer's requirement is essential to the success of our organization. We can say that the years we experienced in the past are significant years and it is clearly seen that we have intensively delivered our best performance to focus on customer satisfaction.
+                    </p>
+                    <p>
+                        On behalf of the Board of Directors, I would like to thank our valuable customers and world-class suppliers. Besides, I would like to make a special mention of our staffs’ and workers’ enthusiastic contribution in establishing our organization. The one thing I would like to present is that our leadership is a result of our employees. They have clearly made RDM one of the outstanding organizations. We know our highly trained technician and worker apply their specialized knowledge to reliably and efficiently produce high quality service.
+                    </p>
+
+                    <p>
+                        We are now in an ever-changing market environment. In such situation, we firmly believe that “trust” is the key element in persuading customers to choose our service and quality products. We totally accept that “trust” can create a “Win-Win Situation” for a long deeper relationship. We will continue our endless effort to serve our valuable customers.
+                    </p>
+
+                    <p>
+                        In addition, we in RDM will intensively endeavor in environmental awareness for the purpose of preventing from climate changes and resources depletion. We are committed to preservation of the environment we live in. So in summary, I would like to thank again all those who have contributed relentless hard work and effort of the past to bring up here today and will continue to grow for years to come.
+                    </p>
+                </div>
+                <div class="md-message-footer ftco-animate">
+                    <h2>
+                        Mostafa Sarwar Riyadh
+
+                    </h2>
+                    <p>
+                        Managing Director
+
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#about-menu-big-screen").addClass("active");
+            $("#about-menu-small-screen").addClass("active");
+        });</script>
+}

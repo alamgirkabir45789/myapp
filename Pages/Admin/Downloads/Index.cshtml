@@ -1,0 +1,82 @@
+﻿@page
+@model myportfolio.Pages.Admin.Downloads.IndexModel
+
+@{
+    ViewData["Title"] = "Downloads";
+}
+
+
+
+<div class="content-wrapper">
+
+
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fa fa-download"></i> Downloads
+                            </h3>
+                            <a class="float-right btn btn-outline-success" asp-page="Create">
+                                Add
+                            </a>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="data-table"
+                                   class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>File Group</th>
+                                        <th>File Name</th>
+
+                                        <th style="width: 15%; text-align: center">
+                                            Actions
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Download)
+                                    {
+                                        <tr>
+                                            <td>@item.FileGroup.GroupName</td>
+                                            <td>
+                                                @item.FileName
+                                            </td>
+
+
+                                            <td class="text-center">
+
+                                                <a class="btn btn-warning text-white px-1 py-0" asp-page="./Edit" asp-route-id="@item.Id" title="Edit">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a class="btn btn-danger text-white px-1 py-0" asp-page="./Delete" asp-route-id="@item.Id" title="Delete">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-downloads").addClass("active-custom");
+            $("#menu-resources").addClass("menu-open");
+        });</script>
+}

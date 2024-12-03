@@ -1,0 +1,87 @@
+﻿@page
+
+@model myportfolio.Pages.Website.About.HistoryModel
+@inject myportfolio.Model.ApplicationDbContext _Context
+
+@{
+    var histories = _Context.Histories.ToList();
+    int counter = 1;
+}
+@{
+    ViewData["Title"] = "History";
+}
+
+<div class="container-xxl position-relative p-0">
+    <div class="container-xxl py-5 bg-primary hero-header">
+        <div class="container my-5 py-5 px-lg-5">
+            <div class="row g-5 py-5">
+                <div class="col-12 text-center">
+                    <h1 class="text-white animated slideInDown">About Me</h1>
+                    <hr class="bg-white mx-auto mt-0" style="width: 90px;">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="/Index">Home</a></li>
+                            @*<li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>*@
+                            @* <li class="breadcrumb-item text-white active" aria-current="page">History</li> *@
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- About Start -->
+<div class="container-xxl py-1">
+    <div class="container py-1 px-lg-5">
+        <div class="row g-5 align-items-center">
+            <p class="section-title text-secondary justify-content-center"><span></span>About Me<span></span></p>
+            <div class="row g-5" >
+            @foreach (var item in histories)
+            {
+                    if(counter %2 != 0)
+                    {
+                        <div class="col-lg-8 wow fadeInUp" data-wow-delay="0.1s">
+                            <h2>@item.Title<span></span></h2>
+                            <hr class="text-black" />
+                            <p class="mb-4" style="text-align:justify">
+                                @Html.Raw(@item.Description)
+                            </p>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <img class="img-fluid img-thumbnail wow zoomIn" data-wow-delay="0.5s" src="/@item.FilePath">
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-lg-4">
+                            <img class="img-fluid img-thumbnail wow zoomIn" data-wow-delay="0.5s" src="/@item.FilePath">
+                        </div>
+                        <div class="col-lg-8 wow fadeInUp" data-wow-delay="0.1s">
+                            <h2>@item.Title<span></span></h2>
+                            <hr class="text-black" />
+                            <p class="mb-4" style="text-align:justify">
+                                @Html.Raw(@item.Description)
+                            </p>
+                        </div>
+
+
+                    }
+                    counter++;
+                }
+                </div>
+          
+           
+        </div>
+    </div>
+</div>
+<!-- About End -->
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#about-menu-big-screen").addClass("active");
+            $("#history-menu-small-screen").addClass("active");
+        });</script>
+}

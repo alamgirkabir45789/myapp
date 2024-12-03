@@ -1,0 +1,139 @@
+﻿@page
+@model myportfolio.Pages.Admin.User.AssignLeaveModel
+@{
+    ViewData["Title"] = "Assign Leave";
+
+}
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Assign Leave</h3>
+                        </div>
+                        <form method="post">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" id="leaveTypeId" asp-for="empLeaveRequest.LeaveTypeId" />
+                            <input type="hidden" id="leaveType" asp-for="empLeaveRequest.LeaveType" />
+                            <div class="card-body">
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="row ">
+                                        <div class="col-md-6 col-sm-12 ">
+                                            <div class="form-group">
+                                                <label asp-for="empLeaveRequest.ValidFromDate">
+                                                    Validate From
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input asp-for="empLeaveRequest.ValidFromDate" id="fromDate" type="text" autocomplete="off" readonly class="form-control datepicker" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="empLeaveRequest.ValidToDate">
+                                                    Validate  To
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input asp-for="empLeaveRequest.ValidToDate" id="toDate" type="text" autocomplete="off" readonly class="form-control datepicker" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="empLeaveRequest.LeaveType">Leave Type<span class="text-danger">*</span></label>
+                                                <select asp-for="empLeaveRequest.LeaveType" required class="form-control" id="selectedLeaveType" onchange="handleChangeLeaveType()">
+                                                    <option value="-1">Select Leave Type</option>
+                                                    @foreach (var item in Model.EmpLeaveTypes)
+                                                    {
+                                                        <option value="@item.Id" id="AllTypes">@item.LeaveTypeName</option>
+                                                    }
+                                                </select>
+                                                <span asp-validation-for="empLeaveRequest.LeaveType" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="" asp-for="empLeaveRequest.TotalLeave">
+                                                    Total Day
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input type="number" asp-for="empLeaveRequest.TotalLeave" required class="form-control" placeholder="Enter Total Day" />
+                                                <span asp-validation-for="empLeaveRequest.TotalLeave" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 offset-md-2 col-sm-12">
+                                            <label>
+                                                <input type="checkbox" id="chkVal" onclick="checkAll()" />Select All
+
+                                            </label>
+
+                                            @for (int i = 0; i < Model.assignHolidayRequests.Count; i++)
+                                            {
+                                                <div class="form-group form-check">
+                                                    <input type="hidden" asp-for="@Model.assignHolidayRequests[i].UserId" />
+
+                                                    <input type="hidden" asp-for="@Model.assignHolidayRequests[i].UserName" />
+                                                    <input type="hidden" asp-for="@Model.assignHolidayRequests[i].IsSelected" class="form-check-input" name="@Model.assignHolidayRequests[i].IsSelected" />
+                                                    <label class="form-check-label" asp-for="@Model.assignHolidayRequests[i].IsSelected">
+                                                        <input class="form-check-input childItem" asp-for="@Model.assignHolidayRequests[i].IsSelected" id="test-@Model.assignHolidayRequests[i].UserId" onclick="handleCheckSingle(@Model.assignHolidayRequests[i].UserId)" />  @Model.assignHolidayRequests[i].UserName
+                                                    </label>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <a class="btn btn-outline-info" asp-page="/Admin/DailyTask/Index">Back</a>
+                                <button type="submit" id="btnSave" class="btn btn-info float-right">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- /.content -->
+</div>
+
+
+@section Scripts {
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-configuration").addClass("menu-open");
+            $("#menu-assign-leave").addClass("active-custom");
+            $("#fromDate").datepicker("setDate", new Date(new Date().getFullYear(), 0, 01));
+            $("#toDate").datepicker("setDate", new Date(new Date().getFullYear(), 11, 31));
+
+            
+        });
+        function checkAll() {
+            var checked = $('#chkVal').is(':checked');
+            if (checked) {
+                $('.childItem').prop("checked", true);
+
+            } else {
+                $('.childItem').prop("checked", false);
+
+            }
+        }
+        function handleCheckSingle(id) {
+            var checked = $(".childItem").is(':checked');
+            console.log(checked)
+        }
+
+        function handleChangeLeaveType() {
+            var leaveType = $('#selectedLeaveType option:selected').text();
+            var leaveTypeId = $('#selectedLeaveType option:selected').val();
+            var userId = $("#userId").val();
+            $("#leaveType").val(leaveType);
+            $("#leaveTypeId").val(leaveTypeId);
+            // console.log({ fromDate, toDate, leaveType })
+        }
+    </script>
+}
+

@@ -1,0 +1,235 @@
+﻿@page
+@model myportfolio.Pages.Admin.Report.LeaveReportModel
+@{
+    ViewData["Title"] = "Leave Report";
+}
+<link href="~/quadrion/css/backdropspinnerloader.css" rel="stylesheet" />
+@*Spinner Start*@
+<div id="overlay">
+    <div class="cv-spinner">
+        <span class="spinner"></span>
+    </div>
+</div>
+@*Spinner End*@
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Leave Report</h3>
+                        </div>
+                        <form method="post" >
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="card-body">
+                                <input type="hidden" id="tableData" />
+                                <div class="d-flex mb-3" style="gap:5px;flex-wrap:wrap;">
+                                    <div style="width:30%">
+                                        <div class="form-group">
+                                            <label>Developer Name<span class="text-danger">*</span></label>
+                                            <select id="userId" class="form-control select2 select2-container" required asp-items="@ViewBag.users" onchange="handleChangeDeveloper()">
+                                                <option value="">Select Developer Name</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div style="width:30%">
+                                        <div class="form-group">
+                                            <label>
+                                                From Date
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input id="fromDate" type="text" autocomplete="off" readonly class="form-control datepicker" />
+                                        </div> 
+                                       
+                                    </div>
+                                    <div style="width:30%">
+                                        <div class="form-group">
+                                            <label>
+                                                To Date
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input id="toDate" type="text" autocomplete="off" readonly class="form-control datepicker" />
+                                        </div>
+                                       
+                                    </div>
+                                  
+                                    <div style="margin-top:2rem;">
+                                        <button type="button" class=" btn bg-primary  align-middle" onclick="handleViewData()">
+                                            View
+                                        </button>
+                                    </div>
+                                    <div style="margin-top:2rem;">
+                                        <button type="button" class="btn bg-info  align-middle" onclick="handlePrintData()">
+
+                                            Print
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                  
+                                    <table class="table table-bordered table-hover p-2">
+                                        <thead>
+                                            <tr>
+                                              
+                                                <th>From Date</th>
+                                                <th>To Date</th>
+                                                <th> From Time</th>
+                                                <th> To Time</th>
+                                                <th>Day/Half Day</th>
+                                                <th>Leave Type </th>
+                                                <th> Reason</th>
+                                                <th>Total Day</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="tbody">
+                                            <tr class="noRecord">
+                                                <td colspan="9" class="text-center tableText">No data found</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <a class="btn btn-outline-info" asp-page="/Admin/User/Index">Back</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- /.content -->
+</div>
+@section Scripts {
+
+    <script src="~/js/moment.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-qt-report").addClass("menu-open");
+            $("#menu-leave-report").addClass("active-custom");
+            $("#fromDate").datepicker("setDate", new Date(new Date().getFullYear(), 0, 01));
+            $("#toDate").datepicker("setDate", new Date(new Date().getFullYear(), 11, 31));
+        });
+
+
+        function handleChangeDeveloper() {
+            
+            $(".tbody").html("<tr><td colspan='9' class='text-center'>No data found</td></tr>");
+
+        }
+
+        $("#fromDate").datepicker({
+            dateFormat: 'dd-mm-yy',
+            onSelect: function () {
+                $(".tbody").html("<tr><td colspan='9' class='text-center'>No data found</td></tr>");
+            }
+        });
+        $("#toDate").datepicker({
+            dateFormat: 'dd-mm-yy',
+            onSelect: function () {
+                $(".tbody").html("<tr><td colspan='9' class='text-center'>No data found</td></tr>");
+            }
+        });
+
+
+        function handleViewData() {
+            var userId = $("#userId").val();
+
+            var fromDate = $("#fromDate").val();
+            var toDate = $("#toDate").val();
+            if (fromDate == "") {
+                Swal.fire("Please select ", "From Date", "warning");
+            } else if (toDate == ""){
+                Swal.fire("Please select ", "To Date", "warning");
+            }
+            else if (userId == "") {
+                Swal.fire("Please select ", "Developer Name", "warning");
+            }
+            else {
+                $("#overlay").fadeIn(300);
+                $.ajax({
+                    url: "/api/LeaveRegister/GetLeaveRecordByUserIdAndDateRange?userId=" + userId + "&fromDate=" + fromDate + "&toDate=" + toDate,
+                    type: "GET",
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "json",
+                    async: true,
+                    success: function (result, status) {
+                       
+                        var data = "";
+                        $.each(result, function (key, item) {                            
+                               if(item.isHalfDay===true){
+                                data += '<tr>';
+                                //data += '<td>' + item.name + '</td>';
+                             
+                                data += '<td >' + moment(item.hourlyLeaveDate).format('DD-MMM-YYYY') + '</td>';
+                                data += '<td>' + moment(item.approvedToDate).format('DD-MMM-YYYY') + '</td>';
+                                data += '<td>' + new Date('7/10/2013 ' + item.fromTime).toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3") + '</td>';
+                                data += '<td>' + new Date('7/10/2013 ' + item.toTime).toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3") + '</td>';
+                                data += '<td>' + "Half Day" + '</td>';
+                                data += '<td>' + item.leaveType + '</td>';
+                                data += '<td>' + item.reason + '</td>';
+                                data += '<td>' + item.approvedTotalDay + '</td>';
+                                data += '</tr>';
+
+                            }else{
+                                data += '<tr>';
+                                //data += '<td>' + item.name + '</td>';
+             
+                                data += '<td>' + moment(item.approvedFromDate).format('DD-MMM-YYYY') + '</td>';
+                                data += '<td >' + moment(item.approvedToDate).format('DD-MMM-YYYY') + '</td>';
+                                data += '<td>' + "N/A" + '</td>';
+                                data += '<td>' + "N/A" + '</td>';
+                               
+                                data += '<td>' + "Day" + '</td>';
+                                data += '<td>' + item.leaveType + '</td>';
+
+                                data += '<td>' + item.reason + '</td>';
+                                data += '<td>' + item.approvedTotalDay + '</td>';
+                                data += '</tr>';
+
+                            }
+                        });
+                        
+                        if (status == 'success') {
+
+                            if (data === "") {
+                                $(".tbody").html("<tr><td colspan='9' class='text-center'>No data found</td></tr>");
+
+                            } else {
+                                $(".tbody").html(data);
+                                $(".noRecord").hide();
+                                $("#tableData").val(result)
+
+                            }
+
+                        }
+
+                    }
+
+                }).done(function () {
+                    setTimeout(function () {
+                        $("#overlay").fadeOut(300);
+                    }, 500);
+                });
+            }
+        }
+
+        function handlePrintData() {
+            var val = $("#tableData").val();
+            if (val == "") {
+                Swal.fire("No data found ", "Please load data", "warning");
+            } else {
+
+                window.print();
+            }
+        }
+    </script>
+}
+  

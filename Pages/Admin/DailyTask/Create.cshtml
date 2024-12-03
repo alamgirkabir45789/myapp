@@ -1,0 +1,185 @@
+﻿@page
+@model myportfolio.Pages.Admin.DailyTask.CreateModel
+@using Microsoft.AspNetCore.Identity
+
+@{
+    ViewData["Title"] = "Create Task";
+   
+}
+
+<link href="~/plugins/clockpicker/dist/bootstrap-clockpicker.css" rel="stylesheet" />
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Daily Task</h3>
+                        </div>
+                        <form method="post">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            @if (!User.IsInRole("Admin"))
+                            {
+                                <input type="hidden" asp-for="DailyTaskReques.Name" value="@ViewData["user"]" />
+                                <input type="hidden" asp-for="DailyTaskReques.SubmitDate" class="datepicker" />
+                            }                           
+
+                            <input type="hidden" asp-for="DailyTaskReques.WorkingProject" id="workingProject"  />
+                   
+                            <div class="card-body">
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="row " >    
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            <div class="col-md-6 col-sm-12 ">
+                                                <div class="form-group">
+                                                    <label asp-for="DailyTaskReques.SubmitDate">
+                                                        Reporting Date
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input type="text" asp-for="DailyTaskReques.SubmitDate" autocomplete="off"  class="form-control datepicker" />
+                                                    <span asp-validation-for="DailyTaskReques.SubmitDate" class="text-danger"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label asp-for="DailyTaskReques.Name">
+                                                        Name
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <select class="form-control select2 select2-container" required asp-for="DailyTaskReques.Name" asp-items="@ViewBag.users">
+                                                        <option value="">Select Developer Name</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                           
+                                        }
+                                        else
+                                        {
+                                            <div class="col-md-6 col-sm-12 ">
+                                                <div class="form-group">
+                                                    <input type="text" asp-for="DailyTaskReques.SubmitDate" autocomplete="off" disabled class="form-control datepicker" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                  
+                                                    <input disabled value="@ViewData["user"]" class="form-control" />
+                                                </div>
+                                            </div>
+                                          
+                                        }
+
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
+                                                <label asp-for="DailyTaskReques.InTime" class="control-label">In Time</label>
+                                                <input asp-for="DailyTaskReques.InTime"  value="09:45" type="text" class="form-control" required id="inTime" onchange="handChangeIntime()">
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-time"></span>
+                                                </span>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
+                                                <label asp-for="DailyTaskReques.OutTime" class="control-label">Out Time</label>
+                                                <input asp-for="DailyTaskReques.OutTime" type="text" class="form-control" value="18:00" id="outTime" required>
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-time"></span>
+                                                </span>
+                                            </div>
+                                        </div> 
+                                      
+
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group" >
+                                                <label >
+                                                    Project
+                                                    <span class="text-danger">*</span>
+                                                </label>                                             
+                                                <select class="form-control statesSelect group" required multiple asp-items="@ViewBag.ReportedProject" style="width:100%;">
+                                                </select>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label asp-for="DailyTaskReques.Description">
+                                                    Description
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <textarea rows="1" asp-for="DailyTaskReques.Description" type="text" class="form-control" required placeholder="Enter  Name" ></textarea>
+                                                <span asp-validation-for="DailyTaskReques.Description" class="text-danger"></span>
+                                            </div>
+                                        </div>    
+                                    </div>
+                                  
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <a class="btn btn-outline-info" asp-page="/Admin/DailyTask/Index">Back</a>
+                                <button type="submit" id="btnSave" class="btn btn-info float-right">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- /.content -->
+</div>
+
+@section Scripts {
+    @*Sweet Alert*@
+    <script src="~/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="~/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/plugins/sweetalert2/sweetalert2.js"></script>
+    @*Sweet Alert*@
+    <script src="~/plugins/clockpicker/js/bootstrap.min.js"></script>
+    <script src="~/plugins/clockpicker/dist/bootstrap-clockpicker.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-daily-task").addClass("active-custom");            
+            $(".datepicker").datepicker("setDate", new Date());          
+            $(".statesSelect").select2({
+                theme: "bootstrap-5",
+                tags: true,
+                placeholder: "Select Project",
+            });
+
+            $('.clockpicker').clockpicker();
+
+            $("#btnSave").click(function () {
+              
+                var selectedValues = [];
+                $(".group :selected").each(function () {
+                  
+                    selectedValues.push($(this).val());
+                });
+                $("#workingProject").val(selectedValues);
+                               
+            })
+
+        });
+
+        function handChangeIntime(e){
+            var inTime = $("#inTime").val();
+            var currentTime = new Date();
+            var time = currentTime.getHours() + ":" + currentTime.getMinutes();
+         
+            if (inTime > time ) {
+                $("#inTime").val("09:45");
+                Swal.fire("In time is not valid!", "Please provide valid time!", "error");
+            }
+        }
+       
+    </script>
+}
+ 

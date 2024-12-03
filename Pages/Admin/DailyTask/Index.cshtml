@@ -1,0 +1,297 @@
+﻿@page
+@model myportfolio.Pages.Admin.DailyTask.IndexModel
+@using Microsoft.AspNetCore.Identity
+@{
+    ViewData["Title"] = "Task List";
+}
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="card card-outline card-tabs">
+                        <div class="card-header ">
+                            <h3 class="card-title">
+                                <i class="fa fa-envelope"></i> Daily Task
+                            </h3>
+                            <a class="float-right ml-2 btn btn-outline-success" asp-page="Create">
+                                Add
+                            </a>
+                        </div>
+                        <div class="card-header p-0 pt-1 border-bottom-0">
+                            <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                                <li class="nav-item">
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <a class="nav-link active" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false">
+                                            Today's Task
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a class="nav-link active" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="false">
+                                            This Month Task
+                                        </a>
+                                    }
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link " id="custom-tabs-three-home-tab" data-toggle="pill" href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home" aria-selected="true">Previous Task</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content" id="custom-tabs-three-tabContent">
+                                @*Previous data table*@
+                                <div class="tab-pane fade table-responsive" id="custom-tabs-three-home" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
+                                    <table id="data-table" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th> Employee Code</th>
+                                                @if (User.IsInRole("Admin"))
+                                                {
+                                                    <th> Name</th>
+                                                }
+                                                <th>Reporting Date</th>
+                                                <th>Working Project</th>
+                                                <th>Description</th>
+                                                <th style="width: 15%; text-align: center">
+                                                    Actions
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (User.IsInRole("Admin"))
+                                            {
+                                                @foreach (var item in Model.DailyTaskReques.Where(x => x.SubmitDate.Date < DateTime.Today.Date && x.IsHoliday == false))
+                                                {
+                                                    <tr>
+                                                        <td>@item.SortCode</td>
+                                                        <td>
+                                                            @item.Name
+                                                        </td>
+                                                        <td>@item.SubmitDate.ToString("dd MMMM yyyy")</td>
+                                                        <td>
+                                                            @item.WorkingProject
+                                                        </td>
+                                                        <td>
+                                                            @item.Description
+                                                        </td>
+                                                        <td class="text-center">
+
+                                                            @if (User.IsInRole("Admin"))
+                                                            {
+
+                                                                <a class="btn btn-primary text-white px-1 py-0" asp-page="./Details" asp-route-id="@item.Id" title="Details">
+                                                                    <i class="fas fa-eye"></i>
+                                                                </a>
+                                                                <a class="btn btn-warning text-white px-1 py-0" asp-page="./Edit" asp-route-id="@item.Id" title="Edit">
+                                                                    <i class="fas fa-edit"></i>
+                                                                </a>
+                                                                <a class="btn btn-danger text-white px-1 py-0" asp-page="./Delete" asp-route-id="@item.Id" title="Delete">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a class="btn btn-primary text-white px-1 py-0" asp-page="./Details" asp-route-id="@item.Id" title="Details">
+                                                                    <i class="fas fa-eye"></i>
+                                                                </a>
+                                                            }
+
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                @*@foreach (var item in Model.DailyTaskReques.Where(x => x.SubmitDate.Date <= DateTime.Now.AddMonths(-1)))*@
+
+                                                @*@foreach (var item in Model.DailyTaskReques.Where(x => x.SubmitDate.Month < DateTime.Now.Month && x.IsHoliday == false))*@
+                                                @foreach (var item in Model.DailyTaskReques.Where(x => x.SubmitDate.Date <= DateTime.Now.AddMonths(-1) && x.IsHoliday == false))
+                                                {
+                                                    <tr>
+                                                        <td>@item.SortCode</td>
+                                                        @* <td>
+                                                @item.Name
+                                                </td>*@
+                                                        <td>@item.SubmitDate.ToString("dd MMMM yyyy")</td>
+
+                                                        <td>
+                                                            @item.WorkingProject
+                                                        </td>
+                                                        <td>
+                                                            @item.Description
+                                                        </td>
+                                                        <td class="text-center">
+
+                                                            @if (User.IsInRole("Admin"))
+                                                            {
+
+                                                                <a class="btn btn-primary text-white px-1 py-0" asp-page="./Details" asp-route-id="@item.Id" title="Details">
+                                                                    <i class="fas fa-eye"></i>
+                                                                </a>
+                                                                <a class="btn btn-warning text-white px-1 py-0" asp-page="./Edit" asp-route-id="@item.Id" title="Edit">
+                                                                    <i class="fas fa-edit"></i>
+                                                                </a>
+                                                                <a class="btn btn-danger text-white px-1 py-0" asp-page="./Delete" asp-route-id="@item.Id" title="Delete">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a class="btn btn-primary text-white px-1 py-0" asp-page="./Details" asp-route-id="@item.Id" title="Details">
+                                                                    <i class="fas fa-eye"></i>
+                                                                </a>
+                                                            }
+
+                                                        </td>
+                                                    </tr>
+                                                }
+
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade active show table-responsive" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
+
+                                    @*Todays data table*@
+                                    <table id="data-table-two" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th> Employee Code</th>
+                                                @if (User.IsInRole("Admin"))
+                                                {
+                                                    <th> Name</th>
+                                                }
+
+                                                <th>Reporting Date</th>
+                                                <th>Working Project</th>
+                                                <th>Description</th>
+
+                                                <th style="width: 15%; text-align: center">
+                                                    Actions
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (User.IsInRole("Admin"))
+                                            {
+                                                @foreach (var item in Model.DailyTaskReques.Where(x => x.SubmitDate.ToString("dd MMMM yyyy") == DateTime.Today.ToString("dd MMMM yyyy") && x.IsHoliday == false))
+                                                {
+                                                    <tr>
+                                                        <td>@item.SortCode</td>
+                                                        <td>
+                                                            @item.Name
+                                                        </td>
+                                                        <td>@item.SubmitDate.ToString("dd MMMM yyyy")</td>
+                                                        <td>
+                                                            @item.WorkingProject
+                                                        </td>
+                                                        <td>
+                                                            @item.Description
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @if (User.IsInRole("Admin"))
+                                                            {
+
+                                                                <a class="btn btn-primary text-white px-1 py-0" asp-page="./Details" asp-route-id="@item.Id" title="Details">
+                                                                    <i class="fas fa-eye"></i>
+                                                                </a>
+                                                                <a class="btn btn-warning text-white px-1 py-0" asp-page="./Edit" asp-route-id="@item.Id" title="Edit">
+                                                                    <i class="fas fa-edit"></i>
+                                                                </a>
+                                                                <a class="btn btn-danger text-white px-1 py-0" asp-page="./Delete" asp-route-id="@item.Id" title="Delete">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a class="btn btn-primary text-white px-1 py-0" asp-page="./Details" asp-route-id="@item.Id" title="Details">
+                                                                    <i class="fas fa-eye"></i>
+                                                                </a>
+                                                            }
+
+
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                @foreach (var item in Model.DailyTaskReques.Where(x => x.SubmitDate.Month == DateTime.Today.Month && x.SubmitDate.Year == DateTime.Today.Year && x.IsHoliday == false))
+                                                {
+                                                    <tr>
+                                                        <td>@item.SortCode</td>
+                                                        @* <td>
+                                                @item.Name
+                                                </td>*@
+                                                        <td>@item.SubmitDate.ToString("dd MMMM yyyy")</td>
+
+                                                        <td>
+                                                            @item.WorkingProject
+                                                        </td>
+                                                        <td>
+                                                            @item.Description
+                                                        </td>
+                                                        <td class="text-center">
+                                                            @if (User.IsInRole("Admin"))
+                                                            {
+
+                                                                <a class="btn btn-primary text-white px-1 py-0" asp-page="./Details" asp-route-id="@item.Id" title="Details">
+                                                                    <i class="fas fa-eye"></i>
+                                                                </a>
+                                                                <a class="btn btn-warning text-white px-1 py-0" asp-page="./Edit" asp-route-id="@item.Id" title="Edit">
+                                                                    <i class="fas fa-edit"></i>
+                                                                </a>
+                                                                <a class="btn btn-danger text-white px-1 py-0" asp-page="./Delete" asp-route-id="@item.Id" title="Delete">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a class="btn btn-primary text-white px-1 py-0" asp-page="./Details" asp-route-id="@item.Id" title="Details">
+                                                                    <i class="fas fa-eye"></i>
+                                                                </a>
+                                                            }
+
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#menu-daily-task").addClass("active-custom");
+            $(".datepicker").datepicker("setDate", new Date());
+
+        });
+
+
+        function setRouteParameter() {
+            var date = $(".datepicker").val();
+            var newhref = $("#addActivityPrice").attr('href') + '/' + date;
+            $("#addActivityPrice").attr("href", newhref);
+        }
+
+    </script>
+}

@@ -1,0 +1,77 @@
+﻿@page
+@model myportfolio.Pages.Admin.QueryMessage.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <section class="content">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Query Message</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <strong>Full Name</strong>
+
+                        <p class="text-muted">
+                            @Model.Query.FullName
+                        </p>
+
+                        <hr>
+
+                        <strong>Email</strong>
+
+                        <p class="text-muted">@Model.Query.Email</p>
+
+                        <hr>
+
+                        <strong>Mobile No</strong>
+
+                        <p class="text-muted">@Model.Query.PhoneNo</p>
+                        <hr>
+
+                        <strong>Subject</strong>
+
+                        <p class="text-muted">@Model.Query.Subject</p>
+
+                        <hr />
+
+                        <strong>Message</strong>
+
+                        <p class="text-muted">@Model.Query.Message</p>
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <div class="text-left">
+
+                            <a asp-page="./Index" class="btn btn-sm btn-outline-info">
+                                Back to list
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+    </section>
+</div>
+
+
+@section Scripts {
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-message").addClass("active-custom");
+
+        });</script>
+}

@@ -1,0 +1,77 @@
+﻿@page
+@model myportfolio.Pages.Admin.Subscriber.ResponseModel
+
+@{
+    ViewData["Title"] = "Subscriper | Response";
+}
+
+<link href="~/css/imageUpload.css" rel="stylesheet" />
+
+
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Subscriber</h3>
+                        </div>
+                        <form method="post" >
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="Subscriber.Id" />
+                            <input type="hidden" asp-for="Subscriber.Key" />
+                            <input type="hidden" asp-for="Subscriber.Email" />
+                            <input type="hidden" asp-for="Subscriber.IpAddress" />
+                            <input type="hidden" asp-for="Subscriber.CreatedAt" />
+                            <input type="hidden" asp-for="Subscriber.CreatedBy" />
+                            <div class="card-body">
+                                <div class="col-md-6">
+                                    <div class="row">
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label asp-for="Subscriber.Email">
+                                                    Email
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input asp-for="Subscriber.Email" type="text" class="form-control" placeholder="Enter Email" />
+                                                <span asp-validation-for="Subscriber.Email" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label asp-for="Subscriber.IpAddress">
+                                                    IP
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input asp-for="Subscriber.IpAddress" type="text" class="form-control" placeholder="Enter Phone" />
+                                                <span asp-validation-for="Subscriber.IpAddress" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                      
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <a class="btn btn-outline-info" asp-page="/Index">Back</a>
+                                <button type="submit" class="btn btn-info float-right">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- /.content -->
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-subscriber").addClass("active-custom");
+        });</script>
+}

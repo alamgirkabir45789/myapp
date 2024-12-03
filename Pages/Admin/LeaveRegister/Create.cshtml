@@ -1,0 +1,460 @@
+﻿@page
+@model myportfolio.Pages.Admin.LeaveRegister.CreateModel
+@using myportfolio.Helpers;
+@{
+    ViewData["Title"] = "Create Leave Application";
+
+    var time = DateTime.Now.ToString("h:mm tt");
+    var user = ViewData["user"];
+
+
+}
+<link href="~/plugins/clockpicker/dist/bootstrap-clockpicker.css" rel="stylesheet" />
+
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Leave Application</h3>
+                        </div>
+                        <form method="post">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <input type="hidden" asp-for="LeaveRegisterRequest.IsDays" id="isDays" />
+                            <input type="hidden" asp-for="LeaveRegisterRequest.IsHalfDay" id="isHalfDays" />
+                            @if (User.IsInRole("Admin"))
+                            {
+
+                                <input type="hidden" asp-for="LeaveRegisterRequest.Name" id="selectedUserName" />
+                                <input type="hidden" asp-for="LeaveRegisterRequest.Email" id="selectedUserEmail" />
+                                <input type="hidden" asp-for="LeaveRegisterRequest.ContactNo" id="selectedUserContactNo" />
+                                <input type="hidden" asp-for="LeaveRegisterRequest.Designation" id="selectedUserDesignation" />
+                                <input type="hidden" asp-for="LeaveRegisterRequest.UserId" id="userId" />
+                            }
+                            else
+                            {
+
+                                <input type="hidden" asp-for="LeaveRegisterRequest.Name" value="@ViewData["Name"]" />
+                                <input type="hidden" asp-for="LeaveRegisterRequest.Email" value="@ViewData["Email"]" />
+                                <input type="hidden" asp-for="LeaveRegisterRequest.ContactNo" value="@ViewData["ContactNo"]" />
+                                <input type="hidden" asp-for="LeaveRegisterRequest.Designation" value="@ViewData["Designation"]" />
+                                <input type="hidden" asp-for="LeaveRegisterRequest.UserId" value="@ViewData["UserId"]" id="userId" />
+                            }
+                            <div class="card-body">
+
+                                @*ViewData["UserList"]*@
+                                <div class="row">
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="LeaveRegisterRequest.Name">
+                                                    Name
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <select class="form-control" asp-for="LeaveRegisterRequest.Name" id="userDdl" asp-items="@ViewBag.UserList"  onchange="handleChangeUser()">
+                                                    <option value="">Select Name</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="LeaveRegisterRequest.Email" class="control-label"></label>
+                                                <input asp-for="LeaveRegisterRequest.Email" class="form-control" disabled  id="email"/>
+                                                <span asp-validation-for="LeaveRegisterRequest.Email" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="LeaveRegisterRequest.ContactNo" class="control-label">Contact No</label>
+                                                <input asp-for="LeaveRegisterRequest.ContactNo" class="form-control" disabled id="contactNo" />
+                                                <span asp-validation-for="LeaveRegisterRequest.ContactNo" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="LeaveRegisterRequest.Designation" class="control-label"></label>
+                                                <input asp-for="LeaveRegisterRequest.Designation" class="form-control" disabled id="designation" />
+                                                <span asp-validation-for="LeaveRegisterRequest.Designation" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                    }
+                                    else
+                                    {
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="LeaveRegisterRequest.Name" class="control-label"></label>
+                                                <input asp-for="LeaveRegisterRequest.Name" class="form-control" disabled value="@ViewData["Name"]" />
+                                                <span asp-validation-for="LeaveRegisterRequest.Name" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="LeaveRegisterRequest.Email" class="control-label"></label>
+                                                <input asp-for="LeaveRegisterRequest.Email" class="form-control" disabled value="@ViewData["Email"]" />
+                                                <span asp-validation-for="LeaveRegisterRequest.Email" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="LeaveRegisterRequest.ContactNo" class="control-label">Contact No</label>
+                                                <input asp-for="LeaveRegisterRequest.ContactNo" class="form-control" disabled value="@ViewData["ContactNo"]" />
+                                                <span asp-validation-for="LeaveRegisterRequest.ContactNo" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="LeaveRegisterRequest.Designation" class="control-label"></label>
+                                                <input asp-for="LeaveRegisterRequest.Designation" class="form-control" disabled value="@ViewData["Designation"]" />
+                                                <span asp-validation-for="LeaveRegisterRequest.Designation" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                    }                                    
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="LeaveRegisterRequest.LeaveType">Leave Type<span class="text-danger">*</span></label>
+                                            <select asp-for="LeaveRegisterRequest.LeaveType" required class="form-control" id="selectedLeaveType" onchange="handleChangeLeaveType()">
+                                                <option value="-1">Select Leave Type</option>
+                                                @foreach (var item in Model.EmpLeaveTypeReq)
+                                                {
+                                                    <option value="@item.LeaveTypeName" id="AllTypes">@item.LeaveTypeName</option>
+                                                }
+                                            </select>
+                                            <span asp-validation-for="LeaveRegisterRequest.LeaveType" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Remaining Days</label>
+                                            <input id="remainingDays" class="form-control" readonly placeholder="0" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Leave Request For<span class="text-danger">*</span></label>
+                                            <select required class="form-control" id="leaveRequest" onchange="handleChangeLeaveRequest()">
+                                                <option value="">Select Leave Request</option>
+                                                <option value="days">Days</option>
+                                                <option value="halfDay">Half Day</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="LeaveRegisterRequest.TotalDay" class="control-label">Total Days</label>
+                                            <input asp-for="LeaveRegisterRequest.TotalDay" id="num_nights" readonly class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                              
+                                <div class="row ">
+                                    <div class="col-md-6 checkedDays">
+
+                                        <div class="form-group">
+                                            <label asp-for="LeaveRegisterRequest.FromDate">
+                                                Leave Start
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input asp-for="LeaveRegisterRequest.FromDate" id="fromDate" type="text" autocomplete="off" readonly class="form-control datepicker" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 checkedDays">
+
+                                        <div class="form-group">
+                                            <label asp-for="LeaveRegisterRequest.ToDate">
+                                                Leave End
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input asp-for="LeaveRegisterRequest.ToDate" id="toDate" type="text" autocomplete="off" readonly class="form-control datepicker" />
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="col-md-6 checkTime">
+                                        <div class="form-group">
+                                            <label asp-for="LeaveRegisterRequest.HourlyLeaveDate">
+                                                Date
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input asp-for="LeaveRegisterRequest.HourlyLeaveDate" id="hourlyDate" type="text" autocomplete="off" readonly class="form-control datepicker" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 checkTime">
+                                        
+                                        <div class="form-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
+                                            <label asp-for="LeaveRegisterRequest.FromTime" class="control-label">From Time</label>
+                                            <input asp-for="LeaveRegisterRequest.FromTime" value="10:00" type="text" class="form-control" required id="fromTime">
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-time"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 checkTime">                                     
+
+                                        <div class="form-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
+                                            <label asp-for="LeaveRegisterRequest.ToTime" class="control-label">To Time</label>
+                                            <input asp-for="LeaveRegisterRequest.ToTime" value="18:00" type="text" class="form-control" required id="toTime">
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-time"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label asp-for="LeaveRegisterRequest.Reason" class="control-label"></label>
+                                            <textarea asp-for="LeaveRegisterRequest.Reason" class="form-control" ></textarea>
+                                            <span asp-validation-for="LeaveRegisterRequest.Reason" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                             
+                            </div>
+                            <div class="card-footer">
+                                <a class="btn btn-outline-info" asp-page="/Admin/LeaveRegister/Index">Back</a>
+                                <button type="submit" class="btn btn-info float-right">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- /.content -->
+</div>
+@section Scripts{
+
+   
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //$("#menu-leave").addClass("menu-open");
+            $("#menu-leave-application").addClass("active-custom");
+            $(".datepicker").datepicker("setDate", new Date());
+            $(".checkTime").css("display", "none");
+            $(".checkTime").css("display", "none");
+            $(".halfDayDate").css("display", "none");
+            $('#num_nights').val(0);
+            //$('#isDay').prop("checked", true);
+
+            $('.clockpicker').clockpicker();
+
+
+        });
+
+        function handleChangeLeaveRequest() {
+            var selectedLeaveRequest = $('#leaveRequest option:selected').text();
+            console.log(selectedLeaveRequest)
+            if (selectedLeaveRequest == "Days") {
+                var initialVal = $('#num_nights').val();
+                $(".checkedDays").css("display", "block")
+                $(".checkTime").css("display", "none")
+                $(".halfDayDate").css("display", "none")
+                $('#hourlyDate').datepicker("setDate", new Date())
+                $("#isHalfDays").val("False");
+                $("#isDays").val("True");
+                if (initialVal == 0) {
+                    $('#num_nights').val(1);
+                }
+
+            } else if (selectedLeaveRequest == "Half Day") {
+
+                $(".checkTime").css("display", "block")
+                $(".checkedDays").css("display", "none")
+                $(".halfDayDate").css("display", "none")
+                $('#fromDate').datepicker("setDate", new Date())
+                $('#toDate').datepicker("setDate", new Date())
+                $('#num_nights').val(0.5);
+                $("#isHalfDays").val("True");
+                $("#isDays").val("False");
+            } else {
+                $(".checkedDays").css("display", "block")
+                $(".checkTime").css("display", "none")
+                $(".halfDayDate").css("display", "none")
+                $("#isHalfDays").val("False");
+                $("#isDays").val("False");
+                $('#num_nights').val(0);
+            }
+        }
+
+        function showDays() {
+            var start = $('#fromDate').datepicker('getDate');
+            var end = $('#toDate').datepicker('getDate');
+            if (!start || !end) return;
+            var days = (end - start) / 1000 / 60 / 60 / 24;
+
+            $('#num_nights').val(days + 1);
+
+
+        }
+
+        $("#fromDate").datepicker({
+            dateFormat: 'dd-mm-yy',
+            onSelect: function () {
+                showDays();
+                //var currentDate = new Date();
+                //var selectedDate = $("#fromDate").datepicker('getDate');
+                ////var end = $('#toDate').datepicker('getDate');
+                //console.log(selectedDate > currentDate)
+                //if (currentDate > selectedDate ) {
+                //    Swal.fire("Leave start date is not valid!", "Please provide valid date!", "warning");
+                //    $('#fromDate').datepicker("setDate", new Date())
+                //} else {
+                //    showDays();
+                //}
+            }
+        });
+        $("#toDate").datepicker({
+            dateFormat: 'dd-mm-yy',
+            onSelect: function () {
+                var start = $('#fromDate').datepicker('getDate');
+                var end = $('#toDate').datepicker('getDate');
+                if (!start || !end) return;
+                var days = (end - start) / 1000 / 60 / 60 / 24;
+                if (Math.sign(days) == -1) {
+                    Swal.fire("Leave end date is not valid!", "Please provide valid date!", "warning");
+                    $('#toDate').datepicker("setDate", new Date())
+                } else {
+                    showDays();
+                }
+            }
+        });
+
+        $("#hourlyDate").datepicker({
+            dateFormat: 'dd-mm-yy',
+            onSelect: function () {
+                //var currentDate = new Date();
+                //var selectedDate = $("#hourlyDate").datepicker('getDate');
+                //console.log(selectedDate > currentDate)
+                //if (currentDate > selectedDate) {
+                //    Swal.fire("Leave Date is not valid!", "Please provide valid date!", "warning");
+                //    $('#hourlyDate').datepicker("setDate", new Date())
+                //}
+            }
+        });
+
+        //function changeDay() {
+        //    var checked = $('#isDay').is(':checked');
+        //    var initialVal = $('#num_nights').val();
+        //    if (checked) {
+        //        $(".checkedDays").css("display", "block")
+        //        $(".checkTime").css("display", "none")
+        //        $(".halfDayDate").css("display", "none")
+        //        $('#isHours').prop("checked", false);
+        //        $('#isHalfDay').prop("checked", false);
+
+        //        if (initialVal == 0) {
+        //            $('#num_nights').val(1);
+        //        }
+        //    } else {
+        //        if (initialVal == 1) {
+        //            $('#num_nights').val(0);
+        //        }
+
+        //    }
+        //}
+
+        //function changeHour() {
+        //    var checked = $('#isHours').is(':checked');
+        //    if (checked) {
+        //        $(".checkTime").css("display", "block")
+        //        $(".checkedDays").css("display", "none")
+        //        $(".halfDayDate").css("display", "none")
+        //        $('#isDay').prop("checked", false);
+        //        $('#isHalfDay').prop("checked", false);
+        //        $('#num_nights').val(0);
+        //    } else {
+        //        $('#isDay').prop("checked", true);
+        //        $(".checkedDays").css("display", "block")
+        //        $(".checkTime").css("display", "none")
+        //        $(".halfDayDate").css("display", "none")
+        //    }
+        //}
+        //function changeHalfDay() {
+        //    var checked = $('#isHalfDay').is(':checked');
+        //    if (checked) {
+        //        $(".halfDayDate").css("display", "block")
+        //        $(".checkTime").css("display", "none")
+        //        $(".checkedDays").css("display", "none")
+        //        $('#isDay').prop("checked", false);
+        //        $('#isHours').prop("checked", false);
+        //        $('#num_nights').val(0);
+        //    } else {
+        //        $('#isDay').prop("checked", true);
+        //        $(".checkedDays").css("display", "block")
+        //        $(".checkTime").css("display", "none")
+        //        $(".halfDayDate").css("display", "none")
+        //    }
+        //}
+
+        function handleChangeLeaveType() {
+            var leaveType = $('#selectedLeaveType option:selected').text();
+            var leaveTypeId = $('#selectedLeaveType option:selected').val();
+            var userId = $("#userId").val();
+            console.log(leaveTypeId)
+            $.ajax({
+                url: "/api/LeaveRegister/GetLeaveRecordByLeaveType?userId=" + userId + "&leaveType=" + leaveType,
+                type: "GET",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (data, status) {
+                    console.log({ data, status });
+
+                    var remainingDays = data;
+                    $("#remainingDays").val(remainingDays);
+                }
+            })
+
+        }
+
+        function handleChangeUser(){
+            var selectedUserName = $('#userDdl option:selected').text();
+            var selectedUserId= $('#userDdl option:selected').val();
+           $("#userId").val(selectedUserId);
+            console.log({ selectedUserName, selectedUserId })
+            $("#remainingDays").val(0);
+            $('#selectedLeaveType').val("-1");
+            $.ajax({
+                url: "/api/Common/GetUserDetailsByUserId?userId=" + selectedUserId,
+                type: "GET",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (data, status) {
+                  if(status=="success"){
+                        $("#email").val(data.email);
+                        $("#contactNo").val(data.contactNo);
+                        //hidden Item fill
+                        $("#selectedUserName").val(data.name);
+                        $("#selectedUserEmail").val(data.email);
+                        $("#selectedUserContactNo").val(data.contactNo);
+                  
+                  }else{
+                        $("#email").val("");
+                        $("#contactNo").val("");
+                        //$("#designation").val("");
+                        //hidden Item fill
+                        $("#selectedUserName").val("");
+                        $("#selectedUserEmail").val("");
+                        $("#selectedUserContactNo").val("");
+                  }
+
+                }
+            })
+        }
+
+    </script>
+}
+

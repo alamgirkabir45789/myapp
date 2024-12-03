@@ -1,0 +1,144 @@
+﻿@page
+@model myportfolio.Pages.Website.Career.DropResumeModel
+@{ }
+
+<link rel="stylesheet" href="~/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+
+<div class="container-xxl position-relative p-0">
+    <div class="container-xxl py-5 bg-primary hero-header">
+        <div class="container my-5 py-5 px-lg-5">
+            <div class="row g-5 py-5">
+                <div class="col-12 text-center">
+                    <h1 class="text-white animated slideInDown">Drop Your Resume</h1>
+                    <hr class="bg-white mx-auto mt-0" style="width: 90px;">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="/Index">Home</a></li>
+                            <li class="breadcrumb-item"><a class="text-white" href="~/Website/Career/JobCircular">Current Vacancies</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">Drop Resume</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Contact Start -->
+<div class="container-xxl py-5">
+    <div class="container py-5 px-lg-5">
+        <div class="wow fadeInUp" data-wow-delay="0.1s">
+            <p class="section-title text-secondary justify-content-center"><span></span>Drop Your Resume<span></span></p>
+            <h1 class="text-center mb-5">Provide your information.</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="wow fadeInUp" data-wow-delay="0.3s">
+                    <p class="text-center mb-4">
+
+                    <form method="post" class="pt-5 " enctype="multipart/form-data" id="resume-form">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="row g-3">
+                     
+                            <div class="col-md-6">
+                                <div class="form-floating">                                   
+
+                                    <input asp-for="ResumeViewModel.FullName" type="text" required class="form-control" id="full-name" placeholder="Enter Full name">
+                                    <label for="FullName">Your Name</label>
+                                    <span asp-validation-for="ResumeViewModel.FullName" class="text-danger"></span>
+                                </div>
+                            </div> 
+
+                             <div class="col-md-6">
+                                <div class="form-floating">
+
+                                    <input asp-for="ResumeViewModel.Email" type="text" required class="form-control" id="email" placeholder="Enter Email Address">
+                                    <label for="Email">Email</label>
+                                    <span asp-validation-for="ResumeViewModel.Email" class="text-danger"></span>
+                                </div>
+                            </div> 
+
+                              <div class="col-md-6">
+                                <div class="form-floating">                                 
+
+                                    <input asp-for="ResumeViewModel.Phone" type="text" required class="form-control" id="phone"  placeholder="Enter Phone Number">
+                                    <label for="Phone">Phone</label>
+                                    <span asp-validation-for="ResumeViewModel.Phone" class="text-danger"></span>
+                                </div>
+                            </div> 
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                  
+
+                                    <input asp-for="ResumeViewModel.YearsOfExperience" type="number" class="form-control" id="experience" required placeholder="Enter Years of Experience" value="">
+                                    <label for="YearsOfExperience">Enter Years of Experience</label>
+                                    <span asp-validation-for="ResumeViewModel.YearsOfExperience" class="text-danger"></span>
+                                </div>
+                            </div> 
+
+                            <div class="col-md-6">
+                                <div class="form-floating">   
+
+                                    <input asp-for="ResumeViewModel.File" type="file" required class="form-control-file" id="exampleFormControlFile1">
+                                    @*<label for="YearsOfExperience">Upload Your Resume (PDF)</label>*@
+                                    <span asp-validation-for="ResumeViewModel.File" class="text-danger"></span>
+                                </div>
+                            </div>
+                          
+                            <div class="row justify-content-center">
+                                @if (!string.IsNullOrEmpty(Model.ResumeViewModel.Message))
+                                {
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <span class="text-danger" id="message">@Model.ResumeViewModel.Message</span>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <div class="col-12">
+                                @*<button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>*@
+                                <button class="btn btn-primary w-100 py-3" type="submit" id="btn-submit">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Contact End -->
+
+@section Scripts{
+    <script src="~/plugins/sweetalert2/sweetalert2.min.js"></script>
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#resume-menu-small-screen").addClass("active");
+            $("#career-menu-big-screen").addClass("active");
+
+
+
+
+            var successMessage = $("#message").text();
+
+            if (successMessage === "Your resume submit successful.") {
+                Swal.fire("Good job!", "Resume Dropped Successfully!", "success");
+                $("#message").text("");
+                $('#full-name').val("");
+                $('#email').val("");
+                $('#phone').val("");
+                $('#experience').val("");
+
+
+            }
+
+
+        });
+    </script>
+}

@@ -1,0 +1,132 @@
+﻿@page
+@model myportfolio.Pages.Admin.Company.AddCompanyImageModel
+@{
+    ViewData["Title"] = "Concern Image | Create";
+}
+
+
+
+<link href="~/css/imageUpload.css" rel="stylesheet" />
+
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Concern Image</h3>
+                        </div>
+                        <form method="post" enctype="multipart/form-data">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="RequestCompanyImage.Key" value="@Guid.NewGuid()" />
+                            <input type="hidden" asp-for="RequestCompanyImage.CompanyId" value="@Request.Query["id"]" />
+
+                            <div class="card-body">
+
+
+
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label asp-for="RequestCompanyImage.Title">
+                                                    Image Title
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input asp-for="RequestCompanyImage.Title" type="text" class="form-control" placeholder="Enter Image Title" />
+                                                <span asp-validation-for="RequestCompanyImage.Title" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label asp-for="RequestCompanyImage.SortOrder">
+                                                    Sort Order
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input asp-for="RequestCompanyImage.SortOrder" type="number" class="form-control" required placeholder="Enter Sort Order" />
+                                                <span asp-validation-for="RequestCompanyImage.SortOrder" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+
+                                                <label asp-for="RequestCompanyImage.Image">
+                                                    Company Image
+                                                    <span class="text-danger">*</span>
+                                                </label>
+
+                                                <div class="container">
+                                                    <div class="wrapper-two">
+                                                        <div class="image">
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="icon">
+                                                                <i class="fas fa-cloud-upload-alt"></i>
+                                                            </div>
+                                                            <div class="text">
+                                                                No file chosen, yet!
+                                                            </div>
+                                                        </div>
+                                                        <div id="cancel-btn">
+                                                            <i class="fas fa-times"></i>
+                                                        </div>
+                                                        <div class="file-name">
+                                                            File name here
+                                                        </div>
+                                                    </div>
+                                                    <button type="button" onclick="defaultBtnActive()" id="custom-choose-file-btn">Choose a file</button>
+                                                    <input id="default-btn" type="file" required asp-for="RequestCompanyImage.Image" style="opacity: 0;">
+                                                </div>
+                                                <br />
+
+                                                <span asp-validation-for="RequestCompanyImage.Image" class="text-danger"></span>
+
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+
+
+                            <div class="card-footer">
+                                <a class="btn btn-outline-info" asp-page="/Admin/Company/Index">Back</a>
+                                <button type="submit" class="btn btn-info float-right">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- /.content -->
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="~/js/imageUpload.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-company").addClass("active-custom");
+
+        });</script>
+}

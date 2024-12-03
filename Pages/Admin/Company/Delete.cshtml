@@ -1,0 +1,86 @@
+﻿@page
+@model myportfolio.Pages.Admin.Company.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <section class="content">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Concern Detail</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 d-flex align-items-stretch flex-column">
+                                <div class="card bg-light d-flex flex-fill">
+                                    <div class="card-header text-muted border-bottom-0">
+
+                                    </div>
+                                    <div class="card-body pt-0">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <h2 class="lead"><b>Name : </b> @Html.DisplayFor(model => model.Company.Name) </h2>
+                                                <h2 class="lead"><b>Established Data : </b> @Model.Company.Established.ToString("dd MMMM yyyy") </h2>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <img src="~/@Model.Company.LogoPath" alt="Company image" width="300" class="img-rounded img-fluid float-right">
+                                            </div>
+
+                                        </div>
+                                        <br />
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p><b>Description : </b> @Html.Raw(@Model.Company.Description)</p>
+                                            </div>
+                                            <br />
+                                            <div class="col-md-12">
+                                                <p><b>History : </b> @Html.DisplayFor(model => model.Company.History)</p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="card-footer">
+                                        <form method="post">
+                                            <input type="hidden" asp-for="Company.Id" />
+                                            <a asp-page="./Index" class="btn  btn-outline-info">Back</a>
+                                            <button type="submit" class="btn btn-danger float-right">Delete</button>
+                                        </form>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+    </section>
+</div>
+
+
+@section Scripts {
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-company").addClass("active-custom");
+
+        });</script>
+}

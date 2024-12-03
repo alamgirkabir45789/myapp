@@ -1,0 +1,137 @@
+﻿@page
+@model myportfolio.Pages.Admin.Buyer.EditModel
+
+@{
+    ViewData["Title"] = "Client | Edit";
+}
+
+<link href="~/css/imageUpload.css" rel="stylesheet" />
+
+
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Edit Client</h3>
+                        </div>
+                        <form method="post" enctype="multipart/form-data">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="RequestBuyer.Id" />
+                            <input type="hidden" asp-for="RequestBuyer.Key" />
+                            <input type="hidden" asp-for="RequestBuyer.CreatedAt" />
+                            <input type="hidden" asp-for="RequestBuyer.CreatedBy" />
+                            <input type="hidden" asp-for="RequestBuyer.FilePath" id="filePath" />
+                            <input type="hidden" asp-for="RequestBuyer.FileType" />
+
+
+
+                            <div class="card-body">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label asp-for="RequestBuyer.FileName">
+                                                    Client Name
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input asp-for="RequestBuyer.FileName" type="text" class="form-control" placeholder="Enter Client Name" />
+                                                <span asp-validation-for="RequestBuyer.FileName" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label asp-for="RequestBuyer.Description">
+                                                    Comments
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <textarea asp-for="RequestBuyer.Description" type="text" class="form-control" placeholder="Enter Description"></textarea>
+                                                <span asp-validation-for="RequestBuyer.Description" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label asp-for="RequestBuyer.Profession">
+                                                    Profession
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <textarea asp-for="RequestBuyer.Profession" type="text" class="form-control" placeholder="Enter Profession"></textarea>
+                                                <span asp-validation-for="RequestBuyer.Profession" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+
+                                                <label asp-for="RequestBuyer.File">
+                                                     Image
+                                                    <span class="text-danger">*</span>
+                                                </label>
+
+                                                <div class="container">
+                                                    <div class="wrapper-two">
+                                                        <div class="image">
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="icon">
+                                                                <i class="fas fa-cloud-upload-alt"></i>
+                                                            </div>
+                                                            <div class="text">
+                                                                No file chosen, yet!
+                                                            </div>
+                                                        </div>
+                                                        <div id="cancel-btn">
+                                                            <i class="fas fa-times"></i>
+                                                        </div>
+                                                        <div class="file-name">
+                                                            File name here
+                                                        </div>
+                                                    </div>
+                                                    <button type="button" onclick="defaultBtnActive()" id="custom-choose-file-btn">Choose a file</button>
+                                                    <input id="default-btn" type="file" asp-for="RequestBuyer.File" style="opacity: 0;">
+                                                </div>
+                                                <br />
+                                                <span asp-validation-for="RequestBuyer.File" class="text-danger"></span>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-footer">
+                                <a class="btn btn-outline-info" asp-page="/Admin/Buyer/Index">Back</a>
+                                <button type="submit" class="btn btn-info float-right">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- /.content -->
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="~/js/imageUpload.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-buyer").addClass("active-custom");
+
+
+
+        });</script>
+}

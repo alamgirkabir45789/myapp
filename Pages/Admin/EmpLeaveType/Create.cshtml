@@ -1,0 +1,67 @@
+﻿@page
+@model myportfolio.Pages.Admin.EmpLeaveType.CreateModel
+@{
+    ViewData["Title"] = "Create Leave Type";
+}
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Leave Type</h3>
+                        </div>
+
+                        <form method="post">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="card-body">
+
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label asp-for="EmpLeaveRequest.LeaveTypeName">
+                                                    Leave Type Name
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input asp-for="EmpLeaveRequest.LeaveTypeName" type="text" class="form-control" placeholder="Enter  Leave Type Name" />
+                                                <span asp-validation-for="EmpLeaveRequest.LeaveTypeName" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                 
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label asp-for="EmpLeaveRequest.Description">
+                                                    Description
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <textarea asp-for="EmpLeaveRequest.Description" type="text" class="form-control" placeholder="Enter  Description"></textarea>
+                                                <span asp-validation-for="EmpLeaveRequest.Description" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <a class="btn btn-outline-info" asp-page="/Admin/EmpLeaveType/Index">Back</a>
+                                <button type="submit" class="btn btn-info float-right">Save</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-configuration").addClass("menu-open");
+            $("#menu-leave-type").addClass("active-custom");
+        });</script>
+}
+

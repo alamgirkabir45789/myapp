@@ -1,0 +1,171 @@
+﻿@page
+@model myportfolio.Pages.Website.About.AchievementsModel
+@{
+    int counter = 1;
+}
+
+
+
+<section class="home-slider js-halfheight owl-carousel">
+    @if (Model.Slider != null)
+    {
+        <div class="slider-item js-halfheight"
+             style=" background-image: url(/@Model.Slider.FilePath); ">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row slider-text justify-content-center align-items-center">
+                    <div class="col-md-7 col-sm-12 text-center ftco-animate js-halfheight-text">
+                        <h1 class="mb-3 mt-5 bread">About Us</h1>
+                        <p class="breadcrumbs">
+                            <span class="mr-2"><a href="/Index">Home</a></span><span>/ About US / Achievements</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="slider-item js-halfheight"
+             style=" background-image: url(https://www.ecotextile.com/images/stories/2021/January/Garment_factory.jpg); ">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row slider-text justify-content-center align-items-center">
+                    <div class="col-md-7 col-sm-12 text-center ftco-animate js-halfheight-text">
+                        <h1 class="mb-3 mt-5 bread">About Us</h1>
+                        <p class="breadcrumbs">
+                            <span class="mr-2"><a href="/Index">Home</a></span><span>/ About US / Achievements</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+
+</section>
+
+@*<section class="fcto-section">
+        <div class="text-container-section">
+            <div class="short-description-text ftco-animate">
+                Our Reputation For Reliability Can Be Credited To Our Highly <br />
+                Skilled Workforce Of 20,000 Employees.
+            </div>
+        </div>
+    </section>*@
+
+<section class="ftco-section">
+    <div class="container">
+
+        @foreach (var item in Model.Achievements)
+        {
+            if (counter % 2 != 0)
+            {
+                <div class="row achievement-container">
+                    <div class="col-md-6 col-sm-12 achievement-img-container">
+                        <img src="/@item.FilePath"
+                             alt="alliance_approved"
+                             width="50%"
+                             height="auto" />
+                    </div>
+                    <div class="col-md-6 col-sm-12 achievement-text-container">
+                        <h3 class="p-4 text-center achievement-title">
+                            @item.Name
+                        </h3>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="row achievement-container achievement-container-reverse">
+                    <div class="col-md-6 col-sm-12 achievement-text-container">
+                        <h3 class="p-4 text-center achievement-title">@item.Name</h3>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12 achievement-img-container">
+                        <img src="/@item.FilePath"
+                             alt="alliance_approved"
+                             width="50%"
+                             height="auto" />
+                    </div>
+                </div>
+            }
+
+            counter++;
+        }
+
+
+
+        @*<div class="row achievement-container">
+                <div class="col-md-6 col-sm-12 achievement-img-container">
+                    <img src="~/images/achievements/alliance_approved.jpg"
+                         alt="alliance_approved"
+                         width="90%"
+                         height="auto" />
+                </div>
+                <div class="col-md-6 col-sm-12 achievement-text-container">
+                    <h3 class="p-4 text-center achievement-title">
+                        The Alliance for Bangladesh Worker Safety (Alliance).
+                    </h3>
+                </div>
+            </div>
+
+            <div class="row achievement-container achievement-container-reverse">
+                <div class="col-md-6 col-sm-12 achievement-text-container">
+                    <h3 class="p-4 text-center achievement-title">Costco Wholesale</h3>
+                </div>
+
+                <div class="col-md-6 col-sm-12 achievement-img-container">
+                    <img src="~/images/achievements/Costco_approved.png"
+                         alt="alliance_approved"
+                         width="70%"
+                         height="auto" />
+                </div>
+            </div>
+
+            <div class="row achievement-container">
+                <div class="col-md-6 col-sm-12 achievement-img-container">
+                    <img src="~/images/achievements/Nirapon_approved.jpg"
+                         alt="alliance_approved"
+                         width="60%"
+                         height="auto" />
+                </div>
+                <div class="col-md-6 col-sm-12 achievement-text-container">
+                    <h3 class="p-4 text-center achievement-title">NIRAPON</h3>
+                </div>
+            </div>
+
+            <div class="row achievement-container achievement-container-reverse">
+                <div class="col-md-6 col-sm-12 achievement-text-container">
+                    <h3 class="p-4 text-center achievement-title">Walmart Inc.</h3>
+                </div>
+
+                <div class="col-md-6 col-sm-12 achievement-img-container">
+                    <img src="~/images/achievements/walmart_approved.png"
+                         alt="alliance_approved"
+                         width="80%"
+                         height="auto" />
+                </div>
+            </div>
+            <div class="row achievement-container">
+                <div class="col-md-6 col-sm-12 achievement-img-container">
+                    <img src="~/images/achievements/wrap_approved.png"
+                         alt="alliance_approved" />
+                </div>
+                <div class="col-md-6 col-sm-12 achievement-text-container">
+                    <h3 class="p-4 text-center achievement-title">
+                        Worldwide Responsible Accredited Production (WRAP)
+                    </h3>
+                </div>
+            </div>*@
+    </div>
+</section>
+
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#about-menu-big-screen").addClass("active");
+            $("#about-menu-small-screen").addClass("active");
+        });</script>
+}

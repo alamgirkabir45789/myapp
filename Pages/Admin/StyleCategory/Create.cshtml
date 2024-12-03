@@ -1,0 +1,63 @@
+﻿@page
+@using myportfolio.Helpers
+@model myportfolio.Pages.Admin.StyleCategory.CreateModel
+
+@{
+    ViewData["Title"] = "Style Category | Create";
+}
+
+
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Style Category</h3>
+                        </div>
+                        <form method="post">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="StyleCategory.Title">
+                                                Category Title
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input asp-for="StyleCategory.Title" type="text" class="form-control" placeholder="Enter Category Title" />
+                                            <span asp-validation-for="StyleCategory.Title" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-footer">
+                                <a class="btn btn-outline-info" asp-page="./Index">Back</a>
+                                <button type="submit" class="btn btn-info float-right">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- /.content -->
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-style-category").addClass("active-custom");
+            $("#menu-styles").addClass("menu-open");
+        });
+    </script>
+}
+
+
+

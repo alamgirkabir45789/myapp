@@ -1,0 +1,78 @@
+﻿@page
+@model myportfolio.Pages.Admin.DailyReport.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+
+
+
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <section class="content">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Assign Project Detail</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
+                                <div class="card bg-light d-flex flex-fill">
+                                    <div class="card-header text-muted border-bottom-0">
+                                    </div>
+                                    <div class="card-body pt-0">
+                                        <div class="row">
+                                            <div class="col-7">
+                                                <h2 class="lead"><strong>Name: </strong><b>@Html.DisplayFor(model => model.DailyReportRequest.Name) </b></h2>
+                                                <p><strong>Project Name: </strong> @Html.DisplayFor(model => model.DailyReportRequest.ProjectName) </p>
+                                                <p><strong>Assign Date: </strong> @Model.DailyReportRequest.AssignDate.ToString("dd MMMM yyyy") </p>
+                                                <p><strong>Target Date: </strong> @Model.DailyReportRequest.TargetDate.ToString("dd MMMM yyyy") </p>
+                                                <p><strong>End Date: </strong> @Model.DailyReportRequest.EndDate.ToString("dd MMMM yyyy") </p>
+                                                <p><strong>Current Status: </strong> @(Model.DailyReportRequest.IsCompleted ? "Complete" : "Not Completed ") </p>
+
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+
+
+                                    <div class="card-footer">
+                                        <form method="post">
+                                            <input type="hidden" asp-for="DailyReportRequest.Id" />
+                                            <a asp-page="./Index" class="btn  btn-outline-info">Back</a>
+                                            <button type="submit" class="btn btn-danger float-right">Delete</button>
+                                        </form>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+    </section>
+</div>
+
+
+@section Scripts {
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-daily-report").addClass("active-custom");
+            $("#menu-report").addClass("menu-open");
+        });</script>
+}
+

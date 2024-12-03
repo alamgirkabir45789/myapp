@@ -1,0 +1,113 @@
+﻿@page
+@model myportfolio.Pages.Admin.JobCircular.DetailsModel
+
+@{ ViewData["Title"] = "Job Circular | Details"; }
+
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <section class="content">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Job Detail</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row mx-5">
+                            <div class="col-md-12">
+                                <h2 class="mb4 job-description-header">@Html.DisplayFor(model => model.JobCircular.JobTitle)</h2>
+                                <p class="job-description-text mb-4">
+                                    @Html.DisplayFor(model => model.JobCircular.Overview)
+                                </p>
+
+                                <hr>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h2 class="mb-2 job-description-header">Application Deadline</h2>
+                                        <p class="job-description-text mb-4">
+                                            @Html.DisplayFor(model => model.JobCircular.EndDate)
+                                        </p>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <h2 class="mb-2 job-description-header">No. of Vacancy</h2>
+                                        <p class="job-description-text mb-4">
+                                            @Html.DisplayFor(model => model.JobCircular.NoOfVacancy)
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h2 class="mb-2 job-description-header">Job Status</h2>
+                                        <p class="job-description-text mb-4">
+                                            @Html.DisplayFor(model => model.JobCircular.JobStatus)
+                                        </p>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <h2 class="mb-2 job-description-header">Job Location</h2>
+                                        <p class="job-description-text mb-4">
+                                            @Html.DisplayFor(model => model.JobCircular.WorkStation)
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <h2 class="mb-2 job-description-header">Responsibilities</h2>
+                                <p class="job-description-text mb-4">
+                                    @Html.Raw(Model.JobCircular.Responsibilities)
+                                </p>
+
+                                <hr>
+
+
+                                <h2 class="mb-2 job-description-header">Job Qualifications</h2>
+                                <p class="job-description-text mb-4">
+                                    @Html.Raw(Model.JobCircular.Qualifications)
+                                </p>
+                                <hr>
+
+                                <h2 class="mb-2 job-description-header">Skill Sets</h2>
+                                <p class="job-description-text mb-4">
+                                    @Html.Raw(Model.JobCircular.Skill)
+                                </p>
+
+                                <hr>
+
+                                <h2 class="mb-2 job-description-header">Privilege </h2>
+                                <p class="job-description-text mb-4">
+                                    @Html.Raw(Model.JobCircular.Privilege)
+                                </p>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <a class="btn btn-outline-info" asp-page="/Admin/JobCircular/Index">Back</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-job-circular").addClass("active-custom");
+            $("#menu-career").addClass("menu-open");
+        });</script>
+}

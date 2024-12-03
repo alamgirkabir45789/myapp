@@ -1,0 +1,157 @@
+﻿@page
+@model myportfolio.Pages.Admin.LeaveRegister.LeaveRecordModel
+@{
+    ViewData["Title"] = "Leave Summary";
+    var data = ViewData["testData"];
+}
+
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                               Leave Summary
+                            </h3>
+
+                        </div>                       
+                        <div class="row">                            
+                            @if (Model.LeaveSummaryViewModels != null)
+                            {
+                                <div class="col-md-12 ">
+                                    <div class="text-center mt-2">
+                                        <h5 class="">@ViewData["selectedEmp"]'s' Current Leave Status</h5>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4" >
+                                    <div class="card p-3 gap-2 m-2 bg-gradient-light" style="height:300px;">
+                                        <div class="card-header text-center">
+                                            <p class="text-bold">Already Taken</p>
+                                        </div>
+                                        <div class="card-body">
+                                            @foreach (var item in Model.LeaveSummaryViewModels)
+                                            {
+                                                <p>@item.LeaveType:@item.TotalLeave</p>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4" >
+                                    <div class="card p-3 gap-2 m-2 bg-gradient-light" style="min-height:300px;">
+                                        <div class="card-header text-center">
+                                            <p class="text-bold">Remaining Leave</p>
+                                        </div>
+                                        <div class="card-body">
+                                            @foreach (var item in Model.LeaveSummaryViewModels)
+                                            {
+                                                <p class="">@item.LeaveType:@item.RemainingLeave</p>
+                                            }
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4" >
+                                    <div class="card p-3 gap-2 m-2 bg-gradient-light" style="min-height:300px;">
+                                        <div class="card-header text-center">
+                                            <p class="text-bold">Yearly Leave</p>
+                                        </div>
+                                        <div class="card-body">
+                                            @foreach (var item in Model.EmpLeaveTypeReq)
+                                            {
+                                                <p>@item.LeaveTypeName:@item.TotalDay</p>
+                                            }
+                                        </div>
+
+                                    </div>
+                                </div>
+                            }
+                            @if (Model.LeaveSummaryViewModels != null)
+                            {
+                                <div class="col-md-12 ">
+                                    <div class="text-center mt-2">
+                                        <h5 class="">Yearly Leave Record</h5>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                            <div class="col-md-12 ">
+                                <div class="text-center mt-2">
+                                    <h5 class="">Todays Leave Record</h5>
+                                </div>
+                            </div>
+                            }
+                            
+                            @foreach (var item in Model.LeaveRegisterRequests)
+                            {
+                                @if (Model.LeaveRegisterRequests != null)
+                                {
+                                    <div class="col-md-4">
+                                        <div class="card p-3 gap-2 m-2 bg-gradient-light" style="min-height:300px;">
+                                            <div class="card-header text-center">
+                                                <p class="text-bold">@item.LeaveType</p>
+                                            </div>
+                                            <div class="card-body">
+                                                <p class="card-text"><strong>From Date : </strong>@item.ApprovedFromDate.ToString("dd MMMM yyyy")</p>
+                                                <p class="card-text"><strong>To Date  : </strong>@item.ApprovedToDate.ToString("dd MMMM yyyy")</p>
+                                                <p class="card-text"><strong>Total Approved Day  : </strong>@item.ApprovedTotalDay</p>
+                                                <p class="card-text"><strong>Reason : </strong>@item.Reason</p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-md-4">
+                                        <div class="card p-3 gap-2 m-2 " style="min-height:300px;">
+                                            <div class="card-header text-center">
+                                                <p class="text-bold">@item.Name</p>
+                                            </div>
+                                            <div class="card-body">
+
+                                                <p class="card-text"><strong>Leave Type : </strong>@item.LeaveType</p>
+                                                <p class="card-text"><strong>From Date : </strong>@item.ApprovedFromDate.ToString("dd MMMM yyyy")</p>
+                                                <p class="card-text"><strong>To Date  : </strong>@item.ApprovedToDate.ToString("dd MMMM yyyy")</p>
+                                                <p class="card-text"><strong>Total Approved Day  : </strong>@item.ApprovedTotalDay</p>
+                                                <p class="card-text"><strong>Reason : </strong>@item.Reason</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                            }
+                        </div>
+
+                        <div class="card-footer">
+                            <a class="btn btn-outline-info" asp-page="./Index">Back</a>
+
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {          
+            $("#menu-leave-application").addClass("active-custom");
+          
+        });
+        function dateChange() {
+            console.log("date change");
+
+        }
+        $("#remainingCasualLeave").val();
+    </script>
+}

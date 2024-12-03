@@ -1,0 +1,85 @@
+﻿@page
+@model myportfolio.Pages.Admin.Style.IndexModel
+
+@{
+    ViewData["Title"] = "Style";
+}
+
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fa fa-hashtag"></i> Style
+                            </h3>
+                            <a class="float-right btn btn-outline-success" asp-page="Create">
+                                Add
+                            </a>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="data-table"
+                                   class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10%; text-align: center;">Category</th>
+                                        <th style="width: 10%; text-align: center;">Style No</th>
+                                        <th style="width: 20%; text-align: center;">Fabrication</th>
+                                        <th style="width: 10%; text-align: center;">FOB</th>
+                                        <th style="width: 10%; text-align: center;">Export <br/> Market</th>
+                                        <th style="width: 10%; text-align: center;">Size</th>
+                                        <th style="width: 10%; text-align: center;">Color</th>
+                                        <th style="width: 10%; text-align: center;">Item</th>
+
+                                        <th style="width: 10%; text-align: center;">
+                                            Actions
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Style)
+                                    {
+                                        <tr>
+                                            <td style="text-align: center;">@item.StyleCategory.Title</td>
+                                            <td style="text-align: center;">@item.StyleNo</td>
+                                            <td style="text-align: center;">@item.Fabrication</td>
+                                            <td style="text-align: right;">$ @item.Price.ToString("N2")/@item.PriceFor</td>
+                                            <td style="text-align: center;">@item.ExportTo</td>
+                                            <td style="text-align: center;">@item.Size</td>
+                                            <td style="text-align: center;">@item.Color</td>
+                                            <td style="text-align: center;">@item.Item</td>
+
+                                            <td class="text-center">
+                                                <a class="btn btn-primary text-white px-1 py-0" asp-page="./Details" asp-route-id="@item.Id" title="Details">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                <a class="btn btn-warning text-white px-1 py-0" asp-page="./Edit" asp-route-id="@item.Id" title="Edit">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a class="btn btn-danger text-white px-1 py-0" asp-page="./Delete" asp-route-id="@item.Id" title="Delete">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-style").addClass("active-custom");
+            $("#menu-styles").addClass("menu-open");
+        });</script>
+}

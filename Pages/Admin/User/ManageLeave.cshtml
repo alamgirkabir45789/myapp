@@ -1,0 +1,210 @@
+﻿@page
+@model myportfolio.Pages.Admin.User.ManageLeaveModel
+@{
+    ViewData["Title"] = "Manage Leave";
+ 
+
+}
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Manage Leave</h3>
+                            @*<h3 class="card-title float-right">@userName</h3>*@
+                        </div>
+                        <form method="post" id="submitForm" asp-page="ManageLeave">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" id="userId" value="@ViewData["userId"]" asp-for="empLeaveRequest.UserId" />
+                            <input type="hidden" id="leaveTypeId" asp-for="empLeaveRequest.LeaveTypeId" />
+                            <input type="hidden" id="leaveType" asp-for="empLeaveRequest.LeaveType" />
+                            <input type="hidden" id="key" asp-for="empLeaveRequest.Key" />
+                            <input type="hidden" id="id" asp-for="empLeaveRequest.Id" />
+                            @*<input type="hidden" id="totalLeave" asp-for="empLeaveRequest.TotalLeave" />*@
+
+
+                            <div class="card-body">
+
+                                <div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label >
+                                                    Name
+                                                </label>
+                                                <input type="text" autocomplete="off" value="@ViewData["Name"]" readonly class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>
+                                                    Email
+                                                </label>
+                                                <input type="text" autocomplete="off" value="@ViewData["Email"]" readonly class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="empLeaveRequest.ValidFromDate">
+                                                    Validate From
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input asp-for="empLeaveRequest.ValidFromDate" id="fromDate" type="text" autocomplete="off" readonly class="form-control datepicker" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="empLeaveRequest.ValidToDate">
+                                                    Validate  To
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input asp-for="empLeaveRequest.ValidToDate" id="toDate" type="text" autocomplete="off" readonly class="form-control datepicker" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="empLeaveRequest.LeaveType">Leave Type<span class="text-danger">*</span></label>
+                                                <select asp-for="empLeaveRequest.LeaveType" required class="form-control" id="selectedLeaveType" onchange="handleChangeLeaveType()">
+                                                    <option value="-1">Select Leave Type</option>
+                                                    @foreach (var item in Model.EmpLeaveTypes)
+                                                    {
+                                                        <option value="@item.Id" id="AllTypes">@item.LeaveTypeName</option>
+                                                    }
+                                                </select>
+                                                <span asp-validation-for="empLeaveRequest.LeaveType" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="" asp-for="empLeaveRequest.TotalLeave">
+                                                    Total Day
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input type="number" asp-for="empLeaveRequest.TotalLeave" required class="form-control" placeholder="Enter Total Day" />
+                                                <span asp-validation-for="empLeaveRequest.TotalLeave" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                                <div class="col-lg-12 col-md-12 table-responsive">
+                                                    <h5 class="text-center text-bold">Assigned Leave</h5>
+
+                                                    <table class="table table-bordered table-hover table-striped">
+                                                        <thead>
+                                                            <tr>
+
+                                                                <th> Leave Type</th>
+                                                        <th>Validate From</th>
+                                                        <th>Validate To</th>
+                                                                <th>Total Day</th>
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="tbody">
+                                                            <tr class="noRecord">
+                                                                <td colspan="4" class="text-center tableText">No data found</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>                                               
+                                            
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <a class="btn btn-outline-info" asp-page="/Admin/User/Index">Back</a>
+                                <button type="submit" class="btn btn-info float-right">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- /.content -->
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-configuration").addClass("menu-open");
+            //$("#menu-leave-type").addClass("active-custom");
+            $("#menu-user").addClass("active-custom");
+            $("#fromDate").datepicker("setDate", new Date(new Date().getFullYear(), 0, 01));
+            $("#toDate").datepicker("setDate", new Date(new Date().getFullYear(), 11, 31));
+            LoadAssignLeave();
+            
+
+        });
+
+
+        $("#fromDate").datepicker({
+            dateFormat: 'dd-mm-yy',
+            onSelect: function () {
+                LoadAssignLeave();
+            }
+        });
+        $("#toDate").datepicker({
+            dateFormat: 'dd-mm-yy',
+            onSelect: function () {
+                LoadAssignLeave();
+            }
+        });
+        function handleChangeLeaveType() {
+            var leaveType = $('#selectedLeaveType option:selected').text();
+            var leaveTypeId = $('#selectedLeaveType option:selected').val();
+            var userId = $("#userId").val();
+            $("#leaveType").val(leaveType);
+            $("#leaveTypeId").val(leaveTypeId);
+            // console.log({ fromDate, toDate, leaveType })
+        }
+
+        function LoadAssignLeave(){
+            var fromDate = $("#fromDate").val();
+            var toDate = $("#toDate").val();
+            var leaveType = $('#selectedLeaveType option:selected').text();
+            var leaveTypeId = $('#selectedLeaveType option:selected').val();
+            var userId = $("#userId").val();
+           
+            $.ajax({
+                url: "/api/EmpLeave/GetAssignedEmployeeLeaveByUserIdAndValidationDate?userId=" + userId + "&validFrom=" + fromDate + "&validTo=" + toDate,
+                type: "GET",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result, status) {
+                    var data = "";
+                    $.each(result, function (key, item) {
+                        data += '<tr>';
+                        data += '<td>' + item.leaveType + '</td>';
+                        data += '<td>' + moment(item.validFromDate).format('DD-MMM-YYYY') + '</td>';
+                        data += '<td>' + moment(item.validToDate).format('DD-MMM-YYYY') + '</td>';
+                        data += '<td>' + item.totalLeave + '</td>';
+                        data += '</tr>';
+                    });
+                    if (status == 'success') {
+                        if (data === "") {
+                            $(".tbody").html("<tr><td colspan='4' class='text-center'>No data found</td></tr>");
+
+                        } else {
+                            $(".tbody").html(data);
+                            $(".noRecord").hide();
+
+                        }
+                    }
+                }
+            })
+        }
+
+      
+    </script>
+}

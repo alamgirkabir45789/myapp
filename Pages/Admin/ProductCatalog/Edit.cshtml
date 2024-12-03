@@ -1,0 +1,125 @@
+﻿@page
+@model myportfolio.Pages.Admin.ProductCatalog.EditModel
+
+@{
+    ViewData["Title"] = "Product Catalog | Edit";
+}
+
+
+
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Product Catalog</h3>
+                        </div>
+                        <form method="post" enctype="multipart/form-data">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="RequestProductCatalog.Id" />
+                            <input type="hidden" asp-for="RequestProductCatalog.Key" />
+                            <input type="hidden" asp-for="RequestProductCatalog.CreatedAt" />
+                            <input type="hidden" asp-for="RequestProductCatalog.CreatedBy" />
+                            <input type="hidden" asp-for="RequestProductCatalog.FilePath" id="filePath" />
+                            <input type="hidden" asp-for="RequestProductCatalog.FileType" />
+
+
+
+                            <div class="card-body">
+
+
+
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="RequestProductCatalog.FileGroupId">
+                                                File Group
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <select class="form-control" id="fileGroupId" disabled asp-for="RequestProductCatalog.FileGroupId" asp-items="ViewBag.FileGroupId">
+                                                <option value="">Select File Group</option>
+                                            </select>
+                                            <span asp-validation-for="RequestProductCatalog.FileGroupId" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="RequestProductCatalog.FileName">
+                                                File Name
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input asp-for="RequestProductCatalog.FileName" type="text" class="form-control" placeholder="Enter File Name" />
+                                            <span asp-validation-for="RequestProductCatalog.FileName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="exampleInputFile">File input  <span class="text-danger">*</span></label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="exampleInputFile" asp-for="RequestProductCatalog.File">
+                                                    <label class="custom-file-label">Choose file</label>
+
+                                                </div>
+
+                                            </div>
+                                            <span asp-validation-for="RequestProductCatalog.File" class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+
+
+
+
+
+
+
+
+                            </div>
+
+
+
+
+                            <div class="card-footer">
+                                <a class="btn btn-outline-info" asp-page="/Admin/ProductCatalog/Index">Back</a>
+                                <button type="submit" class="btn btn-info float-right">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- /.content -->
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    <script src="~/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-product-catalog").addClass("active-custom");
+            $("#menu-resources").addClass("menu-open");
+
+            $(".custom-file-label").text($("#filePath").val().split('/')[2]);
+            $(function () {
+                bsCustomFileInput.init();
+            });
+
+        });</script>
+}

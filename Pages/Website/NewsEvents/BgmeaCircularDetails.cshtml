@@ -1,0 +1,107 @@
+﻿@page
+@model myportfolio.Pages.Website.NewsEvents.BgmeaCircularDetailsModel
+
+@{
+
+}
+
+
+<section class="home-slider js-halfheight owl-carousel">
+    @if (Model.Slider != null)
+    {
+        <div class="slider-item js-halfheight"
+             style="background-image: url(/@Model.Slider.FilePath);">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row slider-text justify-content-center align-items-center">
+                    <div class="col-md-7 col-sm-12 text-center ftco-animate js-halfheight-text">
+                        <h1 class="mb-3 mt-5 bread">Circular Details</h1>
+                        <p class="breadcrumbs">
+                            <span class="mr-2"><a href="/Index">Home</a></span><span>/ News & Events / BGMEA Circulation</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="slider-item js-halfheight"
+             style="background-image: url(https://www.ecotextile.com/images/stories/2021/January/Garment_factory.jpg);">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row slider-text justify-content-center align-items-center">
+                    <div class="col-md-7 col-sm-12 text-center ftco-animate js-halfheight-text">
+                        <h1 class="mb-3 mt-5 bread">Circular Details</h1>
+                        <p class="breadcrumbs">
+                            <span class="mr-2"><a href="/Index">Home</a></span><span>/ News & Events / BGMEA Circulation</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</section>
+
+
+<section class="ftco-section ftco-animate">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="heading text-center">Circular Details</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-striped">
+                        <tr>
+                            <th style="width: 15%">Publish Date</th>
+                            <td> @Model.BGMEACircular.PublishDate.ToString("dd-MMM-yyyy") </td>
+                        </tr>
+
+                        <tr>
+                            <th>Circular Title</th>
+                            <td> @Model.BGMEACircular.CircularTitle </td>
+                        </tr>
+
+                        <tr>
+                            <th>Language</th>
+                            <td> @Model.BGMEACircular.Language </td>
+                        </tr>
+
+                        <tr>
+                            <th>Details</th>
+                            <td> @Html.Raw(Model.BGMEACircular.CircularDetails) </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card-footer">
+                    @if (Model.BGMEACircular.FilePath != null)
+                    {
+                        <a class="btn btn-outline-dark" href="~/@Model.BGMEACircular.FilePath" download>Download Attachment</a>
+                    }
+
+
+                    <a class="btn btn-outline-info float-right" asp-page="./BgmeaCirculation">Back to List</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</section>
+
+
+
+@section Scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#news-menu-big-screen").addClass("active");
+            $("#news-menu-small-screen").addClass("active");
+        });</script>
+
+}

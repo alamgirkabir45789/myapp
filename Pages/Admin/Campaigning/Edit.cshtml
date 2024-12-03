@@ -1,0 +1,95 @@
+﻿@page
+@using myportfolio.Helpers
+@model myportfolio.Pages.Admin.Campaigning.EditModel
+
+@{
+    ViewData["Title"] = "Campaigning | Edit";
+    var businessType = BusinessType.BusinessTypeList();
+}
+
+
+
+
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Campaigning</h3>
+                        </div>
+                        <form method="post">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="hidden" asp-for="Campaigning.Id" value="@Model.Campaigning.Id" />
+                                            <input type="hidden" asp-for="Campaigning.Key" value="@Model.Campaigning.Key" />
+                                            <input type="hidden" asp-for="Campaigning.CreatedAt" value="@Model.Campaigning.CreatedAt" />
+                                            <input type="hidden" asp-for="Campaigning.CreatedBy" value="@Model.Campaigning.CreatedBy" />
+
+                                            <label asp-for="Campaigning.BusinessType">Business Type<span class="text-danger">*</span></label>
+                                            <select asp-for="Campaigning.BusinessType" required class="form-control">
+                                                <option value="">Select Business Type</option>
+                                                @foreach (var item in businessType)
+                                                {
+                                                    <option value="@item">@item</option>
+                                                }
+                                            </select>
+                                            <span asp-validation-for="Campaigning.BusinessType" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Campaigning.Name">
+                                                Category Title
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input asp-for="Campaigning.Name" type="text" class="form-control" placeholder="Enter Campaigning Name" />
+                                            <span asp-validation-for="Campaigning.Name" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label asp-for="Campaigning.FilePath">
+                                                Video URL
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input asp-for="Campaigning.FilePath" type="text" class="form-control" placeholder="Please enter video <Embed> link. Example: https://www.youtube.com/embed/2jfvsM9X0fA" />
+                                            <span asp-validation-for="Campaigning.FilePath" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="card-footer">
+                                <a class="btn btn-outline-info" asp-page="/Admin/Campaigning/Index">Back</a>
+                                <button type="submit" class="btn btn-info float-right">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-campaigning").addClass("active-custom");
+            $("#menu-product-services").addClass("menu-open");
+        });
+    </script>
+}

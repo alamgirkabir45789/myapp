@@ -1,0 +1,89 @@
+﻿@page
+@model myportfolio.Pages.Admin.Company.IndexModel
+
+@{
+    ViewData["Title"] = "Concern | Index";
+}
+
+<div class="content-wrapper">
+
+
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fas fa-building"></i> Concern
+                            </h3>
+                            <a class="float-right btn btn-outline-success" asp-page="Create">
+                                Add
+                            </a>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="data-table"
+                                   class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Established</th>
+                                        <th>Logo</th>
+
+                                        <th style="width: 15%; text-align: center">
+                                            Actions
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Company)
+                                    {
+                                        <tr>
+                                            <td>@item.Name</td>
+                                            
+                                            <td>@item.Established.ToString("dd MMMM yyyy")</td>
+
+                                            <td>
+                                                <img src="~/@item.LogoPath" alt="Alternate Text" class="img-circle elevation-2" width="50" height="50" />
+                                            </td>
+                                            
+                                            <td class="text-center">
+                                                <a class="btn btn-info text-white px-1 py-0" asp-page="./CompanyImage" asp-route-id="@item.Id" title="Add Company Image">
+                                                    <i class="fas fa-image"></i>
+                                                </a>
+
+                                                <a class="btn btn-primary text-white px-1 py-0" asp-page="./Details" asp-route-id="@item.Id" title="Details">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                <a class="btn btn-warning text-white px-1 py-0" asp-page="./Edit" asp-route-id="@item.Id" title="Edit">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a class="btn btn-danger text-white px-1 py-0" asp-page="./Delete" asp-route-id="@item.Id" title="Delete">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#menu-company").addClass("active-custom");
+        });</script>
+}

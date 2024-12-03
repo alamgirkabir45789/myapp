@@ -1,0 +1,139 @@
+﻿@page
+@model myportfolio.Pages.Admin.DailyTask.TaskReportModel
+@inject myportfolio.Model.ApplicationDbContext _Context
+@{
+    ViewData["Title"] = "Task Report";
+  var selectedDate=  Convert.ToDateTime(ViewData["SelectedDate"]);
+    var formatedDate = selectedDate.ToString("dd-MMMM-yyyy");
+}
+
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fa fa-user"></i>Task Summary
+                            </h3>
+                            <p class="float-right ml-2 ">
+                                Date:@formatedDate
+                            </p>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table class="table table-bordered table-hover p-2">
+                                <thead>
+                                    <tr>
+                                        <th> SL/No</th>
+                                        <th> Name</th>
+                                        <th> In Time</th>
+                                        <th> Out Time</th>
+                                        <th>Working Project </th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                     @foreach (var item in Model.TaskReports)
+                                    {
+                                       
+                                        @if (item.IsInLeave == true )
+                                        {
+                                            <tr class="text-warning" >
+                                                <td>@item.SortCode</td>
+                                                <td >
+                                                    @item.Name
+                                                </td>
+                                                <td colspan="4" class="text-center">
+                                                    <span>
+                                                        Leave due to @item.Reason
+
+                                                    </span>                                                   
+                                                </td>                                                
+                                            </tr>
+                                        }
+                                        else if (item.WorkingProject == null && item.Description == null)
+                                        {
+                                            <tr class="text-danger">
+                                                <td>@item.SortCode</td>
+
+                                                <td>
+                                                    @item.Name
+                                                </td>
+                                                <td colspan="4" class="text-center">
+                                                    Yet task not submitted.
+                                                </td>
+                                              
+                                            </tr>
+                                        }
+                                        else
+                                        {
+                                            <tr >
+                                                <td>@item.SortCode</td>
+
+                                                <td>
+                                                    @item.Name
+                                                </td>
+                                                @{
+
+                                                    TimeSpan timeSpan = new TimeSpan(item.InTime.Ticks);
+                                                    DateTime time = DateTime.Today.Add(timeSpan);
+                                                    <td>
+                                                        @time.ToString("hh:mm tt")
+
+                                                    </td>
+                                                }
+
+                                                @{
+
+                                                    TimeSpan timeSpan2 = new TimeSpan(item.OutTime.Ticks);
+                                                    DateTime time2 = DateTime.Today.Add(timeSpan2);
+                                                    <td>
+                                                        @time2.ToString("hh:mm tt")
+
+                                                    </td>
+                                                }
+                                                <td>
+                                                    @item.WorkingProject
+                                                </td>
+                                                <td>
+                                                    @item.Description
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    }
+                                </tbody>
+                            </table>
+                         
+                           
+                        </div>
+                        <!-- /.card-body -->
+                   
+                        <div class="card-footer">
+                            <a class="btn btn-outline-info" asp-page="./Index">Back</a>
+
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //$("#menu-report").addClass("menu-open");
+            $("#menu-daily-task").addClass("active-custom");
+            console.log($("#getInputDate").val())
+
+        });
+    
+
+    </script>
+}

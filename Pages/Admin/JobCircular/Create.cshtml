@@ -1,0 +1,242 @@
+﻿@page
+@model myportfolio.Pages.Admin.JobCircular.CreateModel
+
+
+@{
+    ViewData["Title"] = "Job Circular | New";
+
+}
+
+
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Job Circular</h3>
+                        </div>
+                        <form method="post">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input asp-for="JobCircular.Key" value="@Guid.NewGuid()" style="display: none" />
+                                            <label asp-for="JobCircular.JobTitle">
+                                                Job Title
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input asp-for="JobCircular.JobTitle" type="text" class="form-control form-control-sm" placeholder="Enter Job Title" />
+                                            <span asp-validation-for="JobCircular.JobTitle" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="JobCircular.JobStatus">
+                                                Job Status
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <select asp-for="JobCircular.JobStatus" class="form-control form-control-sm">
+                                                <option value="">Select Job Status</option>
+                                                <option value="Full Time">Full Time</option>
+                                                <option value="Part Time">Part Time</option>
+                                            </select>
+                                            <span asp-validation-for="JobCircular.JobStatus" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="JobCircular.StartDate">
+                                                Start Date
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" asp-for="JobCircular.StartDate" autocomplete="off" readonly class="form-control datepicker" placeholder="Enter Start Date" />
+
+                                            <span asp-validation-for="JobCircular.StartDate" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="JobCircular.EndDate">
+                                                End Date
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" asp-for="JobCircular.EndDate" autocomplete="off" readonly class="form-control datepicker" placeholder="Enter End Date" />
+
+                                            <span asp-validation-for="JobCircular.EndDate" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="JobCircular.NoOfVacancy">
+                                                Number of Vacancy
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="number" asp-for="JobCircular.NoOfVacancy"
+                                                   class="form-control form-control-sm"
+                                                   placeholder="Enter Number of Vacancy" />
+                                            <span asp-validation-for="JobCircular.NoOfVacancy" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label asp-for="JobCircular.WorkStation">
+                                                Job Location
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" asp-for="JobCircular.WorkStation"
+                                                   class="form-control form-control-sm"
+                                                   placeholder="Enter work station" />
+                                            <span asp-validation-for="JobCircular.WorkStation" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label asp-for="JobCircular.Salary">Salary <span class="text-danger">*</span></label>
+                                            <input type="number" id="salary" asp-for="JobCircular.Salary"
+                                                   class="form-control form-control-sm"
+                                                   placeholder="Enter salary" />
+                                            <span asp-validation-for="JobCircular.Salary" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-1">
+                                        <div class="form-group">
+                                            <div class="form-check mt-4 pt-2">
+                                                <input type="checkbox" class="form-check-input" id="salary-negotiable-checkbox" />
+                                                <label class="form-check-label">Negotiable</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label asp-for="JobCircular.Overview">Overview <span class="text-danger">*</span></label>
+                                    <textarea class="form-control form-control-sm"
+                                              placeholder="Enter Job Overview"
+                                              rows="2" asp-for="JobCircular.Overview"></textarea>
+                                    <span asp-validation-for="JobCircular.Overview" class="text-danger"></span>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="JobCircular.Responsibilities">
+                                                Responsibilities
+                                                <span class="text-danger">*</span>
+                                            </label>
+
+                                            <textarea class="form-control form-control-sm"
+                                                      placeholder="Enter Job Responsibilities"
+                                                      id="job-responsibilities"
+                                                      rows="2" asp-for="JobCircular.Responsibilities"></textarea>
+                                            <span asp-validation-for="JobCircular.Responsibilities" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="JobCircular.Privilege">
+                                                Privilege
+                                                <span class="text-danger">*</span>
+                                            </label>
+
+                                            <textarea class="form-control form-control-sm"
+                                                      placeholder="Enter Job Privilege"
+                                                      id="job-privilege"
+                                                      rows="2" asp-for="JobCircular.Privilege"></textarea>
+                                            <span asp-validation-for="JobCircular.Privilege" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="JobCircular.Qualifications">
+                                                Qualifications
+                                                <span class="text-danger">*</span>
+                                            </label>
+
+                                            <textarea class="form-control form-control-sm"
+                                                      placeholder="Enter Job Qualifications"
+                                                      id="job-qualifications"
+                                                      rows="2" asp-for="JobCircular.Qualifications"></textarea>
+                                            <span asp-validation-for="JobCircular.Qualifications" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="JobCircular.Skill">Skills <span class="text-danger">*</span></label>
+
+                                            <textarea class="form-control form-control-sm"
+                                                      placeholder="Enter Job Skills"
+                                                      id="job-skills"
+                                                      rows="2" asp-for="JobCircular.Skill"></textarea>
+                                            <span asp-validation-for="JobCircular.Skill" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="card-footer">
+                                <a class="btn btn-outline-info" asp-page="/Admin/JobCircular/Index">Back</a>
+                                <button type="submit" class="btn btn-info float-right">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- /.content -->
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-job-circular").addClass("active-custom");
+            $("#menu-career").addClass("menu-open");
+            $(".datepicker").datepicker("setDate", new Date());
+
+            $("#salary-negotiable-checkbox").click(function () {
+
+                if ($("#salary-negotiable-checkbox").is(':checked')) {
+                    $('#salary').attr({ "type": "text", "readonly": true });
+                    $('#salary').val('Negotiable');
+
+                } else {
+                    $('#salary').attr({ "type": "number", "readonly": false });
+                    $('#salary').val('0');
+                }
+
+            });
+        });
+    </script>
+
+
+
+}
+
+
+

@@ -1,0 +1,234 @@
+﻿@page
+@model IndexModel;
+@inject myportfolio.Model.ApplicationDbContext _Context
+
+@{
+    var buyers = _Context.Buyers.ToList();
+    var categroy = _Context.Categories.ToList();
+    var products = _Context.Products.ToList();
+    var mediaGallery = _Context.MediaGallery.ToList();
+    var teamMember = _Context.Teams.Count();
+}
+<style>
+    /* Add hover effect to the card */
+    #hoverEffect:hover {
+        transform: scale(1.05);
+        /* Increase the card size on hover */
+        transition: transform 0.5s ease-in-out;
+        /* Smooth transition */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        /* Add a box shadow on hover */
+        background-color: #F0F0F0 !important;
+    }
+</style>
+<div class="container-xxl position-relative p-0">
+    <div class="container-xxl bg-primary hero-header">
+        <div class="container px-lg-5">
+            <div class="row g-5 align-items-end">
+                <div class="col-lg-6 text-center text-lg-start">
+                    <h1 class="text-white mb-4 animated slideInDown">
+                        Welcome to Alamgir Kabir's Portfolio where
+                        innovation
+                        meets excellence in the world of software development.
+                    </h1>
+                    <p class="text-white pb-3 animated slideInDown" style="text-align:justify"> As a leading force in
+                    the ever-evolving technology landscape, we pride ourselves on delivering cutting-edge software
+                    solutions that empower businesses to thrive in the digital age. With a dedicated team of
+                    visionary developers, designers, and strategists, we transform ideas into reality, crafting
+                    bespoke software that not only meets but exceeds the unique needs of my clients. my commitment
+                    to quality, agility, and innovation sets us apart as a trusted partner for organizations seeking
+                    to harness the full potential of technology to drive growth, efficiency, and innovation.</p>
+                    <a href="~/Website/About/History"
+                       class="btn btn-secondary py-sm-3 px-sm-5 rounded-pill me-3 animated slideInLeft">Read More</a>
+                    <a href="~/Website/Contact/ContactUs"
+                       class="btn btn-light py-sm-3 px-sm-5 rounded-pill animated slideInRight">Contact Us</a>
+                </div>
+                <div class="col-lg-6 text-center text-lg-start">
+                    <img class="img-fluid animated zoomIn" src="~/quadrion/img/heroImage.gif" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- About Start -->
+<div class="container-xxl py-5">
+    <div class="container py-5 px-lg-5">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                @*<p class="section-title text-secondary">About Us<span></span></p>*@
+                <h1 class="mb-5">years of experience with</h1>
+                @* <p class="mb-4" style="text-align:justify">Alamgir Kabir Portfolio is a promising IT Enabled Service
+                provider in Bangladesh with a great deal of commitment and has the vision to serve renowned
+                government, public and private companies. Our top priority is providing our clients with
+                high-quality services. Our team of expert engineers is among the best in the local Industrial IT
+                sector and is extensively educated, trained, and experienced. They are confident in their ability to
+                complete any job in a quality and systematic manner.</p> *@
+
+                <div class="skill mb-4">
+                    <div class="d-flex justify-content-between">
+                        <p class="mb-2"> <i class="fa fa-globe" aria-hidden="true"></i> Asp.Net Core</p>
+                        <p class="mb-2">95%</p>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" style="background-color:#e43025" role="progressbar" aria-valuenow="95"
+                             aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+
+                <div class="skill mb-4">
+                    <div class="d-flex justify-content-between">
+                        <p class="mb-2"> <i class="fa fa-server" aria-hidden="true"></i> Asp.Net Core Web API</p>
+                        <p class="mb-2">80%</p>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" style="background-color:#48b748" role="progressbar" aria-valuenow="80"
+                             aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+
+                <div class="skill mb-4">
+                    <div class="d-flex justify-content-between">
+                        <p class="mb-2"><i class="fa fa-life-ring" aria-hidden="true"></i> MSSQL SERVER</p>
+                        <p class="mb-2">90%</p>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" style="background-color:#f15a26" role="progressbar" aria-valuenow="90"
+                             aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <div class="skill mb-4">
+                    <div class="d-flex justify-content-between">
+                        <p class="mb-2"><i class="fa fa-database" aria-hidden="true"></i> React JS</p>
+                        <p class="mb-2">85%</p>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" style="background-color:#212b5e" role="progressbar" aria-valuenow="85"
+                             aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+
+                <div class="skill mb-4">
+                    <div class="d-flex justify-content-between">
+                        <p class="mb-2"><i class="fa fa-database" aria-hidden="true"></i> Javascript</p>
+                        <p class="mb-2">85%</p>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" style="background-color:#212b5e" role="progressbar" aria-valuenow="85"
+                             aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+
+
+                <div class="skill mb-4">
+                    <div class="d-flex justify-content-between">
+                        <p class="mb-2"><i class="fa fa-database" aria-hidden="true"></i> Jquery</p>
+                        <p class="mb-2">85%</p>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" style="background-color:#212b5e" role="progressbar" aria-valuenow="85"
+                             aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+
+                <div class="skill mb-4">
+                    <div class="d-flex justify-content-between">
+                        <p class="mb-2"><i class="fa fa-database" aria-hidden="true"></i> Ajax</p>
+                        <p class="mb-2">85%</p>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" style="background-color:#212b5e" role="progressbar" aria-valuenow="85"
+                             aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+
+                <div class="skill mb-4">
+                    <div class="d-flex justify-content-between">
+                        <p class="mb-2"><i class="fa fa-database" aria-hidden="true"></i> Microsoft Azure</p>
+                        <p class="mb-2">85%</p>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" style="background-color:#212b5e" role="progressbar" aria-valuenow="85"
+                             aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <a href="~/Website/About/History" class="btn btn-primary py-sm-3 px-sm-5 rounded-pill mt-3">
+                    Read
+                    More
+                </a>
+            </div>
+            <div class="col-lg-6">
+                <img class="img-fluid wow zoomIn" data-wow-delay="0.5s" src="~/quadrion/img/aboutImage.gif">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About End -->
+<!-- Facts Start -->
+@* <div class="container-xxl bg-primary fact py-5 wow fadeInUp" data-wow-delay="0.1s">
+<div class="container py-5 px-lg-5">
+<div class="row g-4">
+<div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.1s">
+<i class="fa fa-certificate fa-3x text-secondary mb-3"></i>
+<h1 class="text-white mb-2" data-toggle="counter-up">3</h1>
+<p class="text-white mb-0">Years Experience</p>
+</div>
+<div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.3s">
+<i class="fa fa-users-cog fa-3x text-secondary mb-3"></i>
+<h1 class="text-white mb-2" data-toggle="counter-up">@teamMember</h1>
+<p class="text-white mb-0">Team Members</p>
+</div>
+<div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.5s">
+<i class="fa fa-users fa-3x text-secondary mb-3"></i>
+<h1 class="text-white mb-2" data-toggle="counter-up">5</h1>
+<p class="text-white mb-0">Satisfied Clients</p>
+</div>
+<div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.7s">
+<i class="fa fa-check fa-3x text-secondary mb-3"></i>
+<h1 class="text-white mb-2" data-toggle="counter-up">8</h1>
+<p class="text-white mb-0">Compleate Projects</p>
+</div>
+</div>
+</div>
+</div> *@
+<!-- Facts End -->
+<!-- Testimonial Start -->
+<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+<div class="container py-5 px-lg-5">
+<p class="section-title text-secondary justify-content-center"><span></span>Testimonial<span></span></p>
+<h1 class="text-center mb-5">What Say Our Clients!</h1>
+<div class="owl-carousel testimonial-carousel">
+
+@foreach (var item in buyers)
+{
+<div class="testimonial-item bg-light rounded my-4">
+<p class="fs-5"><i class="fa fa-quote-left fa-4x text-primary mt-n4 me-3"></i>@item.Description.</p>
+<div class="d-flex align-items-center">
+
+<img class="img-fluid flex-shrink-0 rounded-circle" src="/@item.LogoPath"
+style="width: 65px; height: 65px;">
+
+<div class="ps-4">
+<h5 class="mb-1">@item.Name</h5>
+<span>@item.Profession</span>
+</div>
+</div>
+</div>
+}
+</div>
+</div>
+</div>
+<!-- Testimonial End -->
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script src="~/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#home-menu-big-screen").addClass("active");
+            $("#home-menu-small-screen").addClass("active");
+
+        });</script>
+}

@@ -1,0 +1,123 @@
+﻿@page
+@model myportfolio.Pages.Website.Style.StyleDetailModel
+
+@{
+    ViewData["Title"] = "Style Detail";
+}
+
+<section class="home-slider js-halfheight owl-carousel">
+    <div class="slider-item js-halfheight"
+         style=" background-image: url(/Uploads/Slider/638001967797492684.jpg);">
+        <div class="overlay-small"></div>
+        <div class="container">
+            <div class="row slider-text justify-content-center align-items-center">
+                <div class="col-md-7 col-sm-12 text-center ftco-animate js-halfheight-text">
+                    <h1 class="mb-3 mt-5 bread">Style Detail</h1>
+                    <p class="breadcrumbs">
+                        <span class="mr-2"><a href="/Index">Home</a></span><span>/ Style / Style Detail</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row no-gutters">
+            <div class="col-md-5 p-md-5 img img-2 ftco-animate" style="background-image: url(/@Model.Style.FilePath);"></div>
+            
+            <div class="col-md-7 wrap-about pb-md-5 ftco-animate">
+                <div class="heading-section mb-5 pl-md-5 heading-section-with-line">
+                    <div class=" ml-md-5">
+                        <h2 class="mb-4">@Model.Style.StyleNo</h2>
+                    </div>
+                </div>
+                
+                <div class="pl-md-5 ml-md-5 mb-5" style="text-align: justify">
+                    <div class="row no-gutters">
+                        <div class="col-lg-3 col-md-4 col-sm-12">
+                            <h5>Category</h5>
+                        </div>
+                        <div class="col-lg-9 col-md-8 col-sm-12">
+                            <p>: @Model.Style.StyleCategory.Title</p>
+                        </div>
+                    </div>
+
+                    <div class="row no-gutters">
+                        <div class="col-lg-3 col-md-4 col-sm-12">
+                            <h5>Fabrication</h5>
+                        </div>
+                        <div class="col-lg-9 col-md-8 col-sm-12">
+                            <p>: @Model.Style.Fabrication</p>
+                        </div>
+                    </div>
+
+                    <div class="row no-gutters">
+                        <div class="col-lg-3 col-md-4 col-sm-12">
+                            <h5>Export Market</h5>
+                        </div>
+                        <div class="col-lg-9 col-md-8 col-sm-12">
+                            <p>: @Model.Style.ExportTo</p>
+                        </div>
+                    </div>
+
+                    <div class="row no-gutters">
+                        <div class="col-lg-3 col-md-4 col-sm-12">
+                            <h5>FOB Price</h5>
+                        </div>
+                        <div class="col-lg-9 col-md-8 col-sm-12">
+                            <p>: $ @Model.Style.Price.ToString("N2")/@Model.Style.PriceFor</p>
+                        </div>
+                    </div>
+
+                    <div class="row no-gutters">
+                        <div class="col-lg-3 col-md-4 col-sm-12">
+                            <h5>Size</h5>
+                        </div>
+                        <div class="col-lg-9 col-md-8 col-sm-12">
+                            <p>: @Model.Style.Size</p>
+                        </div>
+                    </div>
+
+                    <div class="row no-gutters">
+                        <div class="col-lg-3 col-md-4 col-sm-12">
+                            <h5>Color</h5>
+                        </div>
+                        <div class="col-lg-9 col-md-8 col-sm-12">
+                            <p>: @Model.Style.Color</p>
+                        </div>
+                    </div>
+
+                    <div class="row no-gutters">
+                        <div class="col-lg-3 col-md-4 col-sm-12">
+                            <h5>Contact</h5>
+                        </div>
+                        <div class="col-lg-9 col-md-8 col-sm-12">
+                            <p>: msriyadh@rdmapparels.com</p>
+                        </div>
+                    </div>
+
+                    <div class="row no-gutters">
+                        <div class="col-lg-3 col-md-4 col-sm-12">
+                            <h5>Website</h5>
+                        </div>
+                        <div class="col-lg-9 col-md-8 col-sm-12">
+                            <p>: www.rdmgroupbd.com</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //$("#about-menu-big-screen").addClass("active");
+            //$("#about-menu-small-screen").addClass("active");
+        });
+    </script>
+}

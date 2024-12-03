@@ -1,0 +1,95 @@
+﻿@page
+@model myportfolio.Pages.Admin.DailyReport.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Assign Project</h3>
+                        </div>
+                        <form method="post" >
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="DailyReportRequest.Key" value="@Guid.NewGuid()" />
+                            <div class="card-body">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label asp-for="DailyReportRequest.Name">
+                                                    Developer Name
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <select class="form-control select2 select2-container" id="TeamMember" asp-for="DailyReportRequest.Name"  asp-items="@ViewBag.TeamMember">
+                                                    <option value="">Select Developer</option>                                                   
+                                                </select>
+                                            </div>
+                                        </div> 
+                                     
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+
+                                                <label asp-for="DailyReportRequest.ProjectName">
+                                                    Project Name
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <select class="form-control select2 select2-container" id="Project" asp-for="DailyReportRequest.ProjectName" asp-items="@ViewBag.Project">
+                                                    <option value="">Select Project</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label asp-for="DailyReportRequest.AssignDate">
+                                                    Assign Date
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input type="text" asp-for="DailyReportRequest.AssignDate" autocomplete="off" readonly class="form-control datepicker" />
+                                                <span asp-validation-for="DailyReportRequest.AssignDate" class="text-danger"></span>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label asp-for="DailyReportRequest.TargetDate">
+                                                    Target Date
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input type="text" asp-for="DailyReportRequest.TargetDate" autocomplete="off" readonly class="form-control datepicker" />
+                                                <span asp-validation-for="DailyReportRequest.TargetDate" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>   
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <a class="btn btn-outline-info" asp-page="/Admin/DailyReport/Index">Back</a>
+                                <button type="submit" class="btn btn-info float-right">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- /.content -->
+</div>
+
+@section Scripts {
+   
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-daily-report").addClass("active-custom");
+            $("#menu-report").addClass("menu-open");
+            $(".datepicker").datepicker("setDate", new Date());
+        });</script>
+}

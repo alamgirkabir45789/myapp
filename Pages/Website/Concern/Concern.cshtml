@@ -1,0 +1,145 @@
+﻿@page
+@model myportfolio.Pages.Website.Concern.ConcernModel
+@{
+
+}
+
+<section class="home-slider js-halfheight owl-carousel">
+    @if (Model.Slider != null)
+    {
+        <div class="slider-item js-halfheight"
+             style=" background-image: url(/@Model.Slider.FilePath); ">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row slider-text justify-content-center align-items-center">
+                    <div class="col-md-7 col-sm-12 text-center ftco-animate js-halfheight-text">
+                        <h1 class="mb-3 mt-5 bread company-name">@Model.Company.Name</h1>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="slider-item js-halfheight"
+             style=" background-image: url(https://www.ecotextile.com/images/stories/2021/January/Garment_factory.jpg); ">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row slider-text justify-content-center align-items-center">
+                    <div class="col-md-7 col-sm-12 text-center ftco-animate js-halfheight-text">
+                        <h1 class="mb-3 mt-5 bread company-name">@Model.Company.Name</h1>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</section>
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row no-gutters ">
+            <div class="col-md-2 col-sm-12 ftco-animate nav-tab-links">
+                <div class="nav flex-column nav-pills nav-pill-margin"
+                     id="v-pills-tab"
+                     role="tablist"
+                     aria-orientation="vertical">
+
+                    @foreach (var item in Model.Companies)
+                    {
+                        <a class="nav-link  nav-tab-text mb-2 nav-tab-text"
+                           id="v-pills-@item.Id-tab"
+                           data-company-name="@item.Name"
+                           role="tab"
+                           asp-page="/Website/Concern/Concern" asp-route-id="@item.Id"
+                           aria-controls="v-pills-@item.Id"
+                           aria-selected="true">@item.Name</a>
+                    }
+                </div>
+            </div>
+
+            <div class="col-md-10 col-sm-12 ftco-animate">
+                <div class="tab-content" id="v-pills-tabContent">
+
+                    @foreach (var item in @Model.Companies.Where(x => x.Id == Model.CompanyId))
+                    {
+
+                        <div class="tab-pane fade show "
+                             id="v-pills-@item.Id"
+                             role="tabpanel"
+                             aria-labelledby="v-pills-@item.Id-tab">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-10 text-left">
+                                        <h2 class="mb-3 header-text">@item.Name</h2>
+                                        <hr class="heading-hr-style" />
+                                    </div>
+                                    <div class="col-md-10 text-justify">
+                                        <p>
+                                            @Html.Raw(item.Description)
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <br />
+
+                                <div class="company-image-container">
+                                    @foreach (var image in Model.CompanyImages.Where(x => x.CompanyId == item.Id))
+                                    {
+                                        <div class="company-image ftco-animate">
+                                            <a href="~/@image.ImagePath"
+                                               class="icon image-popup d-flex justify-content-center align-items-center">
+                                                <img src="/@image.ImagePath" alt="@image.Title" />
+                                            </a>
+                                        </div>
+                                    }
+                                </div>
+
+                                @*<br />
+
+                                <div class="row justify-content-center">
+                                    <div class="col-md-10 text-left">
+                                        <h2 class="mb-3 header-text">@item.Name History</h2>
+                                        <hr class="heading-hr-style" />
+                                    </div>
+                                    <div class="col-md-10 text-justify">
+                                        <p>
+                                            @item.History
+                                        </p>
+                                    </div>
+                                </div>*@
+
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#concern-menu-big-screen").addClass("active");
+            $("#concern-menu-small-screen").addClass("active");
+
+            var companyId = @Model.CompanyId;
+            var pillsTab = '#v-pills-' + companyId + '-tab';
+            var pills = '#v-pills-' + companyId;
+
+            $(pillsTab).addClass("active");
+            $(pills).addClass("active");
+
+            $(".nav-tab-text").click(function() {
+                var companyName = $(this).attr("data-company-name");
+
+                $(".company-name").text(companyName);
+            });
+
+        });
+    </script>
+}

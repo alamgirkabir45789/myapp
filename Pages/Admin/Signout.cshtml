@@ -1,0 +1,35 @@
+﻿@page "/Signout"
+@model myportfolio.Pages.Admin.SignoutModel
+@{ ViewData["Title"] = "Sign Out"; }
+
+
+
+
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Sign Out</h3>
+                        </div>
+                        <form method="post">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p> Are you sure you want to sign out?</p>
+                                        <p>
+                                            <button class="btn btn-outline-info" asp-page-handler="Signout">Yes</button>
+                                            <button class="btn btn-info ml-2 " asp-page-handler="DontSignout">No</button>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

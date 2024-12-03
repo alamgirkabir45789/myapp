@@ -1,0 +1,66 @@
+﻿@page
+@model myportfolio.Pages.Admin.Campaigning.DeleteModel
+
+@{
+    ViewData["Title"] = "Campaigning | Delete";
+}
+
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <section class="content">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Campaigning Detail</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
+                                <div class="card bg-light d-flex flex-fill">
+                                    <div class="card-header text-muted border-bottom-0">
+
+                                    </div>
+                                    <div class="card-body pt-0">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h2 class="lead"><b>Business Type : @Html.DisplayFor(model => model.Campaigning.BusinessType) </b></h2>
+                                                <h2 class="lead"><b>Category Name : @Html.DisplayFor(model => model.Campaigning.Name) </b></h2>
+                                                <h2 class="lead"><b>Video URL : @Html.DisplayFor(model => model.Campaigning.FilePath) </b></h2>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <form method="post">
+                                            <input type="hidden" asp-for="Campaigning.Id" />
+                                            <a asp-page="./Index" class="btn  btn-outline-info">Back</a>
+                                            <button type="submit" class="btn btn-danger float-right">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+    </section>
+</div>
+
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-campaigning").addClass("active-custom");
+            $("#menu-product-services").addClass("menu-open");
+
+        });
+    </script>
+}

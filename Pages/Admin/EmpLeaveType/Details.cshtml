@@ -1,0 +1,57 @@
+﻿@page
+@model myportfolio.Pages.Admin.EmpLeaveType.DetailsModel
+@{
+    ViewData["Title"] = "Leave Type Details";
+}
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <section class="content">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Leave Type Details</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-sm-6 col-md-6 d-flex align-items-stretch flex-column">
+                                <div class="card bg-light d-flex flex-fill">
+                                    <div class="card-header text-muted border-bottom-0">
+                                    </div>
+                                    <div class="card-body pt-0">
+                                        <div class="row">
+                                            <div class="col-7">
+                                                <h2 class="lead"><strong>Leave Type : </strong><b>@Html.DisplayFor(model => model.EmpLeaveRequest.LeaveTypeName) </b></h2>
+                                                <p><strong>Description: </strong> @Html.DisplayFor(model => model.EmpLeaveRequest.Description) </p>
+                                                @*<p><strong>Total Day: </strong> @Html.DisplayFor(model => model.EmpLeaveRequest.TotalDay) </p>*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <form method="post">
+                                            <input type="hidden" asp-for="EmpLeaveRequest.Id" />
+                                            <a asp-page="./Index" class="btn  btn-outline-info">Back</a>                                           
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-configuration").addClass("menu-open");
+            $("#menu-leave-type").addClass("active-custom");
+        });</script>
+}
+
+

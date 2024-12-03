@@ -1,0 +1,122 @@
+﻿@page
+@model myportfolio.Pages.Website.NewsEvents.DailyActivitiesModel
+@{ int count = 1; }
+
+<section class="home-slider js-halfheight owl-carousel">
+    @if (Model.Slider != null)
+    {
+        <div class="slider-item js-halfheight"
+             style=" background-image: url(/@Model.Slider.FilePath); ">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row slider-text justify-content-center align-items-center">
+                    <div class="col-md-7 col-sm-12 text-center ftco-animate js-halfheight-text">
+                        <h1 class="mb-3 mt-5 bread">Day to Day Activities</h1>
+                        <p class="breadcrumbs">
+                            <span class="mr-2"><a href="/Index">Home</a></span><span>/ News & Events / Day to Day Activities</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="slider-item js-halfheight"
+             style=" background-image: url(https://www.ecotextile.com/images/stories/2021/January/Garment_factory.jpg); ">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row slider-text justify-content-center align-items-center">
+                    <div class="col-md-7 col-sm-12 text-center ftco-animate js-halfheight-text">
+                        <h1 class="mb-3 mt-5 bread">Day to Day Activities</h1>
+                        <p class="breadcrumbs">
+                            <span class="mr-2"><a href="/Index">Home</a></span><span>/ News & Events / Day to Day Activities</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</section>
+
+<section class="ftco-section ftco-animate">
+    <h2 class="mb-4 text-center text-uppercase">Day to Day Activities</h2>
+    <div class="container gallery-container">
+        @foreach (var item in Model.DayToDayActivities)
+        {
+            @if (count % 2 == 0)
+            {
+                <div class="row achievement-container gallery-container-item">
+                    <div class="col-md-6 col-sm-12 gallery-img-container" style="background-image: url(/@item.FilePath);">
+                        <a href="/@item.FilePath"
+                           class="icon image-popup d-flex justify-content-center align-items-center">
+                            <span class="icon-expand gallery-image-expand"></span>
+                        </a>
+                    </div>
+                    <div class="col-md-6 col-sm-12 achievement-text-container">
+                        <h3 class="p-4 text-center achievement-title">@item.FileName</h3>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="row achievement-container achievement-container-reverse gallery-container-item">
+                    <div class="col-md-6 col-sm-12 achievement-text-container">
+                        <h3 class="p-4 text-center achievement-title">@item.FileName</h3>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12 gallery-img-container"
+                         style=" background-image: url(/@item.FilePath); ">
+                        <a href="/@item.FilePath"
+                           class="icon image-popup d-flex justify-content-center align-items-center">
+                            <span class="icon-expand gallery-image-expand"></span>
+                        </a>
+                    </div>
+                </div>
+            }
+            count++;
+        }
+    </div>
+</section>
+
+<div id="gallery-pagination-container"></div>
+
+
+
+@section Scripts{
+
+    <script src="~/js/jquery.simplePagination.js"></script>
+
+    <script>
+        let galleryItems = $(".gallery-container .gallery-container-item");
+        let numItems = galleryItems.length;
+        let perPage = 10;
+
+        galleryItems.slice(perPage).hide();
+
+        $("#gallery-pagination-container").pagination({
+            items: numItems,
+            itemsOnPage: perPage,
+            prevText: "<",
+            nextText: ">",
+            onPageClick: function (pageNumber) {
+                let showFrom = perPage * (pageNumber - 1);
+                let showTo = showFrom + perPage;
+                galleryItems.hide().slice(showFrom, showTo).show();
+            },
+        });
+    </script>
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#news-menu-big-screen").addClass("active");
+            $("#news-menu-small-screen").addClass("active");
+        });</script>
+
+
+
+}
+

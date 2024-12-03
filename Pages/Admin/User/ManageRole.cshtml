@@ -1,0 +1,70 @@
+﻿@page
+@model myportfolio.Pages.Admin.User.ManageRoleModel
+
+@{
+    ViewData["Title"] = "User Role";
+    var userId = ViewData["userId"];
+    var Name = ViewData["Name"];
+}
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">User Role</h3>
+                           
+                        </div>
+
+                        <form method="post">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="card-body">                              
+                                <div class="col-md-6">
+                                    <p><strong>Name :</strong>@Name</p>
+                                    <div class="row">
+                                        <div class="col-md-12" >
+                                            @for (int i = 0; i < Model.AssignRoleRequests.Count; i++)
+                                            {
+                                                <div class="form-group form-check">
+                                                    <input type="hidden" asp-for="@Model.AssignRoleRequests[i].RoleId"  />
+                                                    <input type="hidden" asp-for="@userId"  />
+                                                    <input type="hidden" asp-for="@Model.AssignRoleRequests[i].RoleName"  />
+                                                    <input type="hidden" asp-for="@Model.AssignRoleRequests[i].IsSelected" class="form-check-input"  name="@Model.AssignRoleRequests[i].IsSelected" />
+                                                    <label class="form-check-label" asp-for="@Model.AssignRoleRequests[i].IsSelected">
+                                                        <input class="form-check-input" id="chkVal"   asp-for="@Model.AssignRoleRequests[i].IsSelected"  />  @Model.AssignRoleRequests[i].RoleName
+                                                    </label>
+                                                </div>
+                                            }
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <a class="btn btn-outline-info" asp-page="/Admin/User/Index">Back</a>
+                                <button type="submit" class="btn btn-info float-right">Save</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- /.content -->
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-configuration").addClass("menu-open");
+            $("#menu-role").addClass("active-custom");
+
+        });
+        
+    </script>
+}

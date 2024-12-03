@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+@await Html.PartialAsync("~/Pages/Admin/Shared/_Admin_Head.cshtml")
+
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+
+        @await Html.PartialAsync("~/Pages/Admin/Shared/_Admin_Placeholder.cshtml")
+
+        @await Html.PartialAsync("~/Pages/Admin/Shared/_Admin_Header.cshtml")
+
+        @await Html.PartialAsync("~/Pages/Admin/Shared/_Admin_Sidebar.cshtml")
+
+        @RenderBody()
+
+        @await Html.PartialAsync("~/Pages/Admin/Shared/_Admin_Footer.cshtml")
+
+    </div>
+
+    @await Html.PartialAsync("~/Pages/Admin/Shared/_Admin_Script.cshtml")
+    @await Component.InvokeAsync("Notyf")
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

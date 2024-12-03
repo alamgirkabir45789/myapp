@@ -1,0 +1,175 @@
+﻿@page
+@model myportfolio.Pages.Admin.Team.DeleteModel
+@{
+}
+<link href="~/css/imageUpload.css" rel="stylesheet" />
+
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-info">
+                        <div class="card-header bg-danger">
+                            <h3 class="card-title ">Are you sure! you want to delete this Team Member?</h3>
+                        </div>
+                        <form method="post" enctype="multipart/form-data">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="RequestTeam.Id" />
+                            <input type="hidden" asp-for="RequestTeam.Key" />
+                            <input type="hidden" asp-for="RequestTeam.CreatedAt" />
+                            <input type="hidden" asp-for="RequestTeam.CreatedBy" />
+                            <input type="hidden" asp-for="RequestTeam.FilePath" id="filePath" />
+                            <input type="hidden" asp-for="RequestTeam.FileType" />
+
+
+
+                            <div class="card-body">
+                                <div class="row">
+
+                                
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label asp-for="RequestTeam.FileName">
+                                                     Name
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input readonly asp-for="RequestTeam.FileName" type="text" class="form-control" placeholder="Enter  Name" />
+                                                <span asp-validation-for="RequestTeam.FileName" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                       @* <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label asp-for="RequestTeam.Email">
+                                                    Email
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input readonly asp-for="RequestTeam.Email" type="text" class="form-control" placeholder="Enter Email" />
+                                                <span asp-validation-for="RequestTeam.Email" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label asp-for="RequestTeam.ContactNo">
+                                                    Phone
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input readonly asp-for="RequestTeam.ContactNo" type="text" class="form-control" placeholder="Enter Phone" />
+                                                <span asp-validation-for="RequestTeam.ContactNo" class="text-danger"></span>
+                                            </div>
+                                        </div>*@
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label asp-for="RequestTeam.Designation">
+                                                    Designation
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input readonly asp-for="RequestTeam.Designation" type="text" class="form-control" placeholder="Enter Designation" />
+                                                @*<input asp-for="RequestBuyer.FileName" type="text" class="form-control" placeholder="Enter Buyer Name" />*@
+                                                <span asp-validation-for="RequestTeam.Designation" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label asp-for="RequestTeam.SortCode">
+                                                    Sort Order
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input readonly asp-for="RequestTeam.SortCode" type="text" class="form-control" placeholder="Enter Sort Order" />
+                                                @*<input asp-for="RequestBuyer.FileName" type="text" class="form-control" placeholder="Enter Buyer Name" />*@
+                                                <span asp-validation-for="RequestTeam.SortCode" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label asp-for="RequestTeam.Expertise">
+                                                        Expertise
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                    <input readonly asp-for="RequestTeam.Expertise" type="text" class="form-control" placeholder="Enter Sort Expertise" />
+                                                @*<input asp-for="RequestBuyer.FileName" type="text" class="form-control" placeholder="Enter Buyer Name" />*@
+                                                <span asp-validation-for="RequestTeam.Expertise" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                   
+                                   
+                                </div>
+                                <div class="col-md-6">
+                                        
+                                            <div class="form-group">
+
+                                                <label asp-for="RequestTeam.File">
+                                                    Image
+                                                    <span class="text-danger">*</span>
+                                                </label>
+
+                                                <div class="container">
+                                                    <div class="wrapper-two">
+                                                        <div class="image">
+                                                        </div>
+                                                        <div class="content">
+                                                            <div class="icon">
+                                                                <i class="fas fa-cloud-upload-alt"></i>
+                                                            </div>
+                                                            <div class="text">
+                                                                No file chosen, yet!
+                                                            </div>
+                                                        </div>
+                                                        <div id="cancel-btn">
+                                                            <i class="fas fa-times"></i>
+                                                        </div>
+                                                        <div class="file-name">
+                                                            File name here
+                                                        </div>
+                                                    </div>
+                                                    <button type="button" onclick="defaultBtnActive()" id="custom-choose-file-btn">Choose a file</button>
+                                                    <input id="default-btn" type="file" asp-for="RequestTeam.File" style="opacity: 0;">
+                                                </div>
+                                                <br />
+
+                                                <span asp-validation-for="RequestTeam.File" class="text-danger"></span>
+
+
+                                            </div>
+                                       
+                                </div>
+                                </div>
+
+                            </div>
+
+
+
+
+                            <div class="card-footer">
+                                <a class="btn btn-outline-info" asp-page="/Admin/Team/Index">Back</a>
+                                <button type="submit" class="btn btn-info float-right">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- /.content -->
+</div>
+
+@section Scripts {
+
+    <script src="~/js/imageUpload.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-team").addClass("active-custom");
+
+        });</script>
+}

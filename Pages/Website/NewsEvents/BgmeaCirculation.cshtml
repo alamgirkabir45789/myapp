@@ -1,0 +1,115 @@
+﻿@page
+@model myportfolio.Pages.Website.NewsEvents.BgmeaCirculationModel
+@{ }
+
+
+
+<section class="home-slider js-halfheight owl-carousel">
+    @if (Model.Slider != null)
+    {
+        <div class="slider-item js-halfheight"
+             style=" background-image: url(/@Model.Slider.FilePath); ">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row slider-text justify-content-center align-items-center">
+                    <div class="col-md-7 col-sm-12 text-center ftco-animate js-halfheight-text">
+                        <h1 class="mb-3 mt-5 bread">BGMEA Circulation</h1>
+                        <p class="breadcrumbs">
+                            <span class="mr-2"><a href="/Index">Home</a></span><span>/ News & Events / BGMEA Circulation</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="slider-item js-halfheight"
+             style=" background-image: url(https://www.ecotextile.com/images/stories/2021/January/Garment_factory.jpg); ">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row slider-text justify-content-center align-items-center">
+                    <div class="col-md-7 col-sm-12 text-center ftco-animate js-halfheight-text">
+                        <h1 class="mb-3 mt-5 bread">BGMEA Circulation</h1>
+                        <p class="breadcrumbs">
+                            <span class="mr-2"><a href="/Index">Home</a></span><span>/ News & Events / BGMEA Circulation</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</section>
+
+<section class="ftco-section ftco-animate">
+    <h2 class="mb-4 text-center text-uppercase">BGMEA Circulation</h2>
+    <table class="table table-bordered table-hover table-striped container" id="data-table">
+        <thead>
+            <tr>
+                <th class="align-top" style="width: 15%">Publish Date</th>
+                <th class="align-top" style="width: 60%">Title</th>
+                <th class="align-top" style="width: 15%">Language</th>
+                <th class="align-top" style="width: 10%">Action</th>
+            </tr>
+        </thead>
+        <tbody class="circular-list-container">
+            @foreach (var item in Model.BgmeaCirculars)
+            {
+                <tr class="circular-list-container-item">
+                    <td>@item.PublishDate.ToString("dd-MMMM-yyyy")</td>
+                    <td>@item.CircularTitle</td>
+                    <td>@item.Language</td>
+                    <td>
+
+                        <a class="btn btn-info text-white" asp-page="./BgmeaCircularDetails" asp-route-id="@item.Id" title="Circular Details">
+                            <i class="fas fa-eye"></i> Details
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div id="gallery-pagination-container"></div>
+</section>
+
+@section Scripts{
+
+    <script src="~/js/jquery.simplePagination.js"></script>
+
+    <script type="text/javascript">
+        let galleryItems = $(".circular-list-container .circular-list-container-item");
+        let numItems = galleryItems.length;
+        let perPage = 10;
+
+        galleryItems.slice(perPage).hide();
+
+        $("#gallery-pagination-container").pagination({
+            items: numItems,
+            itemsOnPage: perPage,
+            prevText: "<",
+            nextText: ">",
+            onPageClick: function (pageNumber) {
+                let showFrom = perPage * (pageNumber - 1);
+                let showTo = showFrom + perPage;
+                galleryItems.hide().slice(showFrom, showTo).show();
+            },
+        });
+    </script>
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#news-menu-big-screen").addClass("active");
+            $("#news-menu-small-screen").addClass("active");
+
+
+
+
+
+
+        });</script>
+
+}

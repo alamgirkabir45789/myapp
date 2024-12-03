@@ -1,0 +1,126 @@
+﻿@*@model IndexModel;*@
+@inject myportfolio.Model.ApplicationDbContext _Context
+
+@{
+
+    //var mediaGallery = _Context.MediaGallery.ToList();
+    var mediaGallery = _Context.MediaGallery.Where(x => x.FileType == ".jpg" || x.FileType == ".png" || x.FileType ==
+    ".jpeg").OrderBy(r => Guid.NewGuid()).Take(6);
+
+}
+<style>
+    .footerGallery {
+        width: 130px;
+        height: 110px;
+        border: 1px solid #1078cd;
+        /*box-shadow: 1px 0px 5px;*/
+        aspect-ratio: attr(width) / attr(height);
+    }
+</style>
+
+<!-- Footer Start -->
+<div class="container-fluid bg-primary text-light footer wow fadeIn" data-wow-delay="0.1s">
+    <div class="container py-5 px-lg-5">
+        <div class="row g-5">
+            <div class="col-md-6 col-lg-4">
+                <p class="section-title text-white h5 mb-4">Address<span></span></p>
+
+                <p>
+                    <i class="fa fa-map-marker-alt me-3"></i>Jhikra,Bagmara, Rajshahi, Bangladesh.
+                    @*<br />*@
+                    <ul style="list-style-type:none;line-height:inherit.5rem;">
+                        <li>
+
+                        </li>
+                    </ul>
+                </p>
+                <p><i class="fa fa-phone-alt me-3"></i>+088 01745 425498</p>
+                <p><i class="fa fa-phone-alt me-3"></i>+088 01892 950630</p>
+                <p><i class="fa fa-envelope me-3"></i>alamgirkabir45789@gmail.com </p>
+                <div class="d-flex pt-2">
+                    <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-outline-light btn-social" href="https://www.facebook.com/alamgirkabir45789/"
+                       target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-outline-light btn-social"
+                       href="https://github.com/alamgirkabir45789?tab=repositories" target="_blank">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a class="btn btn-outline-light btn-social"
+                       href="https://www.linkedin.com/in/alamgir-kabir-38232b128/" target="_blank">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <p class="section-title text-white h5 mb-4">Quick Link<span></span></p>
+                <a class="btn btn-link" href="~/Website/About/History">About Us</a>
+                <a class="btn btn-link" href="~/Website/Contact/ContactUs">Contact Us</a>
+                @* <a class="btn btn-link" href="~/Website/Resources/Gallery">Gallery</a> *@
+                <a class="btn btn-link" href="~/alamgir kabir.pdf" target="_blank">Download Resume</a>
+                @* <a class="btn btn-link" href="~/Website/Career/JobCircular">Current Vacancies</a> *@
+            </div>
+           @*  <div class="col-md-6 col-lg-3">
+                <p class="section-title text-white h5 mb-4">Gallery<span></span></p>
+                <div class="row g-1 ">
+                    @foreach (var item in mediaGallery)
+                    {
+                        if (item.FileType == ".jpg" || item.FileType == ".png" || item.FileType == ".jpeg")
+                        {
+                            <div class="col-4 ">
+                                <img class="img-fluid footerGallery" src="/@item.FilePath" alt="Image">
+                            </div>
+                        }
+                    }
+                </div>
+            </div> *@
+            <div class="col-md-6 col-lg-4">
+                <p class="section-title text-white h5 mb-4">Newsletter<span></span></p>
+                <p>Be the first to find out about exclusive deals, the latest Lookbooks, and top trends.</p>
+                <div class="position-relative w-100 mt-3">
+                    <form autocomplete="off">
+                        <input id="txt-footer-subscribe-email" name="email" autocomplete="off"
+                               class="form-control border-0 rounded-pill w-100 ps-4 pe-5" type="text"
+                               placeholder="Your Email" style="height: 48px;">
+                        <button type="button" onclick="SubscribePost()"
+                                class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2">
+                            <i class="fa fa-paper-plane text-primary fs-4" id="subscribeBtn"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container px-lg-5">
+        <div class="copyright">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    &copy;
+                    <script>document.write(new Date().getFullYear());</script> <a href="#">Alamgir Kabir Portfolio</a>,
+                    All Right Reserved.
+
+                    <br><br>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <div class="footer-menu">
+                        <a href="#">
+                            <i class="fa fa-globe" aria-hidden="true"></i>
+                            Research
+                        </a>
+                        <a href="#">
+                            <i class="fa fa-server" aria-hidden="true"></i>
+                            Innovation
+                        </a>
+                        <a href="#">
+                            <i class="fa fa-life-ring" aria-hidden="true"></i>
+                            Optimization
+                        </a>
+                        <a href="#">
+                            <i class="fa fa-database" aria-hidden="true"></i><span style="margin-left:5px">Normalization</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer End -->

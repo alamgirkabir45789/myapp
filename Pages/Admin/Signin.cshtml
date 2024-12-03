@@ -1,0 +1,71 @@
+﻿@page "/Signin"
+@model myportfolio.Pages.Admin.SigninModel
+@{ ViewData["Title"] = "Sign In";
+    Layout = ""; }
+
+<link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
+
+
+
+<link rel="stylesheet" href="~/dist/css/adminlte.min.css?v=3.2.0">
+
+<div class="login-page">
+
+
+    <div class="login-box">
+
+        <div class="card card-outline card-primary">
+            <div class="card-header text-center">
+                <a class="h1" style="font-size:1.5rem"><b>Alamgir KabirPortfolio</b></a>
+            </div>
+            <div class="card-body">
+                <p class="login-box-msg">Sign in to start your session</p>
+                <form method="post">
+                    <div class="input-group mb-3">
+                        <input type="email" asp-for="Model.Email" class="form-control" placeholder="example@sample.com" />
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                        <br />
+
+                    </div>
+                    <span asp-validation-for="Model.Email" class="text-danger"></span>
+
+                    <div class="input-group mb-3">
+                        <input type="password" asp-for="Model.Password" class="form-control" placeholder="*********" />
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <span asp-validation-for="Model.Password" class="text-danger"></span>
+                    <div class="row align-items-baseline">
+                        <div class="col-8">
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" asp-for="Model.RememberMe" class="form-check-input" />
+                                <label class="form-check-label" asp-for="Model.RememberMe">Remember Me?</label>
+                            </div>
+                        </div>                       
+
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        </div>
+                    </div>
+                    <div>
+
+                        <a asp-page="./ForgotPassword">Forgot Password</a>
+                    </div>
+                </form>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

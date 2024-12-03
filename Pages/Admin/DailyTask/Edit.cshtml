@@ -1,0 +1,209 @@
+﻿@page
+@model myportfolio.Pages.Admin.DailyTask.EditModel
+@using Microsoft.AspNetCore.Identity
+@{
+    ViewData["Title"] = "Edit Task";
+}
+<link href="~/plugins/clockpicker/dist/bootstrap-clockpicker.css" rel="stylesheet" />
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Daily Task</h3>
+                        </div>
+                        <form method="post">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="DailyTaskReques.Id" />
+                            <input type="hidden" asp-for="DailyTaskReques.Name" />
+                            <input type="hidden" asp-for="DailyTaskReques.UserId" />
+                            <input type="hidden" asp-for="DailyTaskReques.IsHoliday" />
+               
+                            <input type="hidden" asp-for="DailyTaskReques.Key" />
+                            <input type="hidden" asp-for="DailyTaskReques.CreatedAt" />
+                            <input type="hidden" asp-for="DailyTaskReques.CreatedBy" />
+                            <input type="hidden" asp-for="DailyTaskReques.WorkingProject" id="workingProject" />
+
+                            <div class="card-body">
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="row ">
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            <div class="col-md-6 col-sm-12 ">
+                                                <div class="form-group">
+                                                    <label asp-for="DailyTaskReques.SubmitDate">
+                                                        Reporting Date
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input type="text" asp-for="DailyTaskReques.SubmitDate" value="@Model.DailyTaskReques.SubmitDate" autocomplete="off" readonly class="form-control datepicker" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label asp-for="DailyTaskReques.Name">
+                                                        Name
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input type="text" asp-for="DailyTaskReques.Name" disabled class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
+                                                    <label asp-for="DailyTaskReques.InTime" class="control-label">In Time</label>
+                                                    <input asp-for="DailyTaskReques.InTime"  type="text" class="form-control" required id="inTime" onchange="handChangeIntime()">
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-time"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
+                                                    <label asp-for="DailyTaskReques.OutTime" class="control-label">Out Time</label>
+                                                    <input asp-for="DailyTaskReques.OutTime" type="text" class="form-control" id="outTime" required >
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-time"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-md-6 col-sm-12 ">
+                                                <div class="form-group">
+                                                    <label asp-for="DailyTaskReques.SubmitDate">
+                                                        Reporting Date
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input type="text" asp-for="DailyTaskReques.SubmitDate" disabled value="@Model.DailyTaskReques.SubmitDate" autocomplete="off" readonly class="form-control datepicker" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label asp-for="DailyTaskReques.Name">
+                                                        Name
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <input type="text" asp-for="DailyTaskReques.Name" disabled class="form-control" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="form-group">
+                                                    <label asp-for="DailyTaskReques.InTime" class="control-label">In Time</label>
+                                                    <input asp-for="DailyTaskReques.InTime" disabled type="time" class="form-control" />
+                                                    <span asp-validation-for="DailyTaskReques.InTime" class="text-danger"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label asp-for="DailyTaskReques.OutTime" class="control-label">Out Time</label>
+                                                    <input asp-for="DailyTaskReques.OutTime" disabled type="time" value="@Model.DailyTaskReques.OutTime" class="form-control" />
+                                                    <span asp-validation-for="DailyTaskReques.OutTime" class="text-danger"></span>
+                                                </div>
+                                            </div>
+
+                                        }
+
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label >
+                                                    Project
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <select id="multiSelect" onchange="handleSelect()" class="form-control statesSelect group" style="width:100%;" required multiple asp-items="@ViewBag.ReportedProject">
+                                                </select>
+                            
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label asp-for="DailyTaskReques.Description">
+                                                    Description
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <textarea rows="1" asp-for="DailyTaskReques.Description" type="text" required class="form-control" placeholder="Enter  Name"></textarea>
+                                                <span asp-validation-for="DailyTaskReques.Description" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                         
+                            <div class="card-footer">
+                                <a class="btn btn-outline-info" asp-page="/Admin/DailyTask/Index">Back</a>
+                                <button type="submit" id="btnSave" class="btn btn-info float-right">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- /.content -->
+</div>
+
+@section Scripts {
+    @*Sweet Alert*@
+    <script src="~/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="~/plugins/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/plugins/sweetalert2/sweetalert2.js"></script>
+    @*Sweet Alert*@
+
+    <script src="~/plugins/clockpicker/js/bootstrap.min.js"></script>
+    <script src="~/plugins/clockpicker/dist/bootstrap-clockpicker.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-daily-task").addClass("active-custom");           
+            $('.clockpicker').clockpicker({
+                
+            });
+
+            $(".statesSelect").select2({
+                theme: "bootstrap-5",
+                tags: true,
+                //placeholder: "Select Project"
+            });
+
+            var project = $("#workingProject").val().split(",");         
+            $("#multiSelect").val(project).change();
+
+          
+
+            $("#btnSave").click(function(){
+
+                var modifiedSelectedValue = handleSelect();
+                $("#workingProject").val(modifiedSelectedValue);
+            })
+
+        });
+     
+        function handleSelect(e){
+         
+          var data=  $("#multiSelect :selected").map(function (i, el) {
+                return $(el).val();
+            }).get();
+            console.log(data);
+            return data;
+         
+        }
+
+        function handChangeIntime(e) {
+            var inTime = $("#inTime").val();
+            var currentTime = new Date();
+            var time = currentTime.getHours() + ":" + currentTime.getMinutes();
+
+            if (inTime > time) {
+                $("#inTime").val("09:45");               
+                Swal.fire("In time is not valid!", "Please provide valid time!", "error");
+            }
+        }
+      
+    </script>
+}

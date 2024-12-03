@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+@await Html.PartialAsync("_Site_Head")
+@await RenderSectionAsync("Style", required: false)
+
+<body>
+    <div class="container-xxl bg-white p-0">
+
+        @await Html.PartialAsync("_Site_Spinner")
+        
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+            @await Html.PartialAsync("_Site_Menu")
+        </div>
+        <!-- Navbar & Hero End -->
+        @*<partial name="_Notification"></partial>*@
+
+        @RenderBody()
+        
+        @await Html.PartialAsync("_Site_Footer")
+        
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-secondary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    @await Html.PartialAsync("_Site_Script")
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+
+</html>

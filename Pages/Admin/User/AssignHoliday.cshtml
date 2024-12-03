@@ -1,0 +1,142 @@
+﻿@page
+@model myportfolio.Pages.Admin.User.AssignHolidayModel
+@using myportfolio.Model.Entity.User
+@{
+    ViewData["Title"] = "Assign Holiday";
+
+}
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Manage Holiday</h3>
+                        </div>
+                        <form method="post">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            @*<input type="hidden" asp-for="@Model.assignHolidayRequests" id="hList"/>*@
+                            <input type="hidden" id="holidayStatus" name="holidayStatus" />
+                            <div class="card-body">
+
+                                <div class="col-md-12 col-sm-12">
+                                    <div class="row ">
+                                       
+                                        <div class="col-md-6 col-sm-12 ">
+                                            <div class="form-group">
+                                                <label>Assign/Remove Holiday<span class="text-danger">*</span></label>
+                                                <select required class="form-control" id="holiday" >
+                                                    <option value="0">Select Leave Type</option>
+                                                    <option value="1">Assign Holiday</option>
+                                                    <option value="2">Remove Holiday</option>
+
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="DailyTaskReques.SubmitDate">
+                                                    Date
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <input type="text" asp-for="DailyTaskReques.SubmitDate" id="submitDate" autocomplete="off" class="form-control datepicker" />
+                                                <span asp-validation-for="DailyTaskReques.SubmitDate" class="text-danger"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="DailyTaskReques.Description">
+                                                    Description
+                                                    <span class="text-danger">*</span>
+                                                </label>
+                                                <textarea rows="5" asp-for="DailyTaskReques.Description" id="description" type="text" class="form-control"  placeholder="Write Description"></textarea>
+                                                <span asp-validation-for="DailyTaskReques.Description" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4 offset-md-2 col-sm-12">
+                                            <label>
+                                                <input type="checkbox" id="chkVal" onclick="checkAll()" />Select All
+
+                                            </label>
+
+                                            @for (int i = 0; i < Model.assignHolidayRequests.Count; i++)
+                                            {
+                                                <div class="form-group form-check">
+                                                    <input type="hidden" asp-for="@Model.assignHolidayRequests[i].UserId" />
+
+                                                    <input type="hidden" asp-for="@Model.assignHolidayRequests[i].UserName" />
+                                                    <input type="hidden" asp-for="@Model.assignHolidayRequests[i].IsSelected" class="form-check-input" name="@Model.assignHolidayRequests[i].IsSelected" />
+                                                    <label class="form-check-label" asp-for="@Model.assignHolidayRequests[i].IsSelected">
+                                                        @*<input class="form-check-input childItem"  asp-for="@Model.assignHolidayRequests[i].IsSelected" name="childItem" id="test-@Model.assignHolidayRequests[i].UserId" />  @Model.assignHolidayRequests[i].UserName*@
+                                                        <input class="form-check-input childItem" asp-for="@Model.assignHolidayRequests[i].IsSelected" id="test-@Model.assignHolidayRequests[i].UserId" onclick="handleCheckSingle(@Model.assignHolidayRequests[i].UserId)" />  @Model.assignHolidayRequests[i].UserName
+                                                    </label>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <a class="btn btn-outline-info" asp-page="/Admin/DailyTask/Index">Back</a>
+                                <button type="submit" id="btnSave" class="btn btn-info float-right">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- /.content -->
+</div>
+<style>
+    .example {
+        font-style: italic;
+    }
+</style>
+
+@section Scripts {
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-configuration").addClass("menu-open");
+            $("#menu-assign-holiday").addClass("active-custom");
+            $(".datepicker").datepicker("setDate", new Date());
+
+            $("#holiday").on("change",function(){
+                var responseId = $(this).val();
+                if(responseId==1){
+                  $("#holidayStatus").val(true);
+                    $("#description").prop("disabled", false);
+                }else{
+                    $("#holidayStatus").val(false);
+                    $("#description").prop("disabled", true);
+                }
+            })
+        });
+        function checkAll() {
+            var checked = $('#chkVal').is(':checked');
+            if (checked) {
+                $('.childItem').prop("checked", true);
+               
+            } else {
+                $('.childItem').prop("checked", false);
+              
+            }
+        }
+        function handleCheckSingle(id) {
+            var checked = $(".childItem").is(':checked');
+            console.log(checked)
+        }
+        //function holidayStatusChange(){
+        //   // var servcies = $("#ddlProductService option:selected").text();
+        //   console.log("hi")
+        //}
+
+    </script>
+}

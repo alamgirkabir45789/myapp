@@ -1,0 +1,201 @@
+﻿@page
+@model myportfolio.Pages.Admin.QueryMessage.IndexModel
+
+@{
+    ViewData["Title"] = "Query Messages";
+}
+
+
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+                <form method="post" id="submitForm">
+            <div class="row">
+                <div class="col-12">
+                  
+                     
+                        <div class="card card-outline card-tabs">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="fa fa-envelope"></i> Query Message
+                                </h3>
+
+                                <button type="button" class="btn btn-danger" style="float:right;" id="deleteBtn" disabled onclick="ValidateFormSubmit()">Delete</button>
+                            </div>
+
+                            <div class="card-header p-0 pt-1 border-bottom-0">
+                                <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="true">Un Read Message <span class="badge badge-danger">@Model.Query.Where(x => x.IsRead == false).Count()</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="custom-tabs-three-home-tab" data-toggle="pill" href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home" aria-selected="false">Read Message</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="tab-content" id="custom-tabs-three-tabContent">
+
+                                    <div class="tab-pane fade table-responsive" id="custom-tabs-three-home" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
+                                        <table id="data-table" class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <input type="checkbox" id="selectAllUnread" onclick="SelectAllUnread()" />
+                                                    </th>
+                                                    <th>Name</th>
+                                                    <th>Email</th>
+                                                    <th>Phone</th>
+                                                    <th>Subject</th>
+                                                    <th>Message</th>
+
+
+                                                    <th style="width: 10%; text-align: center">
+                                                        Actions
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model.Query.Where(x => x.IsRead == true))
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            <input type="checkbox" value="@item.Id" class="queryMessageIdUnread" name="queryMessageIds" id="queryMessageIds-@item.Id" onclick="SelectThis(@item.Id)" />
+                                                        </td>
+                                                        <td>@item.FullName</td>
+                                                        <td>@item.Email</td>
+                                                        <td>@item.PhoneNo</td>
+                                                        <td>@item.Subject</td>
+                                                        <td>@item.Message</td>
+
+
+                                                        <td class="text-center">
+                                                            <a class="btn btn-primary text-white px-1 py-0" asp-page="./Details" asp-route-isRead="read" asp-route-id="@item.Id" title="View Message">
+                                                                <i class="fas fa-eye"></i>
+                                                            </a>
+
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div class="tab-pane fade active show table-responsive" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
+                                        <table id="data-table-two" class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        <input type="checkbox" id="selectAllRead" onclick="SelectAllRead()" />
+                                                    </th>
+                                                    <th>Name</th>
+                                                    <th>Email</th>
+                                                    <th>Phone</th>
+                                                    <th>Subject</th>
+                                                    <th>Message</th>
+
+                                                    <th style="width: 10%; text-align: center">
+                                                        Actions
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model.Query.Where(x => x.IsRead == false))
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            <input type="checkbox" value="@item.Id" class="queryMessageIdRead" name="queryMessageIds" id="queryMessageIds-@item.Id" onclick="SelectThis(@item.Id)" />
+                                                        </td>
+                                                        <td>@item.FullName</td>
+                                                        <td>@item.Email</td>
+                                                        <td>@item.PhoneNo</td>
+                                                        <td>@item.Subject</td>
+                                                        <td>@item.Message</td>
+                                                        <td class="text-center">
+                                                            <a class="btn btn-primary text-white px-1 py-0" asp-page="./Details" asp-route-isRead="unread" asp-route-id="@item.Id" title="View Message">
+                                                                <i class="fas fa-eye"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                   
+                </div>
+            </div>
+                </form>
+        </div>
+    </section>
+
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+@section Scripts{
+    <script src="~/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-message").addClass("active-custom");
+        });
+
+        function SelectAllRead() {
+            var checked = $('#selectAllRead').is(':checked');
+            if (checked) {
+                $("#deleteBtn").attr('disabled', false);
+                $('.queryMessageIdRead').prop("checked", true);
+            } else {
+                $("#deleteBtn").attr('disabled', true);
+                $('.queryMessageIdRead').prop("checked", false);
+            }
+        }
+
+        function SelectAllUnread() {
+            var checked = $('#selectAllUnread').is(':checked');
+            if (checked) {
+                $("#deleteBtn").attr('disabled', false);
+                $('.queryMessageIdUnread').prop("checked", true);
+            } else {
+                $("#deleteBtn").attr('disabled', true);
+                $('.queryMessageIdUnread').prop("checked", false);
+            }
+        }
+
+        function SelectThis(id) {
+            var checked = $('#queryMessageIds-' + id).is(':checked');
+            console.log(checked)
+            if (checked) {
+                $("#deleteBtn").attr('disabled', false);
+            } else {
+                var checkBoxRead = $('.queryMessageIdRead').is(':checked');
+                var checkBoxUnread = $('.queryMessageIdUnread').is(':checked');
+                if (!checkBoxRead && !checkBoxUnread) {
+                    $("#deleteBtn").attr('disabled', true);
+                }
+            }
+        }
+
+        function ValidateFormSubmit() {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#submitForm").submit();
+                }
+            })
+        }
+    </script>
+}
+

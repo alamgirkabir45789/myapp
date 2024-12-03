@@ -1,0 +1,419 @@
+﻿@page
+@model myportfolio.Pages.Website.About.ManagementModel
+@{
+}
+
+
+
+<div class="container-xxl position-relative p-0">
+    <div class="container-xxl py-5 bg-primary hero-header">
+        <div class="container my-5 py-5 px-lg-5">
+            <div class="row g-5 py-5">
+                <div class="col-12 text-center">
+                    <h1 class="text-white animated slideInDown">About Us</h1>
+                    <hr class="bg-white mx-auto mt-0" style="width: 90px;">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
+                            @*<li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>*@
+                            <li class="breadcrumb-item text-white active" aria-current="page">About</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- About Start -->
+<div class="container-xxl py-5">
+    <div class="container py-5 px-lg-5">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                @*<p class="section-title text-secondary">  Managing Director's Message<span></span></p>*@
+                <h1 class="mb-5">Managing Director's Message </h1>
+                <p class="mb-4">Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit clita duo justo eirmod magna dolore erat amet</p>
+                <div class="md-message-body ftco-animate text-justify">
+                    <p>
+                        In the current process of widespread globalization, we in RDM understand that meeting our customer's requirement is essential to the success of our organization. We can say that the years we experienced in the past are significant years and it is clearly seen that we have intensively delivered our best performance to focus on customer satisfaction.
+                    </p>
+                    <p>
+                        On behalf of the Board of Directors, I would like to thank our valuable customers and world-class suppliers. Besides, I would like to make a special mention of our staffs’ and workers’ enthusiastic contribution in establishing our organization. The one thing I would like to present is that our leadership is a result of our employees. They have clearly made RDM one of the outstanding organizations. We know our highly trained technician and worker apply their specialized knowledge to reliably and efficiently produce high quality service.
+                    </p>
+
+                    <p>
+                        We are now in an ever-changing market environment. In such situation, we firmly believe that “trust” is the key element in persuading customers to choose our service and quality products. We totally accept that “trust” can create a “Win-Win Situation” for a long deeper relationship. We will continue our endless effort to serve our valuable customers.
+                    </p>
+@*
+                    <p>
+                        In addition, we in RDM will intensively endeavor in environmental awareness for the purpose of preventing from climate changes and resources depletion. We are committed to preservation of the environment we live in. So in summary, I would like to thank again all those who have contributed relentless hard work and effort of the past to bring up here today and will continue to grow for years to come.
+                    </p>*@
+                </div>
+                <div class="md-message-footer ftco-animate">
+                    <h2>
+                        Mostafa Sarwar Riyadh
+
+                    </h2>
+                    <p>
+                        Managing Director
+
+                    </p>
+                </div>
+               
+                @*<a href="#" class="btn btn-primary py-sm-3 px-sm-5 rounded-pill mt-3">Read More</a>*@
+            </div>
+            <div class="col-lg-6">
+                <img class="img-fluid wow zoomIn" data-wow-delay="0.5s" src="~/images/management/MD_MostafaSarwarRiyad.jpg">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About End -->
+
+@*<section class="home-slider js-halfheight owl-carousel">
+
+
+    @if (Model.Slider != null)
+    {
+        <div class="slider-item js-halfheight"
+             style=" background-image: url(/@Model.Slider.FilePath); ">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row slider-text justify-content-center align-items-center">
+                    <div class="col-md-7 col-sm-12 text-center ftco-animate js-halfheight-text">
+                        <h1 class="mb-3 mt-5 bread">About Us</h1>
+                        <p class="breadcrumbs">
+                            <span class="mr-2"><a href="/Index">Home</a></span><span>/ About US / Our Team</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="slider-item js-halfheight"
+             style="background-image: url(https://www.ecotextile.com/images/stories/2021/January/Garment_factory.jpg);">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row slider-text justify-content-center align-items-center">
+                    <div class="col-md-7 col-sm-12 text-center ftco-animate js-halfheight-text">
+                        <h1 class="mb-3 mt-5 bread">About Us</h1>
+                        <p class="breadcrumbs">
+                            <span class="mr-2"><a href="/Index">Home</a></span><span>/ About US / Our Team</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+
+</section>
+
+
+
+<section class="ftco-section pt-5 mt-3 pb-0">
+    <div class="">
+
+        <div class="md-message-container">
+            <div class="md-image ftco-animate">
+                <img src="~/images/management/MD_MostafaSarwarRiyad.jpg" alt="Alternate Text" />
+            </div>
+            <div class="md-message ftco-animate">
+                <div class="md-message-header ">
+                  
+                    Managing Director's Message
+                </div>
+                <div class="md-message-body ftco-animate text-justify">
+                    <p>
+                        In the current process of widespread globalization, we in RDM understand that meeting our customer's requirement is essential to the success of our organization. We can say that the years we experienced in the past are significant years and it is clearly seen that we have intensively delivered our best performance to focus on customer satisfaction.
+                    </p>
+                    <p>
+                        On behalf of the Board of Directors, I would like to thank our valuable customers and world-class suppliers. Besides, I would like to make a special mention of our staffs’ and workers’ enthusiastic contribution in establishing our organization. The one thing I would like to present is that our leadership is a result of our employees. They have clearly made RDM one of the outstanding organizations. We know our highly trained technician and worker apply their specialized knowledge to reliably and efficiently produce high quality service.
+                    </p>
+
+                    <p>
+                        We are now in an ever-changing market environment. In such situation, we firmly believe that “trust” is the key element in persuading customers to choose our service and quality products. We totally accept that “trust” can create a “Win-Win Situation” for a long deeper relationship. We will continue our endless effort to serve our valuable customers.
+                    </p>
+
+                    <p>
+                        In addition, we in RDM will intensively endeavor in environmental awareness for the purpose of preventing from climate changes and resources depletion. We are committed to preservation of the environment we live in. So in summary, I would like to thank again all those who have contributed relentless hard work and effort of the past to bring up here today and will continue to grow for years to come.
+                    </p>
+                </div>
+                <div class="md-message-footer ftco-animate">
+                    <h2>
+                        Mostafa Sarwar Riyadh
+
+                    </h2>
+                    <p>
+                        Managing Director
+
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<hr />*@
+
+@*<section class="ftco-section pt-5">
+    <div class="container">
+
+        <div class="row justify-content-center mb-3 pb-2">
+            <div class="col-md-12 ftco-animate fadeInUp ftco-animated">
+                <h2 class="mb-4 text-center text-uppercase header-text ftco-animate">Meet Our Management</h2>
+            </div>
+        </div>
+
+        <div class="management-container">
+            <div class="manangement-item ftco-animate">
+                <div class="management-img">
+                    <img src="~/images/management/ChairmanRakibulAlamChowdhury.png" alt="Alternate Text" />
+                </div>
+                <div class="management-info">
+                    <h2 class="management-name">Rakibul Alam Chowdhury</h2>
+                    <h2 class="management-designation-text">Chairman</h2>
+
+                    <h2 class="management-message text-justify">After Completing Master degree in Commerce, Mr. Rakibul Alam Chowdhury commenced his entrepreneurial career 2001 with apparel industry ‘HKC Apparels Ltd’. In a few years’ time he garnered ample of expertise and knowledge about the Ready Made Garments (RMG) sector... <span><a class="management-learn-more" data-toggle="modal" data-target="#modalRakibulAlamChy">Read More</a></span></h2>
+
+                </div>
+            </div>
+
+            <div class="manangement-item ftco-animate">
+                <div class="management-img">
+                    <img src="~/images/management/ManagingDirectorMostafaSarwarRiyadh.jpg" alt="Alternate Text" />
+                </div>
+                <div class="management-info">
+                    <h2 class="management-name">Mostafa Sarwar Riyadh</h2>
+                    <h2 class="management-designation-text">Managing Director</h2>
+
+                    <h2 class="management-message text-justify">
+                        Mr. Mostafa Sarwar Riyadh, Completing Bachelor of Engineering from prestigious BMS College of Engineering in 2005, worked as DATA COMMUNICATION engineer in telecom industry, but as a member of Business family Mr. Mostafa Sarwar Riyadh started Apparels Business...<span><a class="management-learn-more" data-toggle="modal" data-target="#modalMostafaSarwarRiyadh">Read More</a></span>
+                    </h2>
+
+
+                </div>
+            </div>
+
+            <div class="manangement-item ftco-animate">
+                <div class="management-img">
+                    <img src="~/images/management/DirectorMostafaKamalManik.jpg" alt="Alternate Text" />
+                </div>
+                <div class="management-info">
+                    <h2 class="management-name">Mostafa Kamal Manik</h2>
+                    <h2 class="management-designation-text">Director</h2>
+
+                    <h2 class="management-message text-justify">Joined Business in 1996 after graduating, since then Mr Mostafa Kamal Manik has been doing business and leading the group in Indenting, Import and retail business in Chittagong. Since his inception in business with his hard work and leader ship skills, he diversified the suppliers...<span><a class="management-learn-more" data-toggle="modal" data-target="#modalMostafaKamalManik">Read More</a></span> </h2>
+
+                </div>
+            </div>
+
+            <div class="manangement-item ftco-animate">
+                <div class="management-img">
+                    <img src="~/images/management/DirectorMostafaMonowarRahat.jpg" alt="Alternate Text" />
+                </div>
+                <div class="management-info">
+                    <h2 class="management-name">Mostafa Monowar Rahat</h2>
+                    <h2 class="management-designation-text">Director</h2>
+
+                    <h2 class="management-message text-justify">Born in Business family and after completing his graduation in 2008, he Joined business and initially gained experience from apparels business, then in to retails and import business in Jubilee road, With his experience in Apparels and retails he established the Apparels Retail chain...<span><a class="management-learn-more" data-toggle="modal" data-target="#modalMostafaMonowarRahat">Read More</a></span></h2>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+</section>
+*@
+
+<!-- Modal Rakibul Alam Chowdhury -->
+@*<div class="modal fade" id="modalRakibulAlamChy" tabindex="-1" role="dialog" aria-labelledby="modalRakibulAlamChyLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="management-name">Rakibul Alam Chowdhury <span class="management-designation-text">(Chairman)</span></h2>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="manangement-item ftco-animate">
+                    <div class="management-img">
+                        <img src="~/images/management/ChairmanRakibulAlamChowdhury.png" alt="Alternate Text" />
+                    </div>
+                    <div class="management-info">
+
+                        <h2 class="management-message text-justify mb-2">After Completing Master degree in Commerce, Mr. Rakibul Alam Chowdhury commenced his entrepreneurial career 2001 with apparel industry ‘HKC Apparels Ltd’. In a few years’ time he garnered ample of expertise and knowledge about the Ready Made Garments (RMG) sector and established 6 factories. </h2>
+
+                        <h2 class="management-message text-justify mb-2">Mr. Rakibul Alam Chowdhury being a visionary witnessed the emergence of IT globally. He anticipated this change Bangladesh in late 2000s. Hence took the initiative of establishing one of the BPO Company of this country Data Exchange in 2002. Under Mr. Rakib’s well steered direction, Data Exchange has won several accolades including the prestigious award. </h2>
+
+                        <h2 class="management-message text-justify mb-2">Mr. Rakibul Alam Chowdhury a serial entrepreneur has a strong presence in number of industries. He occupies position in the board of RDM Group and several others. His resourceful mindset and goodwill are appreciated at home and abroad. He is actively associated with several charity, social and religious organizations and currently serving as the Vice-President of Bangladesh Garment Manufacturer and Exporter Association (BGMEA).  He is a member of Chittagong Seniors’ Club Limited also.</h2>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+*@
+
+
+
+<!-- Modal Mostafa Sarwar Riyadh -->
+@*<div class="modal fade" id="modalMostafaSarwarRiyadh" tabindex="-1" role="dialog" aria-labelledby="modalMostafaSarwarRiyadh" aria-hidden="true">
+    <div class="modal-dialog modal-lg " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="management-name">Mostafa Sarwar Riyadh <span class="management-designation-text">(Managing Director)</span></h2>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="manangement-item ftco-animate">
+                    <div class="management-img">
+                        <img src="~/images/management/ManagingDirectorMostafaSarwarRiyadh.jpg" alt="Alternate Text" />
+                    </div>
+                    <div class="management-info">
+
+                        <h2 class="management-message text-justify mb-2"><b>Mr. Mostafa Sarwar Riyadh,</b>  Completing Bachelor of Engineering from prestigious BMS College of Engineering in 2005, worked as <b>DATA COMMUNICATION</b>  engineer in telecom industry, but as a member of Business family Mr. Mostafa Sarwar Riyadh started Apparels Business in 2007 by setting up <b>RDM Apparels Ltd.</b>  Mr. Mostafa Sarwar Riyadh currently leading the apparels business as Managing Director of the group, which has 3 production facility in Chittagong. Under his dynamic leadership apparel business has been growing rapidly and also expanding more into apparels business with new textile and new production units. </h2>
+
+                        <h2 class="management-message text-justify mb-2">
+                            With his engineering background and also practical knowledge of working in Telecom Industry, He started his own software development Company <b>“Alamgir KabirPortfolio Ltd”,</b>  which is currently one of the pioneers in providing ERP solution & HR Solution for RMG industry. With his visionary approach, and Bangladesh government’s policy support he saw the potential in Agro sector and stared RDM Group’s Agro venture named <b>“UNI CHEM Agro Ltd”.</b>  Currently UNI CHEM agro LTD is one of the largest Agro farm in Chittagong.
+
+                        </h2>
+
+
+                        <h2 class="management-message text-justify mb-2">
+
+                            He is a great socializer and actively associated with several social and charity organization. He is a member of The Chittagong Club, Chittagong Riffle Club and also a life member of The <b>Engineers Institution of Bangladesh.</b>  He also served as Chairman of different standing committees of <b>BGMEA.</b>
+
+                        </h2>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+*@
+
+
+
+<!-- Modal Mostafa Kamal Manik -->
+@*<div class="modal fade" id="modalMostafaKamalManik" tabindex="-1" role="dialog" aria-labelledby="modalMostafaKamalManik" aria-hidden="true">
+    <div class="modal-dialog modal-lg " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="management-name">
+                    Mostafa Kamal Manik <span class="management-designation-text">(Director)</span>
+                </h2>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="manangement-item ftco-animate">
+                    <div class="management-img">
+                        <img src="~/images/management/DirectorMostafaKamalManik.jpg" alt="Alternate Text" />
+                    </div>
+                    <div class="management-info">
+
+                        <h2 class="management-message text-justify mb-2">Joined Business in 1996 after graduating, since then Mr Mostafa Kamal Manik has been doing business and leading the group in Indenting, Import and retail business in Chittagong. Since his inception in business with his hard work and leader ship skills, he diversified the suppliers base in abroad. Currently he is working as a agent for 25 companies of different origin such as China, Korea, Thailand and Taiwan. He is great socializer and very well known in Chittagong.  </h2>
+
+                        <ol class="font-weight-bold m-0 p-0">
+                            <li>Member of Shaheen Golf and Country Club.</li>
+                            <li>Member of Chittagong Seniors Club Ltd.</li>
+                            <li>Life member of Chittagong Maa-o- Shishu Hospital.</li>
+                            <li>Member of Chittagong Khulshi Club.</li>
+                            <li>Former General Secretary of Bangladesh Fish Firm Owner Association.</li>
+                            <li>Member of Rubber Plantation Owners Association.</li>
+                            <li>Lifetime member of Chattogram Public School & College, Chittagong Cantonment.</li>
+                            <li>Member of Bangladesh Indenting Agent Association.</li>
+                            <li>Member of Chattogram Chamber & Commerce Association.</li>
+                            <li>Member of Lions International Limited, (Green City Chattogram District 315, Bangladesh).</li>
+                            <li>Life member of Jubilee Merchant Association.</li>
+                            <li>Member of Bangladesh Agriculture Machinery Merchant Association.</li>
+                            <li>Member of Merul Knacha Bazar Traders Association, Rampura, Dhaka.</li>
+
+
+
+                        </ol>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+*@
+
+
+<!-- Modal Mostafa Monowar Rahat -->
+@*<div class="modal fade" id="modalMostafaMonowarRahat" tabindex="-1" role="dialog" aria-labelledby="modalMostafaMonowarRahat" aria-hidden="true">
+    <div class="modal-dialog modal-lg " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="management-name">
+                    Mostafa Monowar Rahat <span class="management-designation-text">(Director)</span>
+                </h2>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="manangement-item ftco-animate">
+                    <div class="management-img">
+                        <img src="~/images/management/DirectorMostafaMonowarRahat.jpg" alt="Alternate Text" />
+                    </div>
+                    <div class="management-info">
+
+                        <h2 class="management-message text-justify mb-2">Born in Business family and after completing his graduation in 2008, he Joined business and initially gained experience from apparels business, then in to retails and import business in Jubilee road, With his experience in Apparels and retails he established the Apparels Retail chain Mini Me in Chittagong, which has 3 outlets in Chittagong. He has been working in Retails and distribution for last 10 years. He is an experience and season person with great understanding of customer philosophy.  </h2>
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+*@
+
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#about-menu-big-screen").addClass("active");
+            $("#about-menu-small-screen").addClass("active");
+        });</script>
+}

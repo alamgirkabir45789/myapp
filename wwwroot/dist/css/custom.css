@@ -1,0 +1,13 @@
+.active-custom {
+  background-color: #17a2b8;
+  color: #fff;
+}
+
+.active-custom > i,
+.active-custom > p {
+  color: #fff;
+}
+
+.active-link-custom {
+  color: #17a2b8;
+}

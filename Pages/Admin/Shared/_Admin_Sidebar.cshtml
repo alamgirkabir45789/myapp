@@ -1,0 +1,374 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using myportfolio.Model.Entity.User;
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    var user = await UserManager.GetUserAsync(User);
+    
+}
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-light-primary elevation-4">
+    <!-- Brand Logo -->
+
+    <a asp-page="/Admin/Index" class="brand-link">
+        <img src="~/quadrion/img/02.png"
+             alt="AdminLTE Logo"
+             class="brand-image img-circle elevation-3"
+             style="opacity: 0.8" />
+        <span class="brand-text font-weight-light" style="font-size:18px">Alamgir KabirPortfolio</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar Menu -->
+
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column"
+                data-widget="treeview"
+                role="menu"
+                data-accordion="false">
+                @if (User.IsInRole("Admin"))
+                {
+                    <li class="nav-item">
+                        <a asp-page="/Admin/Index" class="nav-link" id="menu-dashboard">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li class="nav-item" id="menu-about-us">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-info-circle"></i>
+                            <p>About Us <i class="right fas fa-angle-left"></i></p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a asp-page="/Admin/History/Index" class="nav-link" id="menu-about-history">
+                                    <i class="nav-icon fas fa-history"></i>
+
+                                    <p>History</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-page="/Admin/Mission/Index" class="nav-link" id="menu-about-mission">
+                                    <i class="nav-icon fas fa-share"></i>
+                                    <p>Mission & Value</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item" id="menu-product-services">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-dice-d6"></i>
+                            <p>Project & Services <i class="right fas fa-angle-left"></i></p>
+                        </a>
+                        <ul class="nav nav-treeview">   
+                            <li class="nav-item">
+                                <a asp-page="/Admin/Service/Index" class="nav-link" id="menu-service">
+                                    <i class="nav-icon fa fa-compass"></i>
+                                    <p>Service Category</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a asp-page="/Admin/Product/Index" class="nav-link" id="menu-product">
+                                    <i class="nav-icon fas fa-dice-five"></i>
+                                    <p>Project</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item" id="menu-resources">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-bandcamp"></i>
+                            <p>Resources <i class="right fas fa-angle-left"></i></p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a asp-page="/Admin/MediaGallery/Index" class="nav-link" id="menu-media-gallery">
+                                    <i class="nav-icon far fa-image"></i>
+                                    <p>Media Gallery</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a asp-page="/Admin/Buyer/Index" class="nav-link" id="menu-buyer">
+                            <i class="nav-icon fa fa-vcard"></i>
+                            <p>Client</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-page="/Admin/Team/Index" class="nav-link" id="menu-team">
+                            <i class="nav-icon fa fa-user-circle-o"></i>
+                            <p>Team</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item" id="menu-career">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-radiation"></i>
+                            <p>Career <i class="right fas fa-angle-left"></i></p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a asp-page="/Admin/JobCircular/Index" class="nav-link" id="menu-job-circular">
+                                    <i class="nav-icon fa fa-sync"></i>
+                                    <p>Job Circulation</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a asp-page="/Admin/DroppedResume/Index" class="nav-link" id="menu-resume-list">
+                                    <i class="nav-icon fas fa-file-download"></i>
+                                    <p>Dropped Resume</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a asp-page="/Admin/QueryMessage/Index" class="nav-link" id="menu-message">
+                            <i class="nav-icon fa fa-telegram"></i>
+                            <p>Query Message</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-page="/Admin/Subscriber/Index" class="nav-link" id="menu-subscriber">
+                            <i class="nav-icon fa fa-address-book"></i>
+                            <p>Subscriber</p>
+                        </a>
+                    </li>
+                   
+                   
+                    <li class="nav-item" id="menu-configuration">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-peace"></i>
+                            <p>Configuration <i class="right fas fa-angle-left"></i></p>
+                        </a>
+                        <ul class="nav nav-treeview"> 
+                            <li class="nav-item">
+                                <a asp-page="/Admin/ReportedProject/Index" class="nav-link" id="menu-reported-Project">
+                                    <i class="nav-icon fa fa-bars"></i>
+                                    <p>Working Project</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-page="/Admin/EmpLeaveType/Index" class="nav-link" id="menu-leave-type">
+                                    <i class="nav-icon fa fa-exclamation-circle"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-page="/Admin/User/AssignLeave" class="nav-link" id="menu-assign-leave">
+                                    <i class="nav-icon fa fa-ravelry"></i>
+                                    <p>Manage Leave</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-page="/Admin/Role/Index" class="nav-link" id="menu-role">
+                                    <i class="nav-icon fa fa-circle-o-notch"></i>
+                                    <p>Manage Role</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-page="/Admin/User/Index" class="nav-link" id="menu-user">
+                                    <i class="nav-icon fas fa-user-circle"></i>
+                                    <p>Manage User</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-page="/Admin/User/AssignHoliday" class="nav-link" id="menu-assign-holiday">
+                                    <i class="nav-icon fa fa-dashboard"></i>
+                                    <p>Manage Holiday</p>
+                                </a>
+                            </li>
+                           
+                           @* <li class="nav-item">
+                                <a asp-page="/Admin/Holiday/Index" class="nav-link" id="menu-assign-holiday">
+                                    <i class="nav-icon fa fa-power-off"></i>
+                                    <p>Yearly Holiday</p>
+                                </a>
+                            </li>*@                          
+                           
+                        </ul>
+                    </li>
+
+                   @* <li class="nav-item" id="menu-report">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-peace"></i>
+                            <p>Daily Report <i class="right fas fa-angle-left"></i></p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a asp-page="/Admin/ReportedProject/Index" class="nav-link" id="menu-reported-Project">
+                                    <i class="nav-icon fa fa-bars"></i>
+                                    <p>Reported Project</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-page="/Admin/DailyTask/Index" class="nav-link" id="menu-daily-task">
+                                    <i class="nav-icon fas fa-tasks"></i>
+                                    <p>Daily Task</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>*@
+
+                   @* <li class="nav-item" id="menu-user-manage">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-user-lock"></i>
+                            <p>Manage User <i class="right fas fa-angle-left"></i></p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a asp-page="/Admin/Role/Index" class="nav-link" id="menu-role">
+                                    <i class="nav-icon fa fa-circle-o-notch"></i>
+                                    <p>Role</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-page="/Admin/User/Index" class="nav-link" id="menu-user">
+                                    <i class="nav-icon fas fa-user-circle"></i>
+                                    <p>User</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>*@
+                   
+                  @*  <li class="nav-item" id="menu-leave">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-sign-out"></i>
+                            <p>Leave Record <i class="right fas fa-angle-left"></i></p>
+                        </a>
+                        <ul class="nav nav-treeview">   
+                            <li class="nav-item">
+                                <a asp-page="/Admin/EmpLeaveType/Index" class="nav-link" id="menu-leave-type">
+                                    <i class="nav-icon fa fa-exclamation-circle"></i>
+                                    <p>Leave Type</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a asp-page="/Admin/LeaveRegister/Index" class="nav-link" id="menu-leave-application">
+                                    <i class="nav-icon fas fa-file-pdf"></i>
+                                    <p>Leave Application</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>          *@
+
+                   
+                    <li class="nav-item" id="menu-qt-report">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-fire"></i>
+                            <p>Report <i class="right fas fa-angle-left"></i></p>
+                        </a>
+                        <ul class="nav nav-treeview">   
+                            
+                            <li class="nav-item">
+                                <a asp-page="/Admin/Report/DailyTaskReport" class="nav-link" id="menu-daily-task-report">
+                                    <i class="nav-icon fas fa-calendar-day"></i>
+                                    <p>Daily Task Report</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-page="/Admin/Report/MonthlyTaskReport" class="nav-link" id="menu-monthly-task-report">
+                                    <i class="nav-icon fa fa-retweet"></i>
+                                    <p>Monthly Task Report</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-page="/Admin/Report/LeaveReport" class="nav-link" id="menu-leave-report">
+                                    <i class="nav-icon fa fa-plane"></i>
+                                    <p>Leave Report</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a asp-page="/Admin/DailyTask/Index" class="nav-link" id="menu-daily-task">
+                            <i class="nav-icon fas fa-tasks"></i>
+                            <p>Daily Task</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a asp-page="/Admin/LeaveRegister/Index" class="nav-link" id="menu-leave-application">
+                            <i class="nav-icon fa fa-plane"></i>
+                            <p>Leave Application</p>
+                        </a>
+                    </li>
+                   
+                    <li class="nav-item">
+                        <a asp-page="/Index" class="nav-link" id="menu-website">
+                            <i class="nav-icon fas fa-paper-plane"></i>
+                            <p>View Site</p>
+                        </a>
+                    </li>
+                }else if (User.IsInRole("Employee"))
+                {
+                    <li class="nav-item" id="menu-report">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-peace"></i>
+                            <p>Daily Task <i class="right fas fa-angle-left"></i></p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                           
+                            <li class="nav-item">
+                                <a asp-page="/Admin/DailyTask/Index" class="nav-link" id="menu-daily-task">
+                                    <i class="nav-icon fas fa-tasks"></i>
+                                    <p>Daily Task</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item" id="menu-leave">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-sign-out"></i>
+                            <p>Leave Application <i class="right fas fa-angle-left"></i></p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                           
+                            <li class="nav-item">
+                                <a asp-page="/Admin/LeaveRegister/Index" class="nav-link" id="menu-leave-application">
+                                    <i class="nav-icon fa fa-plane"></i>
+                                    <p>Leave Application</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                }else 
+                {
+
+                    <li class="nav-item" id="menu-leave">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fa fa-sign-out"></i>
+                            <p>Leave Record <i class="right fas fa-angle-left"></i></p>
+                        </a>
+                        <ul class="nav nav-treeview">                        
+
+                            <li class="nav-item">
+                                <a asp-page="/Admin/LeaveRegister/Index" class="nav-link" id="menu-leave-application">
+                                    <i class="nav-icon fas fa-file-pdf"></i>
+                                    <p>Leave Application</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                }
+
+
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>

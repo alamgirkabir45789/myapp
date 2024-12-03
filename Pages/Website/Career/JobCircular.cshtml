@@ -1,0 +1,92 @@
+﻿@page
+@model myportfolio.Pages.Website.Career.JobCircularModel
+@{
+}
+
+<div class="container-xxl py-5 bg-primary hero-header">
+    <div class="container my-5 py-5 px-lg-5">
+        <div class="row g-5 py-5">
+            <div class="col-12 text-center">
+                <h1 class="text-white animated slideInDown">Job Circular</h1>
+                <hr class="bg-white mx-auto mt-0" style="width: 90px;">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb justify-content-center">
+                        <li class="breadcrumb-item"><a class="text-white" href="/Index">Home</a></li>
+                        <li class="breadcrumb-item"><a class="text-white" href="~/Website/Team/TeamList">Our Team</a></li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">Career</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="ftco-section ftco-animate" style="padding:0 10%">
+    <div class="container career-container">
+        <div class="job-opening-container">
+            @*<h2 class="mb-4 job-opening-header text-center">Job Opening</h2>*@
+            <p class="section-title text-secondary justify-content-center"><span></span>Current Vacancies<span></span></p>
+
+            <p class="job-opening-description text-justify">
+                If you are someone who identifies as a highly focused and
+                result-oriented vibrant individual who is passionate about making an
+                impact, Alamgir KabirPortfolio is the place for you. Please drop us your CV and
+                let’s build a standard for business success, together.
+            </p>
+        </div>
+
+        
+        @if (Model.JobCircular.Any())
+        {
+            <div class="circular-section" >
+                <div class="row">
+                    @foreach (var JobCircular in Model.JobCircular)
+                    {
+                        <div class="col-md-3">
+                            <a asp-page="./JobDescription" asp-route-id="@JobCircular.Key" target="_blank" class="location-text">
+                            <div class="card">
+                                <div class="card-header text-center" style="background-color:#1078CD; color:white;">@JobCircular.JobTitle</div>
+                                <div class="card-body">
+                                    <div class="circular-date">Work Station : @JobCircular.WorkStation</div>
+                                    <div class="circular-date">No of Vacancy : @JobCircular.NoOfVacancy</div>
+                                    <div class="circular-date">Job Status : @JobCircular.JobStatus</div>
+                                    <div class="circular-date">Salary : @JobCircular.Salary</div>
+                                    
+                                    
+                                </div>
+
+                                <div class="card-footer text-center">
+                                    <div class="circular-date">DEADLINE : @JobCircular.EndDate.ToString("dd MMMM yyyy")</div>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    }
+                </div>                
+            </div>
+        }
+        else
+        {
+
+            //#f6f6f6
+            <div style="width: 100%; display: flex; justify-content: center; align-items: center; text-align: center; background-color: #f6f6f6; height: 250px">
+
+                <div style="color:#000; font-weight: bold;font-size: 1.3rem;">Sorry, We have no vacancy in our company at this time. <br /> Please keep in touch.</div>
+
+            </div>
+        }
+
+
+
+
+    </div>
+</section>
+
+
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#career-menu-small-screen").addClass("active");
+            $("#career-menu-big-screen").addClass("active");
+        });</script>
+}

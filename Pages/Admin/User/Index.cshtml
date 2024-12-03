@@ -1,0 +1,268 @@
+﻿@page
+@model myportfolio.Pages.Admin.User.IndexModel
+@using Microsoft.AspNetCore.Identity
+@{
+    ViewData["Title"] = "User List";
+
+}
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card card-outline card-tabs">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fa fa-user"></i>User List
+                            </h3>
+                            <a class="float-right btn btn-outline-success" asp-page="/Admin/Signup">
+                                Add
+                            </a>
+                        </div>
+                        <div class="card-header p-0 pt-1 border-bottom-0">
+                            <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="true">Active User <span class="badge badge-success">@Model.UserRoles.Where(x => x.IsActive == true).Count()</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="custom-tabs-three-home-tab" data-toggle="pill" href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home" aria-selected="false">Inactive User</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="tab-content" id="custom-tabs-three-tabContent">
+                                <div class="tab-pane fade table-responsive
+" id="custom-tabs-three-home" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
+                                    <table id="data-table" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th> Employee Code</th>
+                                                <th> Name</th>
+                                                <th>Email</th>
+                                                <th>Contact No</th>
+                                                @*<th>Role</th>*@
+                                               @* @if (User.IsInRole("Admin"))
+                                                {
+                                                    <th style="width: 10%; text-align: center">Manage</th>
+                                                }*@
+                                                <th style="width: 15%; text-align: center">
+                                                    Actions
+                                                </th>
+
+                                               
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.UserRoles.Where(x => x.IsActive == false))
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @item.EmpCode
+                                                    </td>
+                                                    <td>
+                                                        @item.Username
+                                                    </td>
+                                                    <td>
+                                                        @item.Email
+                                                    </td>
+
+                                                    <td>
+                                                        @item.ContactNo
+                                                    </td>
+                                                  @*  <td>
+                                                        @item.Role
+                                                    </td>*@
+                                                   @* @if (User.IsInRole("Admin"))
+                                                    {
+                                                        <td class="text-center">
+
+                                                            <a class="btn btn-info text-white px-1 py-0" asp-page="./ManageRole" asp-route-id="@item.UserId" title="Manage Role">
+                                                                <i class='fa fa-expeditedssl'></i>
+                                                            </a>
+                                                            <a class="btn btn-success text-white px-1 py-0" asp-page="./ManageLeave" asp-route-id="@item.UserId" title="Manage Leave">
+                                                                <i class="nav-icon fa fa-telegram"></i>
+                                                            </a>
+
+                                                        </td>
+                                                    }*@
+                                                    <td class="text-center">
+                                                        <a class="btn btn-primary text-white px-1 py-0" asp-page="./Details" asp-route-id="@item.UserId" title="Details">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                        @if (User.IsInRole("Admin"))
+                                                        {
+                                                            <a class="btn btn-success text-white px-1 py-0" asp-page="./RetriveUser" asp-route-id="@item.UserId" title="Retrive">
+                                                                <i class="fas fa-check-circle"></i>
+                                                            </a>
+                                                        }
+
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade active show table-responsive" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
+                                    <table id="data-table-two" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th> Employee Code</th>
+                                                <th> Name</th>
+                                                <th>Email</th>
+                                                <th>Contact No</th>
+                                                <th>Role</th>
+                                                @if (User.IsInRole("Admin"))
+                                                {
+                                                    <th style="width: 10%; text-align: center">Manage</th>
+                                                }
+                                                <th style="width: 15%; text-align: center">
+                                                    Actions
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.UserRoles.Where(x => x.IsActive == true))
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @item.EmpCode
+                                                    </td>
+                                                    <td>
+                                                        @item.Username
+                                                    </td>
+                                                    <td>
+                                                        @item.Email
+                                                    </td>
+
+                                                    <td>
+                                                        @item.ContactNo
+                                                    </td>
+                                                    <td>
+                                                        @item.Role
+                                                    </td>
+                                                    @if (User.IsInRole("Admin"))
+                                                    {
+                                                        <td class="text-center">
+
+                                                            <a class="btn btn-info text-white px-1 py-0" asp-page="./ManageRole" asp-route-id="@item.UserId" title="Manage Role">
+                                                                <i class='fa fa-expeditedssl'></i>
+                                                            </a>
+                                                            <a class="btn btn-success text-white px-1 py-0" asp-page="./ManageLeave" asp-route-id="@item.UserId" title="Manage Leave">
+                                                                <i class="nav-icon fa fa-telegram"></i>
+                                                            </a>
+
+                                                        </td>
+                                                    }
+                                                    <td class="text-center">
+                                                        <a class="btn btn-primary text-white px-1 py-0" asp-page="./Details" asp-route-id="@item.UserId" title="Details">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                        @if (User.IsInRole("Admin"))
+                                                        {
+                                                            <a class="btn btn-warning text-white px-1 py-0" asp-page="./Edit" asp-route-id="@item.UserId" title="Edit">
+                                                                <i class="fas fa-edit"></i>
+                                                            </a>
+
+                                                            <a class="btn btn-danger text-white px-1 py-0" asp-page="./Delete" asp-route-id="@item.UserId" title="Delete">
+                                                                <i class="fas fa-trash"></i>
+                                                            </a>
+                                                        }
+
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                           @* <table id="data-table"
+                                   class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th> Employee Code</th>
+                                        <th> Name</th>
+                                        <th>Email</th>
+                                        <th>Contact No</th>
+                                        <th>Role</th>
+                                        @if (User.IsInRole("Admin"))
+                                                {
+                                        <th style="width: 10%; text-align: center">Manage</th>
+                                                }
+                                        <th style="width: 15%; text-align: center">
+                                            Actions
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.UserRoles)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @item.EmpCode
+                                            </td><td>
+                                                @item.Username
+                                            </td>
+                                            <td>
+                                                @item.Email
+                                            </td>
+
+                                            <td>
+                                                @item.ContactNo
+                                            </td> 
+                                            <td>
+                                                @item.Role
+                                            </td>
+                                                @if (User.IsInRole("Admin"))
+                                                {
+                                            <td class="text-center">
+                                                   
+                                                    <a class="btn btn-info text-white px-1 py-0" asp-page="./ManageRole" asp-route-id="@item.UserId" title="Manage Role">
+                                                        <i class='fa fa-expeditedssl'></i>
+                                                    </a>
+                                                    <a class="btn btn-success text-white px-1 py-0" asp-page="./ManageLeave" asp-route-id="@item.UserId" title="Manage Leave">
+                                                        <i class="nav-icon fa fa-telegram"></i>
+                                                    </a>
+                                                   
+                                            </td>
+                                                }
+                                            <td class="text-center">
+                                                <a class="btn btn-primary text-white px-1 py-0" asp-page="./Details" asp-route-id="@item.UserId" title="Details">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                @if (User.IsInRole("Admin"))
+                                                {
+                                                    <a class="btn btn-warning text-white px-1 py-0" asp-page="./Edit" asp-route-id="@item.UserId" title="Edit">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                  
+                                                    <a class="btn btn-danger text-white px-1 py-0" asp-page="./Delete" asp-route-id="@item.UserId" title="Delete">
+                                                        <i class="fas fa-trash"></i>
+                                                    </a>
+                                                }
+                                             
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>*@
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-configuration").addClass("menu-open");
+            $("#menu-user").addClass("active-custom");
+        });</script>
+}
+

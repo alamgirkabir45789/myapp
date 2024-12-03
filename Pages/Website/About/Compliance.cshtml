@@ -1,0 +1,392 @@
+﻿@page
+@model myportfolio.Pages.Website.About.ComplianceModel
+@{
+    int counter = 1;
+}
+
+
+<section class="home-slider js-halfheight owl-carousel">
+    @if (Model.Slider != null)
+    {
+        <div class="slider-item js-halfheight"
+             style=" background-image: url(/@Model.Slider.FilePath); ">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row slider-text justify-content-center align-items-center">
+                    <div class="col-md-7 col-sm-12 text-center ftco-animate js-halfheight-text">
+                        <h1 class="mb-3 mt-5 bread">About Us</h1>
+                        <p class="breadcrumbs">
+                            <span class="mr-2"><a href="/Index">Home</a></span><span>/ About US / Compliance</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="slider-item js-halfheight"
+             style=" background-image: url(https://www.ecotextile.com/images/stories/2021/January/Garment_factory.jpg); ">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="row slider-text justify-content-center align-items-center">
+                    <div class="col-md-7 col-sm-12 text-center ftco-animate js-halfheight-text">
+                        <h1 class="mb-3 mt-5 bread">About Us</h1>
+                        <p class="breadcrumbs">
+                            <span class="mr-2"><a href="/Index">Home</a></span><span>/ About US / Compliance</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</section>
+
+<!-- <section class="fcto-section">
+  <div class="text-container-section">
+    <div class="short-description-text ftco-animate">
+      Compliance Policy for <br />
+      RDM Apparels.
+    </div>
+  </div>
+</section> -->
+
+<section class="ftco-section ftco-animate pt-5">
+    <div class="container justify-content-center">
+        <div class="row text-center justify-content-center">
+            <h3 class="font-weight-bold mb-4 text-uppercase header-text">Our Compliances</h3>
+
+        </div>
+
+        <div class="compliance-container">
+
+            @foreach (var item in Model.Compliances)
+            {
+                if (counter % 2 != 0)
+                {
+                    <div class="compliance-item ftco-animate">
+                        <div class="compliance-header">
+                            <img src="/images/compliance.png" width="50" alt="Focus Image" />
+
+
+
+                            <h2 class="compliance-header-text"> @item.Title</h2>
+
+                        </div>
+                        <div class="compliance-body">
+                            <div class="compliance-description text-justify">
+                                <p>
+                                    @item.Details
+                                </p>
+
+                                <a href="/@item.FilePath" download target="_blank" class="btn btn-outline-dark">Download</a>
+
+                            </div>
+
+                            <div class="compliance-img">
+                                <img src="/@item.ImagePath" alt="Alternate Text" />
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="compliance-item ftco-animate">
+                        <div class="compliance-header">
+                            <img src="/images/compliance.png" width="50" alt="Focus Image" />
+                            <h2 class="compliance-header-text"> @item.Title</h2>
+
+                        </div>
+                        <div class="compliance-body">
+                            <div class="compliance-img">
+                                <img src="/@item.ImagePath" alt="Alternate Text" />
+                            </div>
+
+
+                            <div class="compliance-description text-justify">
+                                <p>
+                                    @item.Details
+                                </p>
+
+                                <a href="/@item.FilePath" download target="_blank" class="btn btn-outline-dark">Download</a>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                }
+
+                counter++;
+            }
+
+
+            @*<div class="compliance-item ftco-animate">
+                    <div class="compliance-header">
+                        <img src="/images/compliance.png" width="50" alt="Focus Image" />
+
+
+
+                        <h2 class="compliance-header-text"> Medical Facilities</h2>
+
+                    </div>
+                    <div class="compliance-body">
+                        <div class="compliance-description text-justify">
+                            <p>
+                                A 6 bed mini hospital has been set up in the factory premises. Two full time doctors and nurses take care of the immediate medical needs of all employees.
+
+                                For the well being of everyone working at the company PFL strives to create a pleasant working environment.
+                                Fatigue has been reduced by the installation of evaporative air conditioning and ergonomic, well lit work stations.
+                            </p>
+
+                            <a href="#" class="btn btn-outline-dark">Download</a>
+
+                        </div>
+
+                        <div class="compliance-img">
+                            <img src="https://www.healthcarefacilitiestoday.com/media/graphics/2018/18034-operating-room.jpg" alt="Alternate Text" />
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="compliance-item ftco-animate">
+                    <div class="compliance-header">
+                        <img src="/images/compliance.png" width="50" alt="Focus Image" />
+                        <h2 class="compliance-header-text"> Modern Fire Fighting</h2>
+
+                    </div>
+                    <div class="compliance-body">
+                        <div class="compliance-img">
+                            <img src="https://s.hdnux.com/photos/01/23/64/51/21973598/4/1200x0.jpg" alt="Alternate Text" />
+                        </div>
+
+
+                        <div class="compliance-description text-justify">
+                            <p>
+                                PFL has equipped the factory with a high quality fire protection system. Beside stauatory fire fighting equipment the factory is monitored by an addressable fire detection system. More than 250 smoke and heat detectors have been fitted to detect fire in any compartment. Should fire break out the control room detects the location and manages a safe evacuation.
+                                Power is supplied by a Bus Bar Trunking System from Graziadio of Italy with a redundant Separate Bus bar for lighting and power.
+
+                                A dedicated fire pump with an independent water reservoir and back up separate diesel pump services fire hydrants throughout the site. The warehouse section is further protected by a water sprinkler system.
+
+                                Prevention of fires and working hazards is an essential part of staff training. Harzard awareness training and the correct use of safety equipment is mandatory for all staff. A dedicated fire fighting unit has been trained for first response in the event of any incident. The team leader is directly responsible to the directors of the company and is involved in regular safety briefings.
+                            </p>
+
+                            <a href="#" class="btn btn-outline-dark">Download</a>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+
+                <div class="compliance-item ftco-animate">
+                    <div class="compliance-header">
+                        <img src="/images/compliance.png" width="50" alt="Focus Image" />
+                        <h2 class="compliance-header-text"> Workers safety</h2>
+
+                    </div>
+                    <div class="compliance-body">
+                        <div class="compliance-description text-justify">
+                            <p>
+                                Workers safety is prime concern at Plummy Fashions Ltd. Unlike conventional multi-story buildings PFL has been designed as low level two story facility which promotes easy fast and safe evacuation in case of fire. Five emergency exits in each floor has been installed ensuring the highest level of safety.
+
+                                Safty
+
+
+                            </p>
+
+                            <a href="#" class="btn btn-outline-dark">Download</a>
+
+                        </div>
+
+                        <div class="compliance-img">
+                            <img src="https://initiafy-website-images.s3.amazonaws.com/wordpress-upload/2015/06/Canada-New-Worker-Safety-group-of-workers.jpg" alt="Alternate Text" />
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="compliance-item ftco-animate">
+                    <div class="compliance-header">
+                        <img src="/images/compliance.png" width="50" alt="Focus Image" />
+                        <h2 class="compliance-header-text">Day care centre for children</h2>
+
+                    </div>
+                    <div class="compliance-body">
+                        <div class="compliance-img">
+                            <img src="https://www.procaresoftware.com/wp-content/uploads/2020/04/blog-hero_ultimateguide-start-daycare_1920x960-3087919.jpg" alt="Alternate Text" />
+                        </div>
+
+
+                        <div class="compliance-description text-justify">
+                            <p>
+                                PFL has equipped the factory with a high quality fire protection system. Beside stauatory fire fighting equipment the factory is monitored by an addressable fire detection system. More than 250 smoke and heat detectors have been fitted to detect fire in any compartment. Should fire break out the control room detects the location and manages a safe evacuation.
+                                Power is supplied by a Bus Bar Trunking System from Graziadio of Italy with a redundant Separate Bus bar for lighting and power.
+
+                                A dedicated fire pump with an independent water reservoir and back up separate diesel pump services fire hydrants throughout the site. The warehouse section is further protected by a water sprinkler system.
+
+
+                            </p>
+
+                            <a href="#" class="btn btn-outline-dark">Download</a>
+
+                        </div>
+
+
+                    </div>
+                </div>*@
+
+
+
+        </div>
+
+
+
+        @*<div class="bs-example">
+                <div class="accordion" id="accordionExample">
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h2 class="mb-0">
+                                <button type="button"
+                                        class="btn btn-link text-dark remove-text-decoration"
+                                        data-toggle="collapse"
+                                        data-target="#collapseOne">
+                                    <i class="icon icon-arrow-right mr-1"></i> Environmental
+                                    Policy Template
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="collapseOne"
+                             class="collapse"
+                             aria-labelledby="headingOne"
+                             data-parent="#accordionExample">
+                            <div class="card-body">
+                                <p class="ml-5">
+                                    <i class="icon-arrow-circle-right"></i>
+                                    Environmental Policy.
+                                    <a class="red-color"
+                                       href="https://www.tutorialrepublic.com/html-tutorial/"
+                                       target="_blank">Download PDF</a>
+                                </p>
+
+                                <p class="ml-5">
+                                    <i class="icon-arrow-circle-right"></i>
+                                    Emergency Situation Handling Policy.
+                                    <a class="red-color"
+                                       href="https://www.tutorialrepublic.com/html-tutorial/"
+                                       target="_blank">Download PDF</a>
+                                </p>
+
+                                <p class="ml-5">
+                                    <i class="icon-arrow-circle-right"></i>
+                                    Waste Reduction Policy.
+                                    <a class="red-color"
+                                       href="https://www.tutorialrepublic.com/html-tutorial/"
+                                       target="_blank">Download PDF</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingTwo">
+                            <h2 class="mb-0">
+                                <button type="button"
+                                        class="btn btn-link collapsed text-dark remove-text-decoration"
+                                        data-toggle="collapse"
+                                        data-target="#collapseTwo">
+                                    <i class="icon icon-arrow-down mr-1"></i> Worker
+                                    Participation Committee
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="collapseTwo"
+                             class="collapse show"
+                             aria-labelledby="headingTwo"
+                             data-parent="#accordionExample">
+                            <div class="card-body">
+                                <p class="ml-5">
+                                    <i class="icon-arrow-circle-right"></i>
+                                    Environmental Policy.
+                                    <a class="red-color"
+                                       href="https://www.tutorialrepublic.com/html-tutorial/"
+                                       target="_blank">Download PDF</a>
+                                </p>
+
+                                <p class="ml-5">
+                                    <i class="icon-arrow-circle-right"></i>
+                                    Emergency Situation Handling Policy.
+                                    <a class="red-color"
+                                       href="https://www.tutorialrepublic.com/html-tutorial/"
+                                       target="_blank">Download PDF</a>
+                                </p>
+
+                                <p class="ml-5">
+                                    <i class="icon-arrow-circle-right"></i>
+                                    Waste Reduction Policy.
+                                    <a class="red-color"
+                                       href="https://www.tutorialrepublic.com/html-tutorial/"
+                                       target="_blank">Download PDF</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingThree">
+                            <h2 class="mb-0">
+                                <button type="button"
+                                        class="btn btn-link collapsed text-dark remove-text-decoration"
+                                        data-toggle="collapse"
+                                        data-target="#collapseThree">
+                                    <i class="icon icon-arrow-right mr-1"></i> Grievance /
+                                    Suggestion Resolve Committee
+                                </button>
+                            </h2>
+                        </div>
+                        <div id="collapseThree"
+                             class="collapse"
+                             aria-labelledby="headingThree"
+                             data-parent="#accordionExample">
+                            <div class="card-body">
+                                <p class="ml-5">
+                                    <i class="icon-arrow-circle-right"></i>
+                                    Environmental Policy.
+                                    <a class="red-color"
+                                       href="https://www.tutorialrepublic.com/html-tutorial/"
+                                       target="_blank">Download PDF</a>
+                                </p>
+
+                                <p class="ml-5">
+                                    <i class="icon-arrow-circle-right"></i>
+                                    Emergency Situation Handling Policy.
+                                    <a class="red-color"
+                                       href="https://www.tutorialrepublic.com/html-tutorial/"
+                                       target="_blank">Download PDF</a>
+                                </p>
+
+                                <p class="ml-5">
+                                    <i class="icon-arrow-circle-right"></i>
+                                    Waste Reduction Policy.
+                                    <a class="red-color"
+                                       href="https://www.tutorialrepublic.com/html-tutorial/"
+                                       target="_blank">Download PDF</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+    </div>
+</section>
+
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#about-menu-big-screen").addClass("active");
+            $("#about-menu-small-screen").addClass("active");
+        });</script>
+}

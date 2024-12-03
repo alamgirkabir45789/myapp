@@ -1,0 +1,67 @@
+﻿@page
+@model myportfolio.Pages.Admin.Subscriber.DetailsModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <section class="content">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Subscriber Message</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                       
+                        <strong>Email</strong>
+
+                        <p class="text-muted">@Model.Subscriber.Email</p>
+
+                        <hr>
+
+                        <strong>Ip</strong>
+
+                        <p class="text-muted">@Model.Subscriber.IpAddress</p>
+                        <hr>
+
+                        <strong>Time</strong>
+
+                        <p class="text-muted">@Model.Subscriber.CreatedAt</p>
+
+                        <hr />
+
+                       
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <div class="text-left">
+
+                            <a asp-page="./Index" class="btn btn-sm btn-outline-info">
+                                Back to list
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+    </section>
+</div>
+
+
+@section Scripts {
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-subscriber").addClass("active-custom");
+
+        });</script>
+}

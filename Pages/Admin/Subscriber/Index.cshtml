@@ -1,0 +1,129 @@
+﻿@page
+@model myportfolio.Pages.Admin.Subscriber.IndexModel
+
+@{
+    ViewData["Title"] = "Subscriber";
+}
+
+
+<div class="content-wrapper">
+    <section class="content pt-3">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="card card-outline card-tabs">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fa fa-envelope"></i> Subscriber Message
+                            </h3>
+
+                        </div>
+                        <div class="card-header p-0 pt-1 border-bottom-0">
+                            <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="custom-tabs-three-profile-tab" data-toggle="pill" href="#custom-tabs-three-profile" role="tab" aria-controls="custom-tabs-three-profile" aria-selected="true">UnRead Message <span class="badge badge-danger">@Model.Subscribers.Where(x => x.IsResponse == false).Count()</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="custom-tabs-three-home-tab" data-toggle="pill" href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home" aria-selected="false">Read Message</a>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content" id="custom-tabs-three-tabContent">
+                                <div class="tab-pane fade table-responsive" id="custom-tabs-three-home" role="tabpanel" aria-labelledby="custom-tabs-three-home-tab">
+                                    <table id="data-table" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Email</th>
+                                                <th>Ip</th>
+                                                <th>Time</th>
+
+
+                                                <th style="width: 10%; text-align: center">
+                                                    Actions
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.Subscribers.Where(x => x.IsResponse == true))
+                                            {
+                                                <tr>
+                                                    <td>@item.Email</td>
+                                                    <td>@item.IpAddress</td>
+                                                    <td>@item.CreatedAt</td>
+
+
+                                                    <td class="text-center">
+                                                        <a class="btn btn-primary text-white px-1 py-0" asp-page="./Details" asp-route-isRead="read" asp-route-id="@item.Id" title="View Message">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade active show table-responsive" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
+                                    <table id="data-table-two" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Email</th>
+                                                <th>Ip</th>
+                                                <th>Time</th>
+
+
+                                                <th style="width: 10%; text-align: center">
+                                                    Actions
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.Subscribers.Where(x => x.IsResponse == false))
+                                            {
+                                                <tr>
+                                                    <td>@item.Email</td>
+                                                    <td>@item.IpAddress</td>
+                                                    <td>@item.CreatedAt</td>
+
+
+                                                    <td class="text-center">
+                                                            @*<a class="btn btn-primary text-white px-1 py-0" asp-page="./Response" asp-route-isRead="unread" asp-route-id="@item.Id" title="Response">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>*@
+                                                        <a class="btn btn-primary text-white px-1 py-0" asp-page="./Details" asp-route-isRead="unread" asp-route-id="@item.Id" title="View Message">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-subscriber").addClass("active-custom");
+        });</script>
+}
+
